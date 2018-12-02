@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PipeGenerator : MonoBehaviour {
+public class ManualPipeGenerator : MonoBehaviour {
 
     public List<GameObject> Points;
 
@@ -107,14 +107,14 @@ public class PipeGenerator : MonoBehaviour {
 
         float angle = 0;
         float t = 0;
-
         Vector3 pivot = origin;
         pivot.y += HeadSize;
 
         Vector3 rotationOffset = new Vector3(0, -HeadSize, 0);
+        float cornerSpeed = MoveSpeed * Mathf.PI * HeadSize * 0.5f;
 
-        while (t < MoveSpeed) {
-            angle = 90 * (t / MoveSpeed);
+        while (t < cornerSpeed) {
+            angle = 90 * (t / cornerSpeed);
             MakeTorus.GenerateMesh(filter, HeadSize, 1, true, 0, angle);
 
             endCap.transform.rotation = Points[point].transform.rotation * Quaternion.Euler(angle, 0, 0);
