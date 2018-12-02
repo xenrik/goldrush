@@ -68,12 +68,24 @@
     <Compile Include="Assets\Scenes\Test Cube\Scripts\PipeNode.cs" />
     <Compile Include="Assets\Scenes\Test Cube\Scripts\ScriptedPipeGenerator.cs" />
     <Compile Include="Assets\Scripts\ShowNormals.cs" />
+    <Compile Include="Assets\ThirdParty\Jurassic\JurassicExampleExecute.cs" />
+    <Compile Include="Assets\ThirdParty\Jurassic\JurassicExampleGUI.cs" />
     <None Include="Assets\ThirdParty\EditorGUISplitView\ReadMe.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Mathf Example Ping-Pong.txt" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe Functions.cginc" />
+    <None Include="Assets\ThirdParty\Jurassic\ReadMe.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Keyboard String.txt" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe.shader" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Axis.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Jump.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\License.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Math Example Bounce.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Keyboard Days.txt" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Math Example Rain.txt" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Cutout Wireframe.shader" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Double-Sided Wireframe.shader" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Double-Sided Cutout Wireframe.shader" />
+    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Mouse.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/Programming/Unity/GoldRush/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -289,6 +301,9 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/Jurassic/Jurassic.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

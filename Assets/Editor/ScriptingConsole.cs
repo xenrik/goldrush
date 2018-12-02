@@ -4,6 +4,8 @@ using System.Threading;
 using System.Text;
 using UnityEngine;
 using UnityEditor;
+using Jurassic;
+using Jurassic.Library;
 
 public class DynamicConsole : EditorWindow {
     [MenuItem("Window/Dynamic Console")]
@@ -21,12 +23,20 @@ public class DynamicConsole : EditorWindow {
     private Texture2D consoleBackground;
 
     private string command;
+    private ScriptEngine engine;
 
     private void OnEnable() {
         InitialiseTextures();
 
         Application.logMessageReceivedThreaded += HandleLog;
         Clear();
+
+        engine = new ScriptEngine();
+        engine.SetGlobalFunction("FindByName", new System.Func<string, GameObject>(FindByName));
+    }
+
+    private GameObject FindByName(string name) {
+        return GameObject.Find(name);
     }
 
     private void InitialiseTextures() {
@@ -61,6 +71,12 @@ public class DynamicConsole : EditorWindow {
         isDirty = true;
     }
 
+    private void Update() {
+        if (isDirty) {
+            Repaint();
+        }
+    }
+
     private string getFullMessage() {
         if (!isDirty) {
             return fullMessage;
@@ -88,7 +104,7 @@ public class DynamicConsole : EditorWindow {
                         break;
 
                     case LogType.Warning:
-                        buffer.Append("<color=#ffff00ff>[ WARN]</color> ");
+                        buffer.Append("<color=#ffff00ff>[WARN]</color>  ");
                         break;
                     }
                     buffer.AppendLine(frame.message);
@@ -173,6 +189,13 @@ public class DynamicConsole : EditorWindow {
         };
         rect = GUILayoutUtility.GetRect(new GUIContent(command), style);
         command = GUI.TextField(rect, command, style);
+        if (Event.current.isKey && Event.current.keyCode == KeyCode.Return) {
+            try {
+                engine.Execute(command);
+            } catch (System.Exception ex) {
+                Debug.Log(ex);
+            }
+        }
     }
 
     private struct LogFrame {
