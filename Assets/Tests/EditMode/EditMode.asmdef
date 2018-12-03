@@ -1,0 +1,14 @@
+{
+    "name": "EditMode",
+    "references": [
+        "UnityEL"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

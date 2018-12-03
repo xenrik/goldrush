@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{114DBB19-96F0-C20F-A4FB-A316CFC2F7DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEL", "UnityEL.csproj", "{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditMode", "EditMode.csproj", "{506FE83D-94A2-5D4B-400B-C5CDEA80322A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{55943F80-5DE3-B115-EA2D-0D86A07DEF29}"
 EndProject
 Global
@@ -15,6 +19,14 @@ Global
 		{114DBB19-96F0-C20F-A4FB-A316CFC2F7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{114DBB19-96F0-C20F-A4FB-A316CFC2F7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{114DBB19-96F0-C20F-A4FB-A316CFC2F7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506FE83D-94A2-5D4B-400B-C5CDEA80322A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506FE83D-94A2-5D4B-400B-C5CDEA80322A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506FE83D-94A2-5D4B-400B-C5CDEA80322A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506FE83D-94A2-5D4B-400B-C5CDEA80322A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55943F80-5DE3-B115-EA2D-0D86A07DEF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55943F80-5DE3-B115-EA2D-0D86A07DEF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55943F80-5DE3-B115-EA2D-0D86A07DEF29}.Release|Any CPU.ActiveCfg = Release|Any CPU

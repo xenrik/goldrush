@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{114DBB19-96F0-C20F-A4FB-A316CFC2F7DC}</ProjectGuid>
+    <ProjectGuid>{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>UnityEL</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -60,44 +60,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\MakePyramid.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\MakeSphereHemisphere.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\MakeTorus.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\MakeTube.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\ManualPipeGenerator.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\PipeNode.cs" />
-    <Compile Include="Assets\Scenes\Test Cube\Scripts\ScriptedPipeGenerator.cs" />
-    <Compile Include="Assets\Scripts\ShowNormals.cs" />
-    <Compile Include="Assets\ThirdParty\Jurassic\JurassicExampleExecute.cs" />
-    <Compile Include="Assets\ThirdParty\Jurassic\JurassicExampleGUI.cs" />
-    <None Include="Assets\ThirdParty\EditorGUISplitView\ReadMe.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Mathf Example Ping-Pong.txt" />
-    <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe Functions.cginc" />
-    <None Include="Assets\ThirdParty\Jurassic\ReadMe.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Keyboard String.txt" />
-    <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe.shader" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Axis.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Jump.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\License.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Math Example Bounce.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Keyboard Days.txt" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Math Example Rain.txt" />
-    <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Cutout Wireframe.shader" />
-    <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Double-Sided Wireframe.shader" />
-    <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Double-Sided Cutout Wireframe.shader" />
-    <None Include="Assets\ThirdParty\Jurassic\Example JavaScripts\Input Example Mouse.txt" />
-    <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Programming/Unity/GoldRush/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Programming/Unity/GoldRush/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Programming/Unity/GoldRush/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Programming/Unity/GoldRush/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
+    <Compile Include="Assets\Scripts\UnityEL\ParserException.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\AdditionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\AndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseAndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseOrParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\ComplimentParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\DivisionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\FunctionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\IdentifierParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\ModulusParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\MultiplicationParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\NotParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\NumberParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\OrParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\PowerPaser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\PropertyAccessorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\StringParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\SubtractionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\TokenParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\StringToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\UnityELEvaluator.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\UnityELExpression.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\UnityELExpressionCompiler.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Software/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -281,26 +268,77 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Timeline">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Timeline">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.GoogleAudioSpatializer">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.HoloLens">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>C:/Software/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>C:/Software/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WSA.Extensions">
+      <HintPath>C:/Software/Unity/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.WSA.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>C:/Software/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Jurassic">
       <HintPath>C:/Programming/Unity/GoldRush/Assets/ThirdParty/Jurassic/Jurassic.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip">
+      <HintPath>C:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="NugetForUnity">
+      <HintPath>C:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Analytics">
+      <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/Editor/UnityEditor.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
@@ -659,12 +697,6 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Software/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="UnityEL.csproj">
-      <Project>{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}</Project>
-      <Name>UnityEL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
