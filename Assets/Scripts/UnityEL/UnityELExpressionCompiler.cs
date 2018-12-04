@@ -7,33 +7,41 @@ public class UnityELExpressionCompiler {
     private List<TokenParser> parsers = new List<TokenParser>();
 
     public UnityELExpressionCompiler() {
-        // Number, Identifier and String
-        parsers.Add(new StringParser()); // " or '
-        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+
-        parsers.Add(new NumberParser()); // [0-9]+
+        // Special parsers to close groups, functions, or keyed access
+        parsers.Add(new ClosePreviousParser()); // ) or ]                           --
 
-        // Property and Functions
-        parsers.Add(new PropertyAccessorParser()); // <identifier>[ or <identifier>.
-        parsers.Add(new FunctionParser()); // <identifier>(
-        parsers.Add(new GroupParser()); // (
+        // Function, Property and Identifiers 
+        parsers.Add(new PropertyAccessorParser()); // <identifier> followed by .    -- DONE
+        parsers.Add(new KeyedAccessorParser()); // <identifier> followed by [       -- DONE
+        parsers.Add(new FunctionParser()); // <identifier> followed by (            -- DONE
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- DONE
+        parsers.Add(new ArgumentParser()); // ,                                     -- DONE
+
+        // Primitives
+        parsers.Add(new StringParser()); // " or '                                  -- DONE
+        parsers.Add(new BooleanParser()); // true or false                          -- DONE
+        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- DONE
+        parsers.Add(new IntegerParser()); // [0-9]+                                 -- DONE
 
         // Maths
-        parsers.Add(new AdditionParser()); // +
-        parsers.Add(new SubtractionParser()); // -
-        parsers.Add(new DivisionParser()); // /
-        parsers.Add(new MultiplicationParser()); // *
-        parsers.Add(new ModulusParser()); // %
-        parsers.Add(new PowerPaser()); // ^
+        parsers.Add(new GroupParser()); // (                                        --
+        parsers.Add(new AdditionParser()); // +                                     --
+        parsers.Add(new SubtractionParser()); // -                                  --
+        parsers.Add(new DivisionParser()); // /                                     --
+        parsers.Add(new MultiplicationParser()); // *                               --
+        parsers.Add(new ModulusParser()); // %                                      --
+        parsers.Add(new PowerParser()); // <integer> or <decimal> followed by ^     --
 
         // Logical
-        parsers.Add(new NotParser()); // !
-        parsers.Add(new OrParser()); // ||
-        parsers.Add(new AndParser()); // &&
+        parsers.Add(new NotParser()); // !                                          --
+        parsers.Add(new OrParser()); // ||                                          --
+        parsers.Add(new AndParser()); // &&                                         --
+        parsers.Add(new XorParser()); // <boolean> followed by ^                    --
 
         // Bitwise
-        parsers.Add(new ComplimentParser()); // ~
-        parsers.Add(new BitwiseAndParser()); // &
-        parsers.Add(new BitwiseOrParser()); // |
+        parsers.Add(new ComplimentParser()); // ~                                   --
+        parsers.Add(new BitwiseAndParser()); // &                                   --
+        parsers.Add(new BitwiseOrParser()); // |                                    --
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {

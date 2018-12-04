@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 /**
  * Parser that accepts identifier like strings. Must start with an alpha char and will
@@ -8,7 +6,6 @@ using UnityEngine;
  */
 public class IdentifierParser : TokenParser {
     public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        // Must have a " or '
         int i = pos;
         int start = -1;
         char ch;
@@ -24,11 +21,12 @@ public class IdentifierParser : TokenParser {
                     return null;
                 }
             } else if (!char.IsLetterOrDigit(ch)) {
+                --i;
                 break;
             }
         }
 
-        if (start != 0) {
+        if (start != -1) {
             string s = new string(chars, start, i - start);
             s = s.Trim();
 
