@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\StringParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\SubtractionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\TokenParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\IdentifierToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\StringToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELEvaluator.cs" />

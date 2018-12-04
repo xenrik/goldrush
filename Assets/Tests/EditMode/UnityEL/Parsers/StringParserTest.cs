@@ -75,4 +75,14 @@ public class StringParserTest {
         Assert.AreEqual(0, pos);
     }
 
+    [Test]
+    public void EscapedQuotes() {
+        string expression = "\"abc\\\"def\"";
+        int pos = 0;
+        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+
+        Assert.AreEqual(new StringToken("abc\"def"), result);
+        Assert.AreEqual(10, pos);
+    }
+
 }
