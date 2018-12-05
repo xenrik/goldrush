@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        return null;
+public class OrParser : DoubleCharacterParser<OrToken> {
+    public OrParser() : base('|') {
     }
 }

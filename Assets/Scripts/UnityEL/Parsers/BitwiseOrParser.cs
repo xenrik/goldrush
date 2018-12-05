@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BitwiseOrParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        return null;
+public class BitwiseOrParser : SingleCharacterParser<BitwiseOrToken> {
+    public BitwiseOrParser() : base('|') {
     }
 }

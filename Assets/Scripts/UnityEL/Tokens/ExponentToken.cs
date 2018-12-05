@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class PowerToken : Token {
+public class ExponentToken : Token {
     public override string ToString() {
-        return "Power{-TBD-}";
+        return "Exponent{-TBD-}";
     }
 }

@@ -30,18 +30,22 @@ public class UnityELExpressionCompiler {
         parsers.Add(new DivisionParser()); // /                                     -- DONE
         parsers.Add(new MultiplicationParser()); // *                               -- DONE
         parsers.Add(new ModulusParser()); // %                                      -- DONE
-        parsers.Add(new PowerParser()); // <integer> or <decimal> followed by ^     -- DONE
+        parsers.Add(new ExponentParser()); // **                                    -- DONE
 
         // Logical
-        parsers.Add(new NotParser()); // !                                          --
-        parsers.Add(new OrParser()); // ||                                          --
-        parsers.Add(new AndParser()); // &&                                         --
-        parsers.Add(new XorParser()); // <boolean> followed by ^                    --
+        parsers.Add(new NotParser()); // !                                          -- DONE
+        parsers.Add(new OrParser()); // ||                                          -- DONE
+        parsers.Add(new AndParser()); // &&                                         -- DONE
+
+        // Coalesce and If
+        parsers.Add(new NullCoalesceParser()); // ??                                -- 
+        parsers.Add(new ConditionalOperatorParser()); // ?                          --
 
         // Bitwise
-        parsers.Add(new ComplimentParser()); // ~                                   --
-        parsers.Add(new BitwiseAndParser()); // &                                   --
-        parsers.Add(new BitwiseOrParser()); // |                                    --
+        parsers.Add(new ComplementParser()); // ~                                   -- DONE
+        parsers.Add(new BitwiseAndParser()); // &                                   -- DONE
+        parsers.Add(new BitwiseOrParser()); // |                                    -- DONE
+        parsers.Add(new XorParser()); // ^                                          -- DONE
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {

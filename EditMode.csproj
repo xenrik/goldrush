@@ -61,10 +61,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\AdditionParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\AndParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ArgumentParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseAndParserTest - Copy.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseOrParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BooleanParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ComplementParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ConditionalOperatorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\DecimalParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\DivisionParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ExponentParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\FunctionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\GroupParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\IdentifierParserTest.cs" />
@@ -72,10 +78,13 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\KeyedAccessorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ModulusParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\MultiplicationParserTest.cs" />
-    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\PowerParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\NotParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\NullCoalesceParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\OrParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\PropertyAccessorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\StringParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\SubtractionParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\XorParserTest.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Software/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
