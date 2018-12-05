@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModulusParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        return null;
+public class ModulusParser : SingleCharacterParser<ModulusToken> {
+    public ModulusParser() : base('%') {
     }
 }

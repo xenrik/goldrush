@@ -24,13 +24,13 @@ public class UnityELExpressionCompiler {
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- DONE
 
         // Maths
-        parsers.Add(new GroupParser()); // (                                        --
-        parsers.Add(new AdditionParser()); // +                                     --
-        parsers.Add(new SubtractionParser()); // -                                  --
-        parsers.Add(new DivisionParser()); // /                                     --
-        parsers.Add(new MultiplicationParser()); // *                               --
-        parsers.Add(new ModulusParser()); // %                                      --
-        parsers.Add(new PowerParser()); // <integer> or <decimal> followed by ^     --
+        parsers.Add(new GroupParser()); // (                                        -- DONE
+        parsers.Add(new AdditionParser()); // +                                     -- DONE
+        parsers.Add(new SubtractionParser()); // -                                  -- DONE
+        parsers.Add(new DivisionParser()); // /                                     -- DONE
+        parsers.Add(new MultiplicationParser()); // *                               -- DONE
+        parsers.Add(new ModulusParser()); // %                                      -- DONE
+        parsers.Add(new PowerParser()); // <integer> or <decimal> followed by ^     -- DONE
 
         // Logical
         parsers.Add(new NotParser()); // !                                          --

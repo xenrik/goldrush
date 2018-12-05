@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdditionParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        return null;
+public class AdditionParser : SingleCharacterParser<AdditionToken> {
+    public AdditionParser() : base('+') {
     }
 }

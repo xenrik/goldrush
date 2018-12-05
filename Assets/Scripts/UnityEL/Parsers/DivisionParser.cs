@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DivisionParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
-        return null;
+public class DivisionParser : SingleCharacterParser<DivisionToken> {
+    public DivisionParser() : base('/') {
     }
 }
