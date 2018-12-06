@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-public abstract class SingleCharacterParser<T> : TokenParser where T : Token, new() {
+public abstract class SingleCharacterParser<T> : TokenParser where T : RawToken, new() {
     private char requiredChar;
 
     public SingleCharacterParser(char requiredChar) {
         this.requiredChar = requiredChar;
     }
 
-    public virtual Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
+    public virtual RawToken Consume(char[] chars, ref int pos) {
         int i = pos;
         char ch;
         while (i < chars.Length) {

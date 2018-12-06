@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-public class ExponentToken : Token {
+﻿public class ExponentToken : MarkerToken {
     public override string ToString() {
         return "Exponent{-TBD-}";
     }

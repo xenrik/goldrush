@@ -63,7 +63,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\AdditionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\AndParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ArgumentParserTest.cs" />
-    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseAndParserTest - Copy.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseAndParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseOrParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BooleanParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\CloseParserTest.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\DivisionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ExponentParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\FunctionParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\GroupOrFunctionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\GroupParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\IdentifierParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\IntegerParserTest.cs" />

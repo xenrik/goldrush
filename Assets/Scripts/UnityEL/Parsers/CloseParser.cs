@@ -6,7 +6,7 @@ public class CloseParser : TokenParser {
     public CloseParser() {
     }
 
-    public virtual Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
+    public virtual RawToken Consume(char[] chars, ref int pos) {
         int i = pos;
         char ch;
         while (i < chars.Length) {

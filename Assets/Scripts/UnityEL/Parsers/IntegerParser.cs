@@ -4,7 +4,7 @@
 * Parser that accepts integer sequences. 
 */
 public class IntegerParser : TokenParser {
-    public Token Consume(Stack<Token> tokenStack, char[] chars, ref int pos) {
+    public RawToken Consume(char[] chars, ref int pos) {
         int i = pos;
         int start = -1;
         char ch;

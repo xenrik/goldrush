@@ -1,4 +1,4 @@
-﻿public class BitwiseAndToken : Token {
+﻿public class BitwiseAndToken : MarkerToken {
     public override string ToString() {
         return "BitwiseAnd{-TBD-}";
     }

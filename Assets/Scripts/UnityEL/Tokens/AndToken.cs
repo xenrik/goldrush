@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-public class AndToken : Token {
+﻿public class AndToken : MarkerToken {
     public override string ToString() {
         return "And{-TBD-}";
     }

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using System;
 
 public class UnityELExpressionCompiler {
     private List<TokenParser> parsers = new List<TokenParser>();
@@ -9,11 +7,14 @@ public class UnityELExpressionCompiler {
     public UnityELExpressionCompiler() {
         // Special parser to close groups, functions, or keyed access
         parsers.Add(new CloseParser()); // ) or ]                                   -- DONE
+        
+        // We can't work out just from the current symbol if this is a group or function,
+        // so we have to do that during resolve, rather than parse
+        parsers.Add(new GroupOrFunctionParser()); // (                              -- DONE
 
         // Function, Property and Identifiers 
-        parsers.Add(new PropertyAccessorParser()); // <identifier> followed by .    -- DONE
-        parsers.Add(new KeyedAccessorParser()); // <identifier> followed by [       -- DONE
-        parsers.Add(new FunctionParser()); // <identifier> followed by (            -- DONE
+        parsers.Add(new PropertyAccessorParser()); // .                             -- DONE
+        parsers.Add(new KeyedAccessorParser()); // [                                -- DONE
         parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- DONE
         parsers.Add(new ArgumentParser()); // ,                                     -- DONE
 
@@ -24,7 +25,6 @@ public class UnityELExpressionCompiler {
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- DONE
 
         // Maths
-        parsers.Add(new GroupParser()); // (                                        -- DONE
         parsers.Add(new AdditionParser()); // +                                     -- DONE
         parsers.Add(new SubtractionParser()); // -                                  -- DONE
         parsers.Add(new DivisionParser()); // /                                     -- DONE
@@ -50,15 +50,25 @@ public class UnityELExpressionCompiler {
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {
         // First, separate the string into tokens
-        Stack<Token> tokens = new Stack<Token>();
+        Stack<RawToken> rawTokens = new Stack<RawToken>();
         char[] chars = expression.ToCharArray();
         int pos = 0;
         while (pos < chars.Length) {
             foreach (TokenParser parser in parsers) {
-                Token token = parser.Consume(tokens, chars, ref pos);
+                RawToken token = parser.Consume(chars, ref pos);
                 if (token != null) {
-                    tokens.Push(token);
+                    rawTokens.Push(token);
                 }
+            }
+        }
+
+        // Now go through each token in turn and ask it to resolve itself. 
+        Stack<Token> resolvedTokens = new Stack<Token>();
+        while (rawTokens.Count > 0) {
+            RawToken rawToken = rawTokens.Pop();
+            Token resolvedToken = rawToken.Resolve(rawTokens);
+            if (resolvedToken != null) {
+                resolvedTokens.Push(resolvedToken);
             }
         }
 

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-public class PropertyAccessorToken : Token {
+﻿public class PropertyAccessorToken : MarkerToken {
     public override string ToString() {
         return "Property{-TBD-}";
     }

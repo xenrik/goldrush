@@ -1,4 +1,4 @@
-﻿public class NotToken : Token {
+﻿public class NotToken : MarkerToken {
     public override string ToString() {
         return "Not{-TBD-}";
     }

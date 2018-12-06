@@ -3,19 +3,17 @@ using System.Collections.Generic;
 
 public class StringParserTest {
     private StringParser parser;
-    private Stack<Token> tokenStack;
     
     [SetUp]
     public void Init() {
         parser = new StringParser();
-        tokenStack = new Stack<Token>();
     }
 
     [Test]
     public void DoubleQuotedString() {
         string expression = "\"123\"";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new StringToken("123"), result);
         Assert.AreEqual(5, pos);
@@ -25,7 +23,7 @@ public class StringParserTest {
     public void SingleQuotedString() {
         string expression = "'123'";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new StringToken("123"), result);
         Assert.AreEqual(5, pos);
@@ -35,7 +33,7 @@ public class StringParserTest {
     public void DoubleQuotedStringWithSpaces() {
         string expression = "  \"123\" ";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new StringToken("123"), result);
         Assert.AreEqual(7, pos);
@@ -45,7 +43,7 @@ public class StringParserTest {
     public void EmptyString() {
         string expression = "";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);
@@ -55,7 +53,7 @@ public class StringParserTest {
     public void UnmatchedToken() {
         string expression = "   abc'123'";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);
@@ -66,7 +64,7 @@ public class StringParserTest {
         string expression = "'abc";
         int pos = 0;
         Assert.Throws<ParserException>(delegate {
-            parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+            parser.Consume(expression.ToCharArray(), ref pos);
         });
         Assert.AreEqual(0, pos);
     }
@@ -75,7 +73,7 @@ public class StringParserTest {
     public void EscapedQuotes() {
         string expression = "\"abc\\\"def\"";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new StringToken("abc\"def"), result);
         Assert.AreEqual(10, pos);

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IdentifierToken : ValueToken<string> {
+﻿public class IdentifierToken : ValueToken<string> {
     public IdentifierToken(string value) : base(value) {
     }
 

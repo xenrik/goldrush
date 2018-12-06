@@ -1,4 +1,4 @@
-﻿public class NullCoalesceToken : Token {
+﻿public class NullCoalesceToken : MarkerToken {
     public override string ToString() {
         return "NullCoalesce{-TBD-}";
     }

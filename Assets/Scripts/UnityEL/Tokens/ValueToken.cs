@@ -1,4 +1,4 @@
-﻿public class ValueToken<T> : Token {
+﻿public abstract class ValueToken<T> : MarkerToken {
     public T Value { get; private set; }
 
     public ValueToken(T value) {

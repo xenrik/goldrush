@@ -3,19 +3,17 @@ using System.Collections.Generic;
 
 public class IdentifierParserTest {
     private IdentifierParser parser;
-    private Stack<Token> tokenStack;
 
     [SetUp]
     public void Init() {
         parser = new IdentifierParser();
-        tokenStack = new Stack<Token>();
     }
 
     [Test]
     public void TestSimpleIdentifier() {
         string expression = "abc";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IdentifierToken("abc"), result);
         Assert.AreEqual(3, pos);
@@ -25,7 +23,7 @@ public class IdentifierParserTest {
     public void TestMixedIdentifier() {
         string expression = "abc123";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IdentifierToken("abc123"), result);
         Assert.AreEqual(6, pos);
@@ -35,7 +33,7 @@ public class IdentifierParserTest {
     public void TestInvalidIdentifier() {
         string expression = "1abc";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);
@@ -45,7 +43,7 @@ public class IdentifierParserTest {
     public void TestSplitIdentifierSpace() {
         string expression = "abc def";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IdentifierToken("abc"), result);
         Assert.AreEqual(3, pos);
@@ -55,7 +53,7 @@ public class IdentifierParserTest {
     public void TestSplitIdentifierPeriod() {
         string expression = "abc.def";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IdentifierToken("abc"), result);
         Assert.AreEqual(3, pos);
@@ -65,7 +63,7 @@ public class IdentifierParserTest {
     public void TestLeadingSpace() {
         string expression = " abc";
         int pos = 0;
-        Token result = parser.Consume(tokenStack, expression.ToCharArray(), ref pos);
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IdentifierToken("abc"), result);
         Assert.AreEqual(4, pos);

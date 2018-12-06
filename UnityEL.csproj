@@ -75,7 +75,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\DoubleCharacterParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\ExponentParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\FunctionParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupEndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupOrFunctionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\IdentifierParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\IntegerParser.cs" />
@@ -108,12 +108,14 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\IdentifierToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\IntegerToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\KeyedAccessorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\MarkerToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ModulusToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\MultiplicationToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\NotToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\NullCoalesceToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\OrToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\PropertyAccessorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\RawToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\StringToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\SubtractionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />

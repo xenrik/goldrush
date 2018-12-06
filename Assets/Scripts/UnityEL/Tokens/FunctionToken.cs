@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-
-public class FunctionToken : Token {
+﻿public class FunctionToken : MarkerToken {
     public override string ToString() {
         return "Function{-TBD-}";
     }

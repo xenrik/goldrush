@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class GroupParserTest {
-    private GroupParser parser;
+public class GroupOrFunctionParserTest {
+    private GroupOrFunctionParser parser;
     
     [SetUp]
     public void Init() {
-        parser = new GroupParser();
+        parser = new GroupOrFunctionParser();
     }
 
     [Test]
@@ -37,5 +37,27 @@ public class GroupParserTest {
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);
+    }
+
+    [Test]
+    public void TestValidAccessor() {
+        string expression = "identifier(child)";
+        int pos = 10;
+
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+
+        Assert.IsAssignableFrom<GroupToken>(result);
+        Assert.AreEqual(11, pos);
+    }
+
+    [Test]
+    public void TestInvalidAccessor() {
+        string expression = "identifier+child";
+        int pos = 10;
+
+        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+
+        Assert.IsNull(result);
+        Assert.AreEqual(10, pos);
     }
 }

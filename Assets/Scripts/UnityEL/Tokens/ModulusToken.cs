@@ -1,4 +1,4 @@
-﻿public class ModulusToken : Token {
+﻿public class ModulusToken : MarkerToken {
     public override string ToString() {
         return "Modulus{-TBD-}";
     }
