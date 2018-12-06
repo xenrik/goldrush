@@ -1,5 +1,5 @@
-﻿public class ExponentToken : MarkerToken {
+﻿public class ExponentToken : BinaryToken {
     public override string ToString() {
-        return "Exponent{-TBD-}";
+        return "Exponent{" + Lhs + "," + Rhs + "}";
     }
 }

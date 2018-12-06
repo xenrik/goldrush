@@ -1,5 +1,5 @@
-﻿public class DivisionToken : MarkerToken {
+﻿public class DivisionToken : BinaryToken {
     public override string ToString() {
-        return "Division{-TBD-}";
+        return "Division{" + Lhs + "," + Rhs + "}";
     }
 }

@@ -1,8 +1,14 @@
-﻿public abstract class ValueToken<T> : MarkerToken {
+﻿using System.Collections.Generic;
+
+public abstract class ValueToken<T> : BaseToken {
     public T Value { get; private set; }
 
     public ValueToken(T value) {
         this.Value = value;
+    }
+
+    public override Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
+        return this;
     }
 
     public override bool Equals(object other) {

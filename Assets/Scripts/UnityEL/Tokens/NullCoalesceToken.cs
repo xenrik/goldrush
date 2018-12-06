@@ -1,5 +1,5 @@
-﻿public class NullCoalesceToken : MarkerToken {
+﻿public class NullCoalesceToken : BinaryToken {
     public override string ToString() {
-        return "NullCoalesce{-TBD-}";
+        return "NullCoalesce{" + Lhs + "," + Rhs + "}";
     }
 }

@@ -1,5 +1,5 @@
-﻿public class ModulusToken : MarkerToken {
+﻿public class ModulusToken : BinaryToken {
     public override string ToString() {
-        return "Modulus{-TBD-}";
+        return "Modulus{" + Lhs + "," + Rhs + "}";
     }
 }

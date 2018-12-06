@@ -1,5 +1,5 @@
-﻿public class OrToken : MarkerToken {
+﻿public class OrToken : BinaryToken {
     public override string ToString() {
-        return "Or{-TBD-}";
+        return "Or{" + Lhs + "," + Rhs + "}";
     }
 }

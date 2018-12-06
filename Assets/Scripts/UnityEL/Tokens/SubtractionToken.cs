@@ -1,5 +1,5 @@
-﻿public class SubtractionToken : MarkerToken {
+﻿public class SubtractionToken : BinaryToken {
     public override string ToString() {
-        return "Subtraction{-TBD-}";
+        return "Subtraction{" + Lhs + "," + Rhs + "}";
     }
 }

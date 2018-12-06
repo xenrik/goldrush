@@ -1,5 +1,7 @@
-﻿public class AdditionToken : MarkerToken {
+﻿using System.Collections.Generic;
+
+public class AdditionToken : BinaryToken {
     public override string ToString() {
-        return "Addition{-TBD-}";
+        return "Addition{" + Lhs + "," + Rhs + "}";
     }
 }

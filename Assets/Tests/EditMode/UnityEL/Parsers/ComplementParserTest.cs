@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class ComplimentParserTest {
+public class ComplementParserTest {
     private ComplementParser parser;
     
     [SetUp]

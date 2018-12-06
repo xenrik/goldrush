@@ -6,23 +6,25 @@ public class UnityELExpressionCompiler {
 
     public UnityELExpressionCompiler() {
         // Special parser to close groups, functions, or keyed access
-        parsers.Add(new CloseParser()); // ) or ]                                   -- DONE
-        
-        // We can't work out just from the current symbol if this is a group or function,
-        // so we have to do that during resolve, rather than parse
-        parsers.Add(new GroupOrFunctionParser()); // (                              -- DONE
+        parsers.Add(new CloseParser()); // ) or ]                                   --
+
+        // We can't work out just from the current symbol if this is a group or 
+        // function, so we have to do that during resolve, rather than parse
+        parsers.Add(new GroupOrFunctionParser()); // (                              --
 
         // Function, Property and Identifiers 
-        parsers.Add(new PropertyAccessorParser()); // .                             -- DONE
-        parsers.Add(new KeyedAccessorParser()); // [                                -- DONE
-        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- DONE
-        parsers.Add(new ArgumentParser()); // ,                                     -- DONE
+        parsers.Add(new PropertyAccessorParser()); // .                             --
+        parsers.Add(new KeyedAccessorParser()); // [                                --
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      --
+        parsers.Add(new ArgumentParser()); // ,                                     --
 
         // Primitives
         parsers.Add(new StringParser()); // " or '                                  -- DONE
         parsers.Add(new BooleanParser()); // true or false                          -- DONE
         parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- DONE
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- DONE
+        // 0b0101010
+        // 0x0123ABC
 
         // Maths
         parsers.Add(new AdditionParser()); // +                                     -- DONE
@@ -33,19 +35,28 @@ public class UnityELExpressionCompiler {
         parsers.Add(new ExponentParser()); // **                                    -- DONE
 
         // Logical
-        parsers.Add(new NotParser()); // !                                          -- DONE
+        parsers.Add(new NotParser()); // !                                          --
         parsers.Add(new OrParser()); // ||                                          -- DONE
         parsers.Add(new AndParser()); // &&                                         -- DONE
 
         // Coalesce and If
         parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
-        parsers.Add(new ConditionalOperatorParser()); // ?                          -- DONE
+        parsers.Add(new ConditionalOperatorParser()); // ?                          --
+        // : (conditional else)
 
         // Bitwise
-        parsers.Add(new ComplementParser()); // ~                                   -- DONE
+        parsers.Add(new ComplementParser()); // ~                                   --
         parsers.Add(new BitwiseAndParser()); // &                                   -- DONE
         parsers.Add(new BitwiseOrParser()); // |                                    -- DONE
         parsers.Add(new XorParser()); // ^                                          -- DONE
+
+        // Comparison
+        // <=
+        // >=
+        // <
+        // >
+        // ==
+        
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {
@@ -66,7 +77,7 @@ public class UnityELExpressionCompiler {
         Stack<Token> resolvedTokens = new Stack<Token>();
         while (rawTokens.Count > 0) {
             RawToken rawToken = rawTokens.Pop();
-            Token resolvedToken = rawToken.Resolve(rawTokens);
+            Token resolvedToken = rawToken.Resolve(rawTokens, resolvedTokens);
             if (resolvedToken != null) {
                 resolvedTokens.Push(resolvedToken);
             }

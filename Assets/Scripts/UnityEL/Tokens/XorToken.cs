@@ -1,5 +1,5 @@
-﻿public class XorToken : MarkerToken {
+﻿public class XorToken : BinaryToken {
     public override string ToString() {
-        return "Xor{-TBD-}";
+        return "Xor{" + Lhs + "," + Rhs + "}";
     }
 }

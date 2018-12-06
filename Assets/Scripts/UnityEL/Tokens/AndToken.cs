@@ -1,5 +1,5 @@
-﻿public class AndToken : MarkerToken {
+﻿public class AndToken : BinaryToken {
     public override string ToString() {
-        return "And{-TBD-}";
+        return "And{" + Lhs + "," + Rhs + "}";
     }
 }

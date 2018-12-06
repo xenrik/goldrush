@@ -1,5 +1,5 @@
-﻿public class BitwiseAndToken : MarkerToken {
+﻿public class BitwiseAndToken : BinaryToken {
     public override string ToString() {
-        return "BitwiseAnd{-TBD-}";
+        return "BitwiseAnd{" + Lhs + "," + Rhs + "}";
     }
 }

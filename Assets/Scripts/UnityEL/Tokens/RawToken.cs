@@ -2,7 +2,7 @@
 
 public interface RawToken : Token {
     /**
-     * Resolve this raw toekn into a resolved token
+     * Resolve this raw token into a resolved token
      */
-    Token Resolve(Stack<RawToken> rawTokens);
+    Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens);
 }

@@ -1,5 +1,5 @@
-﻿public class MultiplicationToken : MarkerToken {
+﻿public class MultiplicationToken : BinaryToken {
     public override string ToString() {
-        return "Multiplication{-TBD-}";
+        return "Multiplication{" + Lhs + "," + Rhs + "}";
     }
 }
