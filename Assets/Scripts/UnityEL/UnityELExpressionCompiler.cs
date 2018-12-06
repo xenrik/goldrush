@@ -7,8 +7,8 @@ public class UnityELExpressionCompiler {
     private List<TokenParser> parsers = new List<TokenParser>();
 
     public UnityELExpressionCompiler() {
-        // Special parsers to close groups, functions, or keyed access
-        parsers.Add(new ClosePreviousParser()); // ) or ]                           --
+        // Special parser to close groups, functions, or keyed access
+        parsers.Add(new CloseParser()); // ) or ]                                   -- DONE
 
         // Function, Property and Identifiers 
         parsers.Add(new PropertyAccessorParser()); // <identifier> followed by .    -- DONE
@@ -38,8 +38,8 @@ public class UnityELExpressionCompiler {
         parsers.Add(new AndParser()); // &&                                         -- DONE
 
         // Coalesce and If
-        parsers.Add(new NullCoalesceParser()); // ??                                -- 
-        parsers.Add(new ConditionalOperatorParser()); // ?                          --
+        parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
+        parsers.Add(new ConditionalOperatorParser()); // ?                          -- DONE
 
         // Bitwise
         parsers.Add(new ComplementParser()); // ~                                   -- DONE
@@ -49,6 +49,7 @@ public class UnityELExpressionCompiler {
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {
+        // First, separate the string into tokens
         Stack<Token> tokens = new Stack<Token>();
         char[] chars = expression.ToCharArray();
         int pos = 0;

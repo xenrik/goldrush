@@ -66,6 +66,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseAndParserTest - Copy.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BitwiseOrParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BooleanParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\CloseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ComplementParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\ConditionalOperatorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\DecimalParserTest.cs" />

@@ -67,7 +67,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseAndParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseOrParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\BooleanParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\ClosePreviousParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\CloseParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\ComplementParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\CondtionalOperatorParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\DecimalParser.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BitwiseAndToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BitwiseOrToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BooleanToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\CloseToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ComplementToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ConditionalOperatorToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\DecimalToken.cs" />
