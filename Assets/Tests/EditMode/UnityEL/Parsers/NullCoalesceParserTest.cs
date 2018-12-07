@@ -13,7 +13,7 @@ public class NullCoalesceParserTest {
     public void TestValidNullCoalesce() {
         string expression = "a??b";
         int pos = 1;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<NullCoalesceToken>(result);
         Assert.AreEqual(3, pos);
@@ -23,7 +23,7 @@ public class NullCoalesceParserTest {
     public void TestNullCoalesceWithSpaces() {
         string expression = "a ?? b";
         int pos = 1;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<NullCoalesceToken>(result);
         Assert.AreEqual(4, pos);
@@ -33,7 +33,7 @@ public class NullCoalesceParserTest {
     public void TestInvalidNullCoalesce() {
         string expression = "a !! b";
         int pos = 1;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(1, pos);

@@ -5,7 +5,7 @@
 * Does not accept decimals that do not have a digit before the period
 */
 public class DecimalParser : TokenParser {
-    public RawToken Consume(char[] chars, ref int pos) {
+    public RawToken Parse(char[] chars, ref int pos) {
         int i = pos;
         int start = -1;
         char ch;

@@ -13,7 +13,7 @@ public class DivisionParserTest {
     public void TestValidDivision() {
         string expression = "1/2";
         int pos = 1;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<DivisionToken>(result);
         Assert.AreEqual(2, pos);
@@ -23,7 +23,7 @@ public class DivisionParserTest {
     public void TestDivisionWithSpaces() {
         string expression = "1 / 2";
         int pos = 1;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<DivisionToken>(result);
         Assert.AreEqual(3, pos);
@@ -33,7 +33,7 @@ public class DivisionParserTest {
     public void TestInvalidDivision() {
         string expression = "1*2";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);

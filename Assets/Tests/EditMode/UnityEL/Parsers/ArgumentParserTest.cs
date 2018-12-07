@@ -13,7 +13,7 @@ public class ArgumentParserTest {
     public void TestValidAccessor() {
         string expression = "identifier(arg1,arg2)";
         int pos = 15;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ArgumentToken>(result);
         Assert.AreEqual(16, pos);
@@ -24,7 +24,7 @@ public class ArgumentParserTest {
         string expression = "identifier(arg1+arg2)";
         int pos = 15;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(15, pos);

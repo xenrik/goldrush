@@ -13,7 +13,7 @@ public class BitwiseOrParserTest {
     public void TestValidBitwiseOr() {
         string expression = "0b1010|0b1001";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<BitwiseOrToken>(result);
         Assert.AreEqual(7, pos);
@@ -23,7 +23,7 @@ public class BitwiseOrParserTest {
     public void TestBitwiseOrWithSpaces() {
         string expression = "0b1010 | 0b1001";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<BitwiseOrToken>(result);
         Assert.AreEqual(8, pos);
@@ -33,7 +33,7 @@ public class BitwiseOrParserTest {
     public void TestInvalidBitwiseOr() {
         string expression = "0b1010#0b1001";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(6, pos);

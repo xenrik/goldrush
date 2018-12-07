@@ -14,7 +14,7 @@ public class FunctionAccessorParserTest {
         string expression = "identifier(child)";
         int pos = 10;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<FunctionToken>(result);
         Assert.AreEqual(11, pos);
@@ -25,7 +25,7 @@ public class FunctionAccessorParserTest {
         string expression = "identifier+child";
         int pos = 10;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(10, pos);

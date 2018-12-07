@@ -13,7 +13,7 @@ public class NotParserTest {
     public void TestValidNot() {
         string expression = "!true";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<NotToken>(result);
         Assert.AreEqual(1, pos);
@@ -23,7 +23,7 @@ public class NotParserTest {
     public void TestNotWithSpaces() {
         string expression = " !true";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<NotToken>(result);
         Assert.AreEqual(2, pos);
@@ -33,7 +33,7 @@ public class NotParserTest {
     public void TestInvalidNot() {
         string expression = "?true";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);

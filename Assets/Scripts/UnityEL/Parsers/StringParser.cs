@@ -9,7 +9,7 @@ using UnityEngine;
  */
 public class StringParser : TokenParser {
 
-    public RawToken Consume(char[] chars, ref int pos) {
+    public RawToken Parse(char[] chars, ref int pos) {
         // Must have a " or '
         int i = pos;
         char terminator = (char)0;

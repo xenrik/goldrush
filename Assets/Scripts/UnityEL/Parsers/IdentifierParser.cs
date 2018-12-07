@@ -5,7 +5,7 @@
  * then consume up until it encounters the first non-alpha, non-numeric char.
  */
 public class IdentifierParser : TokenParser {
-    public RawToken Consume(char[] chars, ref int pos) {
+    public RawToken Parse(char[] chars, ref int pos) {
         int i = pos;
         int start = -1;
         char ch;

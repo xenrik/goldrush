@@ -5,7 +5,7 @@ using UnityEngine;
 * Parser that accepts boolean sequences. 
 */
 public class BooleanParser : TokenParser {
-    public RawToken Consume(char[] chars, ref int pos) {
+    public RawToken Parse(char[] chars, ref int pos) {
         int i = pos;
         char ch;
         while (i < chars.Length) {

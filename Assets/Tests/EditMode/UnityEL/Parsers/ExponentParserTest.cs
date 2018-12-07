@@ -14,7 +14,7 @@ public class ExponentParserTest {
         string expression = "123**2";
         int pos = 3;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ExponentToken>(result);
         Assert.AreEqual(5, pos);
@@ -25,7 +25,7 @@ public class ExponentParserTest {
         string expression = "123.45**2";
         int pos = 6;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ExponentToken>(result);
         Assert.AreEqual(8, pos);
@@ -36,7 +36,7 @@ public class ExponentParserTest {
         string expression = "123^2";
         int pos = 3;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(3, pos);
@@ -47,7 +47,7 @@ public class ExponentParserTest {
         string expression = "123.45^2";
         int pos = 6;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(6, pos);

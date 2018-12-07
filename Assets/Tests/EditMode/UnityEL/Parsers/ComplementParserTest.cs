@@ -13,7 +13,7 @@ public class ComplementParserTest {
     public void TestValidCompliment() {
         string expression = "~0b0110";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ComplementToken>(result);
         Assert.AreEqual(1, pos);
@@ -23,7 +23,7 @@ public class ComplementParserTest {
     public void TestComplimentWithSpaces() {
         string expression = " ~0b0110";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ComplementToken>(result);
         Assert.AreEqual(2, pos);
@@ -33,7 +33,7 @@ public class ComplementParserTest {
     public void TestInvalidCompliment() {
         string expression = "?0b0110";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);

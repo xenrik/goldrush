@@ -13,7 +13,7 @@ public class AndParserTest {
     public void TestValidAnd() {
         string expression = "true&&false";
         int pos = 4;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<AndToken>(result);
         Assert.AreEqual(6, pos);
@@ -23,7 +23,7 @@ public class AndParserTest {
     public void TestAndWithSpaces() {
         string expression = "true && false";
         int pos = 5;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<AndToken>(result);
         Assert.AreEqual(7, pos);
@@ -33,7 +33,7 @@ public class AndParserTest {
     public void TestInvalidAnd() {
         string expression = "true!!false";
         int pos = 5;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(5, pos);

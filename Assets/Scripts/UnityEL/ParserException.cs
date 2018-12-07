@@ -7,6 +7,10 @@ public class ParserException : System.Exception {
     public ParserException(string message) : base(message) {
     }
 
+    public ParserException(string message, int position) : base(message) {
+
+    }
+
     public ParserException(string message, Exception innerException) : base(message, innerException) {
     }
 }

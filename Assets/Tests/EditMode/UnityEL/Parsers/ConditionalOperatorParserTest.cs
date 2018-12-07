@@ -13,7 +13,7 @@ public class ConditionalOperatorParserTest {
     public void TestValidConditionalOperator() {
         string expression = "(true)?1:2";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ConditionalOperatorToken>(result);
         Assert.AreEqual(7, pos);
@@ -23,7 +23,7 @@ public class ConditionalOperatorParserTest {
     public void TestConditionalOperatorWithSpaces() {
         string expression = "(true) ? 1 : 2";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<ConditionalOperatorToken>(result);
         Assert.AreEqual(8, pos);
@@ -33,7 +33,7 @@ public class ConditionalOperatorParserTest {
     public void TestInvalidConditionalOperator() {
         string expression = "(true) ! 2 ? 1";
         int pos = 6;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(6, pos);

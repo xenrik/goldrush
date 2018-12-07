@@ -13,7 +13,7 @@ public class IntegerParserTest {
     public void TestSimpleInteger() {
         string expression = "123";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IntegerToken(123), result);
         Assert.AreEqual(3, pos);
@@ -23,7 +23,7 @@ public class IntegerParserTest {
     public void TestMixedIdentifier() {
         string expression = "123abc";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IntegerToken(123), result);
         Assert.AreEqual(3, pos);
@@ -33,7 +33,7 @@ public class IntegerParserTest {
     public void TestSplitIdentifierSpace() {
         string expression = "123 456";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IntegerToken(123), result);
         Assert.AreEqual(3, pos);
@@ -43,7 +43,7 @@ public class IntegerParserTest {
     public void TestSplitIdentifierPeriod() {
         string expression = "123.456";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IntegerToken(123), result);
         Assert.AreEqual(3, pos);
@@ -53,7 +53,7 @@ public class IntegerParserTest {
     public void TestLeadingSpace() {
         string expression = " 123";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.AreEqual(new IntegerToken(123), result);
         Assert.AreEqual(4, pos);

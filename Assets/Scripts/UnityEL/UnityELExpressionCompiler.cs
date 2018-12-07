@@ -56,24 +56,28 @@ public class UnityELExpressionCompiler {
         // <
         // >
         // ==
+
+        // Assignment
+        // =
+
+        // Others
+        // is (instance of)
         
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {
         // First, separate the string into tokens
-        Stack<RawToken> rawTokens = new Stack<RawToken>();
         char[] chars = expression.ToCharArray();
         int pos = 0;
+        RawToken root = new RootToken();
         while (pos < chars.Length) {
             foreach (TokenParser parser in parsers) {
-                RawToken token = parser.Consume(chars, ref pos);
-                if (token != null) {
-                    rawTokens.Push(token);
-                }
+                root = parser.Parse(root, chars, ref pos);
             }
         }
 
         // Now go through each token in turn and ask it to resolve itself. 
+        /*
         Stack<Token> resolvedTokens = new Stack<Token>();
         while (rawTokens.Count > 0) {
             RawToken rawToken = rawTokens.Pop();
@@ -82,7 +86,14 @@ public class UnityELExpressionCompiler {
                 resolvedTokens.Push(resolvedToken);
             }
         }
+        */
 
         return null;
+    }
+
+    private class RootToken : BaseToken {        
+        public override Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
+            throw new NotImplementedException();
+        }
     }
 }

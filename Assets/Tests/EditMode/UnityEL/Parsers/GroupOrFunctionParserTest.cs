@@ -13,7 +13,7 @@ public class GroupOrFunctionParserTest {
     public void TestValidGroup() {
         string expression = "(1 + 2)";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<GroupToken>(result);
         Assert.AreEqual(1, pos);
@@ -23,7 +23,7 @@ public class GroupOrFunctionParserTest {
     public void TestGroupWithSpaces() {
         string expression = " (1 + 2)";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<GroupToken>(result);
         Assert.AreEqual(2, pos);
@@ -33,7 +33,7 @@ public class GroupOrFunctionParserTest {
     public void TestInvalidGroup() {
         string expression = "[1 + 2]";
         int pos = 0;
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(0, pos);
@@ -44,7 +44,7 @@ public class GroupOrFunctionParserTest {
         string expression = "identifier(child)";
         int pos = 10;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsAssignableFrom<GroupToken>(result);
         Assert.AreEqual(11, pos);
@@ -55,7 +55,7 @@ public class GroupOrFunctionParserTest {
         string expression = "identifier+child";
         int pos = 10;
 
-        Token result = parser.Consume(expression.ToCharArray(), ref pos);
+        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
         Assert.IsNull(result);
         Assert.AreEqual(10, pos);
