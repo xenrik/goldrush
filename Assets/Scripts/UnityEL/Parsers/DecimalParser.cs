@@ -5,7 +5,7 @@
 * Does not accept decimals that do not have a digit before the period
 */
 public class DecimalParser : TokenParser {
-    public RawToken Parse(char[] chars, ref int pos) {
+    public bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         int i = pos;
         int start = -1;
         char ch;
@@ -19,7 +19,7 @@ public class DecimalParser : TokenParser {
                 } else if (char.IsDigit(ch)) {
                     start = i - 1;
                 } else {
-                    return null;
+                    return false;
                 }
             } else if (char.IsDigit(ch)) {
                 continue;
@@ -40,14 +40,16 @@ public class DecimalParser : TokenParser {
             string s = new string(chars, start, i - start);
             s = s.Trim();
 
-            pos = i;
             try {
-                return new DecimalToken(float.Parse(s));
+                DecimalToken token = new DecimalToken(float.Parse(s), pos, parent);
+                pos = i;
+
+                return true;
             } catch (System.FormatException e) {
-                throw new ParserException("Unable to parse as float: " + s, e);
+                throw new ParserException("decimal", pos, "Unable to parse as decimal: " + s, e);
             }
         }
 
-        return null;
+        return false;
     }
 }

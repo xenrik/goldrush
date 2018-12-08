@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 
 public class XorParserTest {
+    private RootToken rootToken;
+    private RawToken parent;
     private XorParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+        parent = rootToken;
+
         parser = new XorParser();
     }
 
@@ -13,9 +18,12 @@ public class XorParserTest {
     public void TestValidXor() {
         string expression = "0b1010^0b1001";
         int pos = 6;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<XorToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new XorToken(6, rootToken), rootToken[0]);
         Assert.AreEqual(7, pos);
     }
 
@@ -23,9 +31,12 @@ public class XorParserTest {
     public void TestXorWithSpaces() {
         string expression = "0b1010 ^ 0b1001";
         int pos = 6;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<XorToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new XorToken(6, rootToken), rootToken[0]);
         Assert.AreEqual(8, pos);
     }
 
@@ -33,9 +44,11 @@ public class XorParserTest {
     public void TestInvalidXor() {
         string expression = "0b1010#0b1001";
         int pos = 6;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsNull(result);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(6, pos);
     }
 }

@@ -1,5 +1,6 @@
 ﻿public class ExponentToken : BinaryToken {
-    public override string ToString() {
-        return "Exponent{" + Lhs + "," + Rhs + "}";
+    public override string Name { get { return "exponent"; } }
+
+    public ExponentToken(int position, RawToken parent) : base(position, parent) {
     }
 }

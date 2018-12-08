@@ -1,11 +1,16 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class FunctionAccessorParserTest {
+public class FunctionParserTest {
+    private RootToken rootToken;
+    private RawToken parent;
     private FunctionParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+        parent = rootToken;
+
         parser = new FunctionParser();
     }
 
@@ -14,9 +19,14 @@ public class FunctionAccessorParserTest {
         string expression = "identifier(child)";
         int pos = 10;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsAssignableFrom<FunctionToken>(result);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new FunctionToken(10, rootToken), rootToken[0]);
+
+        // The function should now be the parent
+        Assert.AreSame(rootToken[0], parent);
+
         Assert.AreEqual(11, pos);
     }
 
@@ -25,9 +35,10 @@ public class FunctionAccessorParserTest {
         string expression = "identifier+child";
         int pos = 10;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsNull(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(10, pos);
     }
 }

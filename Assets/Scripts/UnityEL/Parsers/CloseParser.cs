@@ -7,7 +7,7 @@ public class CloseParser : TokenParser {
     public CloseParser() {
     }
 
-    public virtual RawToken Parse(RawToken container, char[] chars, ref int pos) {
+    public virtual bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         int i = pos;
         char ch;
         while (i < chars.Length) {
@@ -16,28 +16,33 @@ public class CloseParser : TokenParser {
             if (char.IsWhiteSpace(ch)) {
                 continue;
             } else if (ch == ')' || ch == ']') {
+                CreateToken(parent, pos);
                 pos = i;
 
-                return CreateToken(container, pos);
+                // Change the parent to our parent's parent
+                parent = parent.Parent;
+                return true;
             }
 
             break;
         }
 
-        return null;
+        return false;
     }
 
-    private RawToken CreateToken(RawToken container, int pos) {
-        CloseToken token = new CloseToken(pos);
-        container.AddToken(token);
+    private void CreateToken(RawToken parent, int pos) {
+        CloseToken token = new CloseToken(pos, parent);
 
-        // The current container must be closeable
-        if (!(container is CloseableToken)) {
-            throw new ParserException("Cannot close a non-closeable token", pos);
+        // The current parent must be closeable
+        if (!(parent is CloseableToken)) {
+            throw new ParserException(token, "Cannot close a non-closeable token: " + parent.DebugName);
         }
 
-        // Close the container and return its parent as the new container
-        ((CloseableToken)container).Close();
-        return container.Parent;
+        // Close the parent
+        try {
+            ((CloseableToken)parent).Close();
+        } catch (ParserException ex) {
+            throw new ParserException(token, "Failed to close token", ex);
+        }
     }
 }

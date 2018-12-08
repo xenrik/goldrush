@@ -8,11 +8,11 @@ using UnityEngine;
  * next (non-escaped) " or '. Leading spaces are ignored.
  */
 public class StringParser : TokenParser {
-
-    public RawToken Parse(char[] chars, ref int pos) {
+    public bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         // Must have a " or '
         int i = pos;
         char terminator = (char)0;
+        int terminatorPos = 0;
         char ch;
         bool lastWasEscape = false;
         while (i < chars.Length) {
@@ -24,11 +24,13 @@ public class StringParser : TokenParser {
                 }
 
                 if (ch == '"') {
+                    terminatorPos = i - 1;
                     terminator = '"';
                 } else if (ch == '\'') {
+                    terminatorPos = i - 1;
                     terminator = '\'';
                 } else {
-                    return null;
+                    return false;
                 }
             } else if (ch == '\\') {
                 lastWasEscape = !lastWasEscape;
@@ -43,17 +45,19 @@ public class StringParser : TokenParser {
                 // Replace escape sequences
                 s = ReplaceEscapes(s);
 
+                new StringToken(s, pos, parent);
                 pos = i;
-                return new StringToken(s);
+
+                return true;
             } else {
                 lastWasEscape = false;
             }
         }
 
         if (terminator != 0) {
-            throw new ParserException("Unmatched string terminator: " + terminator);
+            throw new ParserException("string", terminatorPos, "Unmatched string terminator: " + terminator);
         } else {
-            return null;
+            return false;
         }
     }
 

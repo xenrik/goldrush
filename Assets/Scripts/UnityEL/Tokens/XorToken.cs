@@ -1,5 +1,6 @@
 ﻿public class XorToken : BinaryToken {
-    public override string ToString() {
-        return "Xor{" + Lhs + "," + Rhs + "}";
+    public override string Name { get { return "xor"; } }
+
+    public XorToken(int position, RawToken parent) : base(position, parent) {
     }
 }

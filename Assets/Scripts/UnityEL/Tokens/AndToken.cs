@@ -1,5 +1,6 @@
 ﻿public class AndToken : BinaryToken {
-    public override string ToString() {
-        return "And{" + Lhs + "," + Rhs + "}";
+    public override string Name { get { return "and"; } }
+
+    public AndToken(int position, RawToken parent) : base(position, parent) {
     }
 }

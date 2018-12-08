@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 
 public class CloseParserTest {
+    private GroupToken groupToken;
+    private RootToken rootToken;
+    private RawToken parent;
     private CloseParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+
+        groupToken = new GroupToken(0, rootToken);
+        parent = groupToken;
+
         parser = new CloseParser();
     }
 
@@ -13,9 +21,14 @@ public class CloseParserTest {
     public void TestValidCloseFunction() {
         string expression = "function(a)";
         int pos = 10;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(10, groupToken), groupToken[0]);
         Assert.AreEqual(11, pos);
     }
 
@@ -23,9 +36,14 @@ public class CloseParserTest {
     public void TestValidCloseGroup() {
         string expression = "(a+b)";
         int pos = 4;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(4, groupToken), groupToken[0]);
         Assert.AreEqual(5, pos);
     }
 
@@ -33,9 +51,14 @@ public class CloseParserTest {
     public void TestValidCloseKey() {
         string expression = "property[a]";
         int pos = 10;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(10, groupToken), groupToken[0]);
         Assert.AreEqual(11, pos);
     }
 
@@ -43,9 +66,14 @@ public class CloseParserTest {
     public void TestValidCloseFunctionWithSpaces() {
         string expression = "function ( a )";
         int pos = 12;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(12, groupToken), groupToken[0]);
         Assert.AreEqual(14, pos);
     }
 
@@ -53,9 +81,14 @@ public class CloseParserTest {
     public void TestValidCloseGroupWithSpaces() {
         string expression = "( a + b )";
         int pos = 7;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(7, groupToken), groupToken[0]);
         Assert.AreEqual(9, pos);
     }
 
@@ -63,9 +96,14 @@ public class CloseParserTest {
     public void TestValidCloseKeyWithSpaces() {
         string expression = "property[ a ]";
         int pos = 11;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<CloseToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        // Parent starts as Group, but should change to Root
+        Assert.AreSame(rootToken, parent);
+
+        Assert.AreEqual(1, groupToken.ChildCount);
+        Assert.AreEqual(new CloseToken(11, groupToken), groupToken[0]);
         Assert.AreEqual(13, pos);
     }
 
@@ -73,19 +111,23 @@ public class CloseParserTest {
     public void TestInvalidCloseFunction() {
         string expression = "function ( a >";
         int pos = 12;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsNull(result);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(groupToken, parent);
+        Assert.AreEqual(0, groupToken.ChildCount);
         Assert.AreEqual(12, pos);
     }
 
     [Test]
-    public void TestInalidCloseGroup() {
+    public void TestInvalidCloseGroup() {
         string expression = "( a + b >";
         int pos = 7;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsNull(result);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(groupToken, parent);
+        Assert.AreEqual(0, groupToken.ChildCount);
         Assert.AreEqual(7, pos);
     }
 
@@ -93,9 +135,11 @@ public class CloseParserTest {
     public void TestInvalidCloseKey() {
         string expression = "property[ a >";
         int pos = 11;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsNull(result);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(groupToken, parent);
+        Assert.AreEqual(0, groupToken.ChildCount);
         Assert.AreEqual(11, pos);
     }
 

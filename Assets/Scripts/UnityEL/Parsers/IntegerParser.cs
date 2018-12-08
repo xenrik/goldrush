@@ -4,7 +4,7 @@
 * Parser that accepts integer sequences. 
 */
 public class IntegerParser : TokenParser {
-    public RawToken Parse(char[] chars, ref int pos) {
+    public bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         int i = pos;
         int start = -1;
         char ch;
@@ -17,7 +17,7 @@ public class IntegerParser : TokenParser {
                 } else if (char.IsDigit(ch)) {
                     start = i - 1;
                 } else {
-                    return null;
+                    return false;
                 }
             } else if (!char.IsDigit(ch)) {
                 --i;
@@ -29,14 +29,16 @@ public class IntegerParser : TokenParser {
             string s = new string(chars, start, i - start);
             s = s.Trim();
 
-            pos = i;
             try {
-                return new IntegerToken(int.Parse(s));
+                new IntegerToken(int.Parse(s), pos, parent);
+                pos = i;
+
+                return true;
             } catch (System.FormatException e) {
-                throw new ParserException("Unable to parse as int: " + s, e);
+                throw new ParserException("integer", pos, "Unable to parse as int: " + s, e);
             }
         }
 
-        return null;
+        return false;
     }
 }

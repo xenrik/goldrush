@@ -1,5 +1,6 @@
 ﻿public class SubtractionToken : BinaryToken {
-    public override string ToString() {
-        return "Subtraction{" + Lhs + "," + Rhs + "}";
+    public override string Name { get { return "subtraction"; } }
+
+    public SubtractionToken(int position, RawToken parent) : base(position, parent) {
     }
 }

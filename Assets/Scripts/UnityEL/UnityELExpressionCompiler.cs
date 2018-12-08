@@ -39,17 +39,6 @@ public class UnityELExpressionCompiler {
         parsers.Add(new OrParser()); // ||                                          -- DONE
         parsers.Add(new AndParser()); // &&                                         -- DONE
 
-        // Coalesce and If
-        parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
-        parsers.Add(new ConditionalOperatorParser()); // ?                          --
-        // : (conditional else)
-
-        // Bitwise
-        parsers.Add(new ComplementParser()); // ~                                   --
-        parsers.Add(new BitwiseAndParser()); // &                                   -- DONE
-        parsers.Add(new BitwiseOrParser()); // |                                    -- DONE
-        parsers.Add(new XorParser()); // ^                                          -- DONE
-
         // Comparison
         // <=
         // >=
@@ -57,12 +46,20 @@ public class UnityELExpressionCompiler {
         // >
         // ==
 
+        // Coalesce and Tests
+        parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
+        parsers.Add(new ConditionalOperatorParser()); // ?                          --
+        // : (conditional else)
+        // is (instance of)
+
+        // Bitwise
+        parsers.Add(new ComplementParser()); // ~                                   --
+        parsers.Add(new BitwiseAndParser()); // &                                   -- DONE
+        parsers.Add(new BitwiseOrParser()); // |                                    -- DONE
+        parsers.Add(new XorParser()); // ^                                          -- DONE
+
         // Assignment
         // =
-
-        // Others
-        // is (instance of)
-        
     }
 
     public UnityELExpression<T> Compile<T>(string expression, UnityELEvaluator context) {
@@ -70,9 +67,12 @@ public class UnityELExpressionCompiler {
         char[] chars = expression.ToCharArray();
         int pos = 0;
         RawToken root = new RootToken();
+        RawToken parent = root;
         while (pos < chars.Length) {
             foreach (TokenParser parser in parsers) {
-                root = parser.Parse(root, chars, ref pos);
+                if (parser.Parse(chars, ref pos, ref parent)) {
+                    break;
+                }
             }
         }
 
@@ -89,11 +89,5 @@ public class UnityELExpressionCompiler {
         */
 
         return null;
-    }
-
-    private class RootToken : BaseToken {        
-        public override Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
-            throw new NotImplementedException();
-        }
     }
 }

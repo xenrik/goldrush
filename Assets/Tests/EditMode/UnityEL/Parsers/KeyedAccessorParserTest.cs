@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 
 public class KeyedAccessorParserTest {
+    private RootToken rootToken;
+    private RawToken parent;
     private KeyedAccessorParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+        parent = rootToken;
+
         parser = new KeyedAccessorParser();
     }
 
@@ -14,9 +19,11 @@ public class KeyedAccessorParserTest {
         string expression = "identifier['child']";
         int pos = 10;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsAssignableFrom<KeyedAccessorToken>(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new KeyedAccessorToken(10, rootToken), rootToken[0]);
         Assert.AreEqual(11, pos);
     }
 
@@ -25,9 +32,10 @@ public class KeyedAccessorParserTest {
         string expression = "identifier('child')";
         int pos = 10;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsNull(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(10, pos);
     }
 }

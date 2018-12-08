@@ -1,8 +1,8 @@
-﻿public class FunctionToken : BaseToken {
-    public FunctionToken(int position) : base(position) {
-    }
+﻿public class FunctionToken : RawToken {
+    public override string Name { get { return "function"; } }
 
-    public override string ToString() {
-        return "Function{-TBD-}";
+    public FunctionToken() : base() {
+    }
+    public FunctionToken(int position, RawToken parent) : base(position, parent) {
     }
 }

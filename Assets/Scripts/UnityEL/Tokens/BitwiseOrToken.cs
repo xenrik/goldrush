@@ -1,5 +1,6 @@
 ﻿public class BitwiseOrToken : BinaryToken {
-    public override string ToString() {
-        return "BitwiseOr{" + Lhs + "," + Rhs + "}";
+    public override string Name { get { return "bitwiseOr"; } }
+
+    public BitwiseOrToken(int position, RawToken parent) : base(position, parent) {
     }
 }

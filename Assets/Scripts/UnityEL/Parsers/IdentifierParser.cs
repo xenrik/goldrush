@@ -5,7 +5,7 @@
  * then consume up until it encounters the first non-alpha, non-numeric char.
  */
 public class IdentifierParser : TokenParser {
-    public RawToken Parse(char[] chars, ref int pos) {
+    public bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         int i = pos;
         int start = -1;
         char ch;
@@ -18,7 +18,7 @@ public class IdentifierParser : TokenParser {
                 } else if (char.IsLetter(ch)) {
                     start = i - 1;
                 } else {
-                    return null;
+                    return false;
                 }
             } else if (!char.IsLetterOrDigit(ch)) {
                 --i;
@@ -31,9 +31,10 @@ public class IdentifierParser : TokenParser {
             s = s.Trim();
 
             pos = i;
-            return new IdentifierToken(s);
+            new IdentifierToken(s, pos, parent);
+            return true;
         }
 
-        return null;
+        return false;
     }
 }

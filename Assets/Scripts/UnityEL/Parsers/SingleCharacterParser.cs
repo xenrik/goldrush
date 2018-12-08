@@ -7,7 +7,7 @@ public abstract class SingleCharacterParser<T> : TokenParser where T : RawToken 
         this.requiredChar = requiredChar;
     }
 
-    public virtual RawToken Parse(RawToken container, char[] chars, ref int pos) {
+    public virtual bool Parse(char[] chars, ref int pos, ref RawToken parent) {
         int i = pos;
         char ch;
         while (i < chars.Length) {
@@ -16,20 +16,22 @@ public abstract class SingleCharacterParser<T> : TokenParser where T : RawToken 
             if (char.IsWhiteSpace(ch)) {
                 continue;
             } else if (ch == requiredChar) {
+                parent = CreateToken(pos, parent);
                 pos = i;
-                return CreateToken(container, pos);
+
+                return true;
             }
 
             break;
         }
 
-        return null;
+        return false;
     }
 
-    protected virtual RawToken CreateToken(RawToken container, int position) {
-        T token = (T)System.Activator.CreateInstance(typeof(T), position, container);
-        container.AddToken(token);
+    protected virtual RawToken CreateToken(int position, RawToken parent) {
+        System.Activator.CreateInstance(typeof(T), position, parent);
 
-        return container;
+        // Don't change the parent by default
+        return parent;
     }
 }

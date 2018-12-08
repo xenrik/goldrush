@@ -3,7 +3,7 @@ using UnityEditor;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-public abstract class BinaryTokenTest<T> where T : BinaryToken, new() {
+public abstract class BinaryTokenTest<T> where T : BinaryToken {
     protected Stack<RawToken> rawTokens;
     protected Stack<Token> resolvedTokens;
     protected RawToken rawToken;
@@ -13,7 +13,7 @@ public abstract class BinaryTokenTest<T> where T : BinaryToken, new() {
         rawTokens = new Stack<RawToken>();
         resolvedTokens = new Stack<Token>();
 
-        rawToken = new T();
+        rawToken = System.Activator.CreateInstance<T>();
     }
 
     [Test]

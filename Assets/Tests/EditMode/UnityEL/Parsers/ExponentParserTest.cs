@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 
 public class ExponentParserTest {
+    private RootToken rootToken;
+    private RawToken parent;
     private ExponentParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+        parent = rootToken;
+
         parser = new ExponentParser();
     }
 
@@ -14,9 +19,11 @@ public class ExponentParserTest {
         string expression = "123**2";
         int pos = 3;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsAssignableFrom<ExponentToken>(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new ExponentToken(3, rootToken), rootToken[0]);
         Assert.AreEqual(5, pos);
     }
 
@@ -25,9 +32,11 @@ public class ExponentParserTest {
         string expression = "123.45**2";
         int pos = 6;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsAssignableFrom<ExponentToken>(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new ExponentToken(6, rootToken), rootToken[0]);
         Assert.AreEqual(8, pos);
     }
 
@@ -36,9 +45,10 @@ public class ExponentParserTest {
         string expression = "123^2";
         int pos = 3;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsNull(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(3, pos);
     }
 
@@ -47,9 +57,10 @@ public class ExponentParserTest {
         string expression = "123.45^2";
         int pos = 6;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsNull(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(6, pos);
     }
 }

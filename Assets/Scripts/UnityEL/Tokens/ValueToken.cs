@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 
-public abstract class ValueToken<T> : BaseToken {
+public abstract class ValueToken<T> : RawToken {
     public T Value { get; private set; }
 
-    public ValueToken(T value) {
+    public ValueToken(T value) : base() {
+        this.Value = value;
+    }
+
+    public ValueToken(T value, int position, RawToken parent) : base(position, parent) {
         this.Value = value;
     }
 
@@ -11,8 +15,13 @@ public abstract class ValueToken<T> : BaseToken {
         return this;
     }
 
-    public override bool Equals(object other) {
-        if (!(other is ValueToken<T>)) {
+    public override int GetHashCode() {
+        const int PRIME = 37;
+        return base.GetHashCode() * PRIME + Value.GetHashCode();
+    }
+
+    public override bool Equals(object other, bool includeChildren) {
+        if (!base.Equals(other, includeChildren)) { 
             return false;
         }
 
@@ -20,7 +29,7 @@ public abstract class ValueToken<T> : BaseToken {
         return Value.Equals(otherToken.Value);
     }
 
-    public override int GetHashCode() {
-        return Value.GetHashCode();
+    protected override string GetTokenDataString() {
+        return Value == null ? "null" : Value.ToString();
     }
 }

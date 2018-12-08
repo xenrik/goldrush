@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿public class AdditionToken : BinaryToken {
+    public override string Name { get { return "addition"; } }
 
-public class AdditionToken : BinaryToken {
-    public override string ToString() {
-        return "Addition{" + Lhs + "," + Rhs + "}";
+    public AdditionToken(int position, RawToken parent) : base(position, parent) {
     }
 }

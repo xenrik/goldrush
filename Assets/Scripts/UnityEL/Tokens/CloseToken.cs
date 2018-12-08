@@ -1,8 +1,8 @@
-﻿public class CloseToken : BaseToken {
-    public CloseToken(int position) : base(position) {
-    }
+﻿public class CloseToken : RawToken {
+    public override string Name { get { return "close"; } }
 
-    public override string ToString() {
-        return "Close{-TBD-}";
+    public CloseToken() : base() {
+    }
+    public CloseToken(int position, RawToken parent) : base(position, parent) {
     }
 }

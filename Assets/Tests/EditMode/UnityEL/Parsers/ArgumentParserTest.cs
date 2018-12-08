@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 
 public class ArgumentParserTest {
+    private RootToken rootToken;
+    private RawToken parent;
     private ArgumentParser parser;
     
     [SetUp]
     public void Init() {
+        rootToken = new RootToken();
+        parent = rootToken;
+
         parser = new ArgumentParser();
     }
 
@@ -13,9 +18,12 @@ public class ArgumentParserTest {
     public void TestValidAccessor() {
         string expression = "identifier(arg1,arg2)";
         int pos = 15;
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
 
-        Assert.IsAssignableFrom<ArgumentToken>(result);
+        Assert.IsTrue(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
+
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(1, rootToken.ChildCount);
+        Assert.AreEqual(new ArgumentToken(15, rootToken), rootToken[0]);
         Assert.AreEqual(16, pos);
     }
 
@@ -24,9 +32,10 @@ public class ArgumentParserTest {
         string expression = "identifier(arg1+arg2)";
         int pos = 15;
 
-        Token result = parser.Parse(expression.ToCharArray(), ref pos);
+        Assert.IsFalse(parser.Parse(expression.ToCharArray(), ref pos, ref parent));
 
-        Assert.IsNull(result);
+        Assert.AreSame(rootToken, parent);
+        Assert.AreEqual(0, rootToken.ChildCount);
         Assert.AreEqual(15, pos);
     }
 }
