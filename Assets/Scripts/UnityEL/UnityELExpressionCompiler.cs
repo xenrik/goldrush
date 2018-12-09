@@ -39,18 +39,16 @@ public class UnityELExpressionCompiler {
         parsers.Add(new OrParser()); // ||                                          -- DONE
         parsers.Add(new AndParser()); // &&                                         -- DONE
 
-        // Comparison
+        // Coalesce and Tests
+        parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
+        parsers.Add(new ConditionalOperatorParser()); // ?                          --
+        parsers.Add(new ConditionalElseParser()); // : (conditional else)           --
+        // is (instance of)
         // <=
         // >=
         // <
         // >
         // ==
-
-        // Coalesce and Tests
-        parsers.Add(new NullCoalesceParser()); // ??                                -- DONE
-        parsers.Add(new ConditionalOperatorParser()); // ?                          --
-        // : (conditional else)
-        // is (instance of)
 
         // Bitwise
         parsers.Add(new ComplementParser()); // ~                                   --

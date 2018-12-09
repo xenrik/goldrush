@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{77C7023D-3A7A-0E5B-61F2-B1C4AAA9EC43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -61,69 +62,72 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UnityEL\ParserException.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\AdditionParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\AndParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\ArgumentParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseAndParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\BitwiseOrParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\BooleanParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\CloseParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\ComplementParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\CondtionalOperatorParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\DecimalParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\DivisionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\DoubleCharacterParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\ExponentParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\FunctionParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupOrFunctionParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\GroupParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\IdentifierParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\IntegerParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\KeyedAccessorParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\ModulusParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\MultiplicationParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\NotParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\NullCoalesceParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\OrParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\PropertyAccessorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AdditionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ArgumentParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BitwiseAndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BitwiseOrParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BooleanParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\CloseParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ComplementParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ConditionalElseParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\CondtionalOperatorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DecimalParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DivisionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ExponentParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\FunctionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\GroupOrFunctionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\GroupParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IdentifierParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IntegerParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\KeyedAccessorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ModulusParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\MultiplicationParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\NotParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\NullCoalesceParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\OrParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\PropertyAccessorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\StringParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\SubtractionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\XorParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\SingleCharacterParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\StringParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\SubtractionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\TokenParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Parsers\XorParser.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\AdditionToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\AndToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\ArgumentToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BinaryToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\BitwiseAndToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\BitwiseOrToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\BooleanToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\CloseableToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\CloseToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\ComplementToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\ConditionalOperatorToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\DecimalToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\DivisionToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\ExponentToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\FunctionToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\GroupOrFunctionToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\GroupToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\IdentifierToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\IntegerToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\KeyedAccessorToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\ModulusToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\MultiplicationToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\NotToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\NullCoalesceToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\OrToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\PropertyAccessorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AdditionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AndToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ArgumentToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BitwiseAndToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BitwiseOrToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BooleanToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\CloseToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ComplementToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ConditionalElseToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ConditionalOperatorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DecimalToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DivisionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ExponentToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\FunctionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\GroupOrFunctionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\GroupToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IdentifierToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IntegerToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\KeyedAccessorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ModulusToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\MultiplicationToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\NotToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\NullCoalesceToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\OrToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\PropertyAccessorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\RootToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\StringToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\SubtractionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\XorToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\RawToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\RootToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\StringToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\SubtractionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\UnaryToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ValueToken.cs" />
-    <Compile Include="Assets\Scripts\UnityEL\Tokens\XorToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELEvaluator.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELExpression.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELExpressionCompiler.cs" />

@@ -6,6 +6,8 @@ public abstract class BinaryToken : RawToken {
     public Token Lhs { get; private set; }
     public Token Rhs { get; private set; }
 
+    public BinaryToken() {
+    }
     public BinaryToken(int position, RawToken parent) : base(position, parent) {
     }
 
