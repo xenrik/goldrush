@@ -1,4 +1,4 @@
-﻿public class NotToken : RawToken {
+﻿public class NotToken : UnaryToken {
     public override string Name { get { return "not"; } }
 
     public NotToken() {

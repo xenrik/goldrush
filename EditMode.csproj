@@ -69,6 +69,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BooleanParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\CloseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ComplementParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ConditionalElseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ConditionalOperatorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecimalParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DivisionParserTest.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BooleanTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\CloseTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ComplementTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ConditionalElseTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ConditionalOperatorTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DecimalTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DivisionTokenTest.cs" />

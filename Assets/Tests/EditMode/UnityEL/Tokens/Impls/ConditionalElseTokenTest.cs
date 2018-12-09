@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class ConditionalOperatorTokenTest {
+public class ConditionalElseTokenTest {
     private Stack<RawToken> rawTokens;
     private Stack<Token> resolvedTokens;
     private ConditionalOperatorToken rawToken;
@@ -16,6 +16,6 @@ public class ConditionalOperatorTokenTest {
 
     [Test]
     public void TestResolveValid() {
-        
+        Token result = rawToken.Resolve(rawTokens, resolvedTokens);
     }
 }
