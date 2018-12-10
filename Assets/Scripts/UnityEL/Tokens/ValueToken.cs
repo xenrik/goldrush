@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 
-public abstract class ValueToken<T> : RawToken {
+public interface ValueToken : Token {
+    object Value { get; }
+}
+
+public abstract class ValueTokenImpl<T> : TokenImpl, ValueToken {
     public T Value { get; private set; }
+    object ValueToken.Value { get { return Value; } }
 
-    public ValueToken(T value) : base() {
+    public ValueTokenImpl(T value) : base() {
         this.Value = value;
     }
 
-    public ValueToken(T value, int position, RawToken parent) : base(position, parent) {
+    public ValueTokenImpl(T value, int position) : base(position) {
         this.Value = value;
-    }
-
-    public override Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
-        return this;
     }
 
     public override int GetHashCode() {
@@ -25,7 +26,7 @@ public abstract class ValueToken<T> : RawToken {
             return false;
         }
 
-        ValueToken<T> otherToken = (ValueToken<T>)other;
+        ValueTokenImpl<T> otherToken = (ValueTokenImpl<T>)other;
         return Value.Equals(otherToken.Value);
     }
 

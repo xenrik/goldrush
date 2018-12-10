@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 
 public class BooleanTokenTest {
-    private Stack<RawToken> rawTokens;
-    private Stack<Token> resolvedTokens;
     private BooleanToken rawToken;
 
-    [SetUp]
-    public void Init() {
-        rawTokens = new Stack<RawToken>();
-        resolvedTokens = new Stack<Token>();
-
-        rawToken = new BooleanToken(true);
+    [Test]
+    public void TestTrue() {
+        ValueToken result = new BooleanToken(true);
+        Assert.AreEqual(true, result.Value);
     }
 
     [Test]
-    public void TestResolveValid() {
-        Token result = rawToken.Resolve(rawTokens, resolvedTokens);
+    public void TestFalse() {
+        ValueToken result = new BooleanToken(false);
+        Assert.AreEqual(false, result.Value);
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System;
 
 public class ParserException : Exception {
-    public ParserException(RawToken source, string message) : 
+    public ParserException(TokenImpl source, string message) : 
         base($"{source.DebugName}{message}") {
     }
 
-    public ParserException(RawToken source, string message, Exception cause) : 
+    public ParserException(TokenImpl source, string message, Exception cause) : 
         base($"{source.DebugName}{message}", cause) {
+    }
+
+    public ParserException(int position, string message) :
+        base($"<@{position}>{message}") {
     }
 
     public ParserException(string contextName, int position, string message) :

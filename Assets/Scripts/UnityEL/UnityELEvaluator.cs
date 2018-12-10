@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnityELEvaluator {
-    private UnityELExpressionCompiler compiler;
-
     public UnityELEvaluator() {
 
     }
 
     public UnityELExpression<T> Compile<T>(string expression) {
-        return compiler.Compile<T>(expression, this);
+        ExpressionCompiler compiler = new ExpressionCompiler(expression);
+        return compiler.Compile<T>();
     }
 
     public T Evaluate<T>(string expressionString) {

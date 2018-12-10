@@ -1,9 +1,9 @@
-﻿public class BooleanToken : ValueToken<bool> {
+﻿public class BooleanToken : ValueTokenImpl<bool> {
     public override string Name { get { return "boolean"; } }
 
     public BooleanToken(bool value) : base(value) {
     }
 
-    public BooleanToken(bool value, int position, RawToken parent) : base(value, position, parent) {
+    public BooleanToken(bool value, int position) : base(value, position) {
     }
 }

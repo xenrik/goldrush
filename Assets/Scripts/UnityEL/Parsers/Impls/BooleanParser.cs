@@ -5,27 +5,31 @@ using UnityEngine;
 * Parser that accepts boolean sequences. 
 */
 public class BooleanParser : TokenParser {
-    public bool Parse(char[] chars, ref int pos, ref RawToken parent) {
-        int i = pos;
+    public bool Parse(ExpressionCompiler compiler) {
+        int i = compiler.Pos;
         char ch;
-        while (i < chars.Length) {
-            ch = chars[i++];
+        while (i < compiler.Expression.Length) {
+            ch = compiler.Expression[i++];
 
             if (char.IsWhiteSpace(ch)) {
                 continue;
             } else if (ch == 't') {
-                if (i + 3 <= chars.Length &&
-                    new string(chars, i-1, 4).Equals("true")) {
-                    new BooleanToken(true, pos, parent);
-                    pos = i + 3;
+                if (i + 3 <= compiler.Expression.Length &&
+                    new string(compiler.Expression, i - 1, 4).Equals("true")) {
+
+                    BooleanToken token = new BooleanToken(true, compiler.Pos);
+                    compiler.Parent.AddChild(token);
+                    compiler.Pos = i + 3;
 
                     return true;
                 }
             } else if (ch == 'f') {
-                if (i + 4 <= chars.Length &&
-                    new string(chars, i-1, 5).Equals("false")) {
-                    new BooleanToken(false, pos, parent);
-                    pos = i + 4;
+                if (i + 4 <= compiler.Expression.Length &&
+                    new string(compiler.Expression, i - 1, 5).Equals("false")) {
+
+                    BooleanToken token = new BooleanToken(false, compiler.Pos);
+                    compiler.Parent.AddChild(token);
+                    compiler.Pos = i + 4;
 
                     return true;
                 }
