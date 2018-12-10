@@ -74,17 +74,8 @@ public class UnityELExpressionCompiler {
             }
         }
 
-        // Now go through each token in turn and ask it to resolve itself. 
-        /*
-        Stack<Token> resolvedTokens = new Stack<Token>();
-        while (rawTokens.Count > 0) {
-            RawToken rawToken = rawTokens.Pop();
-            Token resolvedToken = rawToken.Resolve(rawTokens, resolvedTokens);
-            if (resolvedToken != null) {
-                resolvedTokens.Push(resolvedToken);
-            }
-        }
-        */
+        // Now resolve
+        root.Resolve();
 
         return null;
     }

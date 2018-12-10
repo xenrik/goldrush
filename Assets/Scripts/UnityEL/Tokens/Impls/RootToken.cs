@@ -8,7 +8,9 @@ public class RootToken : RawToken {
     public RootToken() : base() {
     }
 
-    public override Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
-        throw new System.NotImplementedException();
+    public override void Resolve() {
+        foreach (RawToken childToken in this) {
+            childToken.Resolve();
+        }
     }
 }

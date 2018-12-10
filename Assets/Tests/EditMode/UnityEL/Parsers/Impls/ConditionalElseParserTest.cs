@@ -23,7 +23,7 @@ public class ConditionalElseParserTest {
 
         Assert.AreSame(rootToken, parent);
         Assert.AreEqual(1, rootToken.ChildCount);
-        Assert.AreEqual(new ConditionalElseToken(6, rootToken), rootToken[0]);
+        Assert.AreEqual(new ConditionalElseToken(8, rootToken), rootToken[0]);
         Assert.AreEqual(9, pos);
     }
 
@@ -36,8 +36,8 @@ public class ConditionalElseParserTest {
 
         Assert.AreSame(rootToken, parent);
         Assert.AreEqual(1, rootToken.ChildCount);
-        Assert.AreEqual(new ConditionalElseToken(6, rootToken), rootToken[0]);
-        Assert.AreEqual(11, pos);
+        Assert.AreEqual(new ConditionalElseToken(10, rootToken), rootToken[0]);
+        Assert.AreEqual(12, pos);
     }
 
     [Test]

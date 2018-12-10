@@ -26,7 +26,9 @@ public class ConditionalOperatorToken : RawToken {
         }
 
         ConditionalElseToken conditionalElse = (ConditionalElseToken)rhs;
-        ResultIfTrue =
+        ResultIfTrue = conditionalElse.ResultIfTrue;
+        ResultIfFalse = conditionalElse.ResultIfFalse;
+
         return this;
     }
 }

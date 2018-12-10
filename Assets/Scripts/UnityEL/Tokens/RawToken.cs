@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
-public abstract class RawToken : Token {
+public abstract class RawToken : Token, IEnumerable<RawToken> {
     /** The position this token started at in the expression */
     public int Position { get; private set; }
 
@@ -41,7 +42,7 @@ public abstract class RawToken : Token {
             }
         }
     }
-
+    
     /** The children of this token */
     private List<RawToken> childTokens;
 
@@ -64,46 +65,18 @@ public abstract class RawToken : Token {
         parent.childTokens.Add(this);
     }
 
+    
+
     /**
      * Resolve this raw token into a resolved token
      */
-    public virtual Token Resolve(Stack<RawToken> rawTokens, Stack<Token> resolvedTokens) {
+    public virtual void Resolve() {
         // TODO: This will change to abstract once everything is refactored.
         throw new System.NotImplementedException();
     }
 
     public sealed override string ToString() {
         return DoToString("");
-    }
-
-    private string DoToString(string indent) { 
-        StringBuilder buffer = new StringBuilder();
-        buffer.Append($"{indent}{DebugName}");
-        string data = GetTokenDataString();
-        if (data != null) {
-            buffer.Append("[" + data + "]");
-        }
-        if (childTokens != null) {
-            buffer.AppendLine("{");
-            bool first = true;
-            foreach (RawToken child in childTokens) {
-                if (!first) {
-                    buffer.AppendLine(",");
-                }
-                first = false;
-                buffer.Append(child.DoToString(indent + "   "));
-            }
-            if (childTokens.Count > 0) {
-                buffer.AppendLine();
-            }
-            buffer.Append(indent + "}");
-        }
-
-        return buffer.ToString();
-    }
-
-    protected virtual string GetTokenDataString() {
-        return null;
     }
 
     public override int GetHashCode() {
@@ -154,5 +127,51 @@ public abstract class RawToken : Token {
         } else {
             return true;
         }
+    }
+
+    public IEnumerator<RawToken> GetEnumerator() {
+        if (childTokens == null) {
+            return System.Linq.Enumerable.Empty<RawToken>().GetEnumerator();
+        } else {
+            return childTokens.GetEnumerator();
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        if (childTokens == null) {
+            return System.Linq.Enumerable.Empty<RawToken>().GetEnumerator();
+        } else {
+            return childTokens.GetEnumerator();
+        }
+    }
+
+    protected virtual string GetTokenDataString() {
+        return null;
+    }
+
+    private string DoToString(string indent) {
+        StringBuilder buffer = new StringBuilder();
+        buffer.Append($"{indent}{DebugName}");
+        string data = GetTokenDataString();
+        if (data != null) {
+            buffer.Append("[" + data + "]");
+        }
+        if (childTokens != null) {
+            buffer.AppendLine("{");
+            bool first = true;
+            foreach (RawToken child in childTokens) {
+                if (!first) {
+                    buffer.AppendLine(",");
+                }
+                first = false;
+                buffer.Append(child.DoToString(indent + "   "));
+            }
+            if (childTokens.Count > 0) {
+                buffer.AppendLine();
+            }
+            buffer.Append(indent + "}");
+        }
+
+        return buffer.ToString();
     }
 }
