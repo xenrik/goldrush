@@ -62,7 +62,9 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BaseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BooleanParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecimalParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BooleanTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DecimalTokenTest.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Software/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

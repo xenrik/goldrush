@@ -43,7 +43,7 @@ public class DecimalParser : TokenParser {
             try {
                 DecimalToken token = new DecimalToken(float.Parse(s), compiler.Pos);
                 compiler.Parent.AddChild(token);
-                compiler.Pos = i + 4;
+                compiler.Pos = i;
 
                 return true;
             } catch (System.FormatException e) {
