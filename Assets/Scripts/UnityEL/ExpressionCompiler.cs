@@ -38,18 +38,18 @@ public class ExpressionCompiler {
         // parsers.Add(new ArgumentParser()); // ,                                    
 
         // Primitives
-        // parsers.Add(new StringParser()); // " or '                                 
+        parsers.Add(new StringParser()); // " or '                                 
         parsers.Add(new BooleanParser()); // true or false                         
-        // parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                         
-        // parsers.Add(new IntegerParser()); // [0-9]+                                
+        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                         
+        parsers.Add(new IntegerParser()); // [0-9]+                                
         // 0b0101010
         // 0x0123ABC
 
         // Maths
-        // parsers.Add(new AdditionParser()); // +                                    
-        // parsers.Add(new SubtractionParser()); // -                                 
-        // parsers.Add(new DivisionParser()); // /                                    
-        // parsers.Add(new MultiplicationParser()); // *                              
+        parsers.Add(new AdditionParser()); // +                                    
+        parsers.Add(new SubtractionParser()); // -                                 
+        parsers.Add(new DivisionParser()); // /                                    
+        parsers.Add(new MultiplicationParser()); // *                              
         // parsers.Add(new ModulusParser()); // %                                     
         // parsers.Add(new ExponentParser()); // **                                   
 

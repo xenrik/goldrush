@@ -34,6 +34,20 @@ public abstract class TokenImpl : Token {
         Children.Add(token);
     }
 
+    /**
+     * Convenience method to remove the last child and return it
+     */
+    public TokenImpl PopChild() {
+        if (Children.Count == 0) {
+            throw new System.InvalidOperationException("No children on this token");
+        }
+
+        TokenImpl child = Children[Children.Count - 1];
+        Children.RemoveAt(Children.Count - 1);
+
+        return child;
+    }
+
     public override int GetHashCode() {
         const int PRIME = 31;
         int hashCode = 1;

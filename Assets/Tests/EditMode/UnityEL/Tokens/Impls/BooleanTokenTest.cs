@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 
 public class BooleanTokenTest {
-    private BooleanToken rawToken;
-
     [Test]
     public void TestTrue() {
         ValueToken result = new BooleanToken(true);
