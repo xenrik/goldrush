@@ -27,23 +27,23 @@ public class ExpressionCompiler {
         // Special parser to close groups, functions, or keyed access
         // parsers.Add(new CloseParser()); // ) or ]                                  
 
-        // We can't work out just from the current symbol if this is a group or 
-        // function, so we have to do that during resolve, rather than parse
-        // parsers.Add(new GroupOrFunctionParser()); // (                             
+        // Function and Group
+        // parsers.Add(new FunctionParser()); // <identifier>(                             
+        // parsers.Add(new GroupParser()); // (                             
+        // parsers.Add(new ArgumentParser()); // ,                                    
 
         // Function, Property and Identifiers 
-        // parsers.Add(new PropertyAccessorParser()); // .                            
+        parsers.Add(new PropertyAccessParser()); // .                            
         // parsers.Add(new KeyedAccessorParser()); // [                               
-        // parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                     
-        // parsers.Add(new ArgumentParser()); // ,                                    
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                     
 
         // Primitives
         parsers.Add(new StringParser()); // " or '                                 
         parsers.Add(new BooleanParser()); // true or false                         
         parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                         
         parsers.Add(new IntegerParser()); // [0-9]+                                
-        // 0b0101010
-        // 0x0123ABC
+        // parsers.Add(new BinaryIntegerParser()); // 0b0101010
+        // parsers.Add(new HexIntegerParser()); // 0x0123ABC
 
         // Maths
         parsers.Add(new AdditionParser()); // +                                    
@@ -62,21 +62,21 @@ public class ExpressionCompiler {
         // parsers.Add(new NullCoalesceParser()); // ??                               
         // parsers.Add(new ConditionalOperatorParser()); // ?                         
         // parsers.Add(new ConditionalElseParser()); // : (conditional else)          
-        // is (instance of)
-        // <=
-        // >=
-        // <
-        // >
-        // ==
+        // parsers.Add(new IsParser()); // is (instance of)
+        // parsers.Add(new LessThanOrEqualToParser()); // <=
+        // parsers.Add(new GreterThanOrEqualToParser()); // >=
+        // parsers.Add(new LessThanParser()); // <
+        // parsers.Add(new GreaterThanParser()); // >
+        // parsers.Add(new EqualsParser()); // ==
 
         // Bitwise
         // parsers.Add(new ComplementParser()); // ~                                  
         // parsers.Add(new BitwiseAndParser()); // &                                  
         // parsers.Add(new BitwiseOrParser()); // |                                   
         // parsers.Add(new XorParser()); // ^                                         
-                                                                                             
+
         // Assignment
-        // =
+        // parsers.Add(new AssignParser()); // =
     }
 
     public UnityELExpression<T> Compile<T>() {

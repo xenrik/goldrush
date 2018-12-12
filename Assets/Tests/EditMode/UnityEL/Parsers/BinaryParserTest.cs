@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 public abstract class BinaryParserTest<P, T> : BaseParserTest
         where P : TokenParser, new()
-        where T : BinaryToken {
+        where T : TokenImpl {
     public abstract string ParserSymbol { get; }
 
     private TokenParser parser;
@@ -12,6 +12,24 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
     [SetUp]
     public void Init() {
         this.parser = new P();
+    }
+
+    protected virtual TokenImpl GetLhs(T token) {
+        TokenImpl impl = token;
+        if (impl is BinaryToken) {
+            return ((BinaryToken)impl).Lhs;
+        } else {
+            return null;
+        }
+    }
+
+    protected virtual TokenImpl GetRhs(T token) {
+        TokenImpl impl = token;
+        if (token is BinaryToken) {
+            return ((BinaryToken)impl).Rhs;
+        } else {
+            return null;
+        }
     }
 
     [Test]
@@ -28,10 +46,10 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
 
         Assert.IsAssignableFrom<T>(root.Children[0]);
 
-        BinaryToken token = (BinaryToken)root.Children[0];
+        T token = (T)root.Children[0];
         Assert.AreEqual(1, token.Position);
-        Assert.AreEqual(new IntegerToken(1, 0), token.Lhs);
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 1), token.Rhs);
+        Assert.AreEqual(new IntegerToken(1, 0), GetLhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 1), GetRhs(token));
     }
 
     [Test]
@@ -48,10 +66,10 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
 
         Assert.IsAssignableFrom<T>(root.Children[0]);
 
-        BinaryToken token = (BinaryToken)root.Children[0];
+        T token = (T)root.Children[0];
         Assert.AreEqual(1, token.Position);
-        Assert.AreEqual(new IntegerToken(1, 0), token.Lhs);
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 2), token.Rhs);
+        Assert.AreEqual(new IntegerToken(1, 0), GetLhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 2), GetRhs(token));
     }
 
     [Test]
