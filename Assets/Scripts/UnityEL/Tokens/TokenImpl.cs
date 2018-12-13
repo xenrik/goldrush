@@ -134,4 +134,15 @@ public abstract class TokenImpl : Token {
     protected virtual string GetTokenDataString() {
         return null;
     }
+
+    public virtual void Validate() {
+        // Validate all children
+        foreach (TokenImpl child in Children) {
+            child.Validate();
+        }
+    }
+
+    public virtual object Evaluate(UnityELEvaluator context) {
+        throw new System.NotImplementedException();
+    }
 }

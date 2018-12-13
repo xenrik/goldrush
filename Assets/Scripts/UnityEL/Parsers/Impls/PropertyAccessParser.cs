@@ -12,3 +12,4 @@ public class PropertyAccessParser : BinaryTokenParser {
         return new PropertyAccessToken(symbolPos, lhs, rhs);
     }
 }
+

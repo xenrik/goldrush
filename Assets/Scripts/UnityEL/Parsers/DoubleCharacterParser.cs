@@ -9,10 +9,10 @@
  * capture it before you ask this to parse.
  */
 public class DoubleCharacterParser : TokenParser {
-    private char requiredChar;
+    private char symbol;
 
-    public DoubleCharacterParser(char requiredChar) {
-        this.requiredChar = requiredChar;
+    public DoubleCharacterParser(char symbol) {
+        this.symbol = symbol;
     }
 
     public virtual bool Parse(ExpressionCompiler compiler) {
@@ -23,8 +23,8 @@ public class DoubleCharacterParser : TokenParser {
 
             if (char.IsWhiteSpace(ch)) {
                 continue;
-            } else if (ch == requiredChar) {
-                if (i < compiler.Expression.Length && compiler.Expression[i] == requiredChar) {
+            } else if (ch == symbol) {
+                if (i < compiler.Expression.Length && compiler.Expression[i] == symbol) {
                     compiler.Pos = i + 1;
                     return true;
                 }

@@ -25,12 +25,13 @@ public class ExpressionCompiler {
 
     private void initParsers() {
         // Special parser to close groups, functions, or keyed access
-        // parsers.Add(new CloseParser()); // ) or ]                                  
+        parsers.Add(new CloseParser(')'));
+        parsers.Add(new CloseParser(']'));
 
         // Function and Group
-        // parsers.Add(new FunctionParser()); // <identifier>(                             
+        parsers.Add(new FunctionParser()); // <identifier>(                             
         parsers.Add(new GroupParser()); // (                             
-        // parsers.Add(new ArgumentParser()); // ,                                    
+        parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
         // Function, Property and Identifiers 
         parsers.Add(new PropertyAccessParser()); // .                            
@@ -81,11 +82,19 @@ public class ExpressionCompiler {
 
     public UnityELExpression<T> Compile<T>() {
         RootToken rootToken = new RootToken();
+        ParentTokens.Clear();
+        ParentTokens.Push(rootToken);
+
         while (Pos < Expression.Length) {
             if (!ParseNextToken()) {
                 throw new ParserException(Pos, "Unknown token found");
             }
         }
+
+        if (Parent != rootToken) {
+            throw new ParserException(Pos, "Incomplete expression");
+        }
+        rootToken.Validate();
 
         return new ExpressionImpl<T>(rootToken);
     }

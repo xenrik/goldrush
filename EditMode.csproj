@@ -60,10 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\BaseCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AdditionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BaseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BinaryParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AdditionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BooleanParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\CloseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecimalParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DivisionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\FunctionParserTest.cs" />

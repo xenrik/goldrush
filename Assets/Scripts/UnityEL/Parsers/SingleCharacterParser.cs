@@ -10,10 +10,10 @@
  * capture it before you ask this to parse.
  */
 public class SingleCharacterParser : TokenParser {
-    private char requiredChar;
+    protected char symbol;
 
-    public SingleCharacterParser(char requiredChar) {
-        this.requiredChar = requiredChar;
+    public SingleCharacterParser(char symbol) {
+        this.symbol = symbol;
     }
 
     public virtual bool Parse(ExpressionCompiler compiler) {
@@ -24,7 +24,7 @@ public class SingleCharacterParser : TokenParser {
 
             if (char.IsWhiteSpace(ch)) {
                 continue;
-            } else if (ch == requiredChar) {
+            } else if (ch == symbol) {
                 compiler.Pos = i;
                 return true;
             }

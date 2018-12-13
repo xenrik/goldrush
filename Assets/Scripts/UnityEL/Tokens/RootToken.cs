@@ -10,16 +10,14 @@ public class RootToken : TokenImpl {
     public RootToken(int position) : base(position) {
     }
 
-    public object Resolve() {
-        // To resolve the root token, we must have a single child which is
-        // a value token
-        if (Children.Count != 0) {
-            throw new ParserException(this, "Unable to resolve root token");
-        } else if (!(Children[0] is ValueToken)) {
-            throw new ParserException(this, "Expression did not resolve to a value");
-        }
+    public override void Validate() {
+        base.Validate();
 
-        ValueToken valueToken = (ValueToken)Children[0];
-        return valueToken.Value;
+        // When we are validated, we must have a single child
+        if (Children.Count > 0) {
+            throw new ParserException(this, "Invalid expression (too many children)");
+        } else if (Children.Count == 0) {
+            throw new ParserException(this, "Invalid expression (no children)");
+        }
     }
 }
