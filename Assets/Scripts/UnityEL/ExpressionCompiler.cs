@@ -29,7 +29,7 @@ public class ExpressionCompiler {
 
         // Function and Group
         // parsers.Add(new FunctionParser()); // <identifier>(                             
-        // parsers.Add(new GroupParser()); // (                             
+        parsers.Add(new GroupParser()); // (                             
         // parsers.Add(new ArgumentParser()); // ,                                    
 
         // Function, Property and Identifiers 

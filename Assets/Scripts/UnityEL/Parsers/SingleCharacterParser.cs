@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 
 /**
- * This parser does not create a token. It is intended to be used as a 
- * symbol parser for BinaryTokenParser. 
+ * This parser does not create a token by default. It is intended to be 
+ * used as a symbol parser for BinaryTokenParser but could be subclassed to
+ * provide a token
  * 
  * Note the Pos on the compiler will have been advanced if this returns 
  * true, so if you need the statring position of the symbol ensure you 

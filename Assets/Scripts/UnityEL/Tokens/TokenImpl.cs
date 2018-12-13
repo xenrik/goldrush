@@ -48,6 +48,19 @@ public abstract class TokenImpl : Token {
         return child;
     }
 
+    /**
+     * Convenience method to get the last child without removing it.
+     * 
+     * Returns null if there are no children.
+     */
+    public TokenImpl PeekChild() {
+        if (Children.Count == 0) {
+            return null;
+        }
+
+        return Children[Children.Count - 1];
+    }
+
     public override int GetHashCode() {
         const int PRIME = 31;
         int hashCode = 1;

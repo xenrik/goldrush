@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BooleanParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DecimalParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DivisionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\FunctionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\GroupParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IdentifierParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IntegerParser.cs" />
