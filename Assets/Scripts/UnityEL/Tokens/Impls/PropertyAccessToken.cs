@@ -57,5 +57,4 @@ public class PropertyAccessToken : TokenImpl {
         return $"Host={(Host != null ? Host.ToString() : "null")}," +
             $"Property={(Property != null ? Property.ToString() : "null")}";
     }
-
 }

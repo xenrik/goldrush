@@ -16,6 +16,10 @@ public abstract class ValueTokenImpl<T> : TokenImpl, ValueToken {
         this.Value = value;
     }
 
+    public override object Evaluate(UnityELEvaluator context) {
+        return Value;
+    }
+
     public override int GetHashCode() {
         const int PRIME = 37;
         if (Value != null) {

@@ -25,8 +25,8 @@ public class ExpressionCompiler {
 
     private void initParsers() {
         // Special parser to close groups, functions, or keyed access
-        parsers.Add(new CloseParser(')'));
-        parsers.Add(new CloseParser(']'));
+        parsers.Add(new CloseParser(')')); //                                       -- Done
+        parsers.Add(new CloseParser(']')); //                                       -- Done
 
         // Function and Group
         parsers.Add(new FunctionParser()); // <identifier>(                             
@@ -39,15 +39,15 @@ public class ExpressionCompiler {
         parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                     
 
         // Primitives
-        parsers.Add(new StringParser()); // " or '                                 
-        parsers.Add(new BooleanParser()); // true or false                         
-        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                         
-        parsers.Add(new IntegerParser()); // [0-9]+                                
+        parsers.Add(new StringParser()); // " or '                                  -- Done                 
+        parsers.Add(new BooleanParser()); // true or false                          -- Done            
+        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
+        parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
         // parsers.Add(new BinaryIntegerParser()); // 0b0101010
         // parsers.Add(new HexIntegerParser()); // 0x0123ABC
 
         // Maths
-        parsers.Add(new AdditionParser()); // +                                    
+        parsers.Add(new AdditionParser()); // +                                     -- Done
         parsers.Add(new SubtractionParser()); // -                                 
         parsers.Add(new DivisionParser()); // /                                    
         parsers.Add(new MultiplicationParser()); // *                              

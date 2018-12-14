@@ -14,10 +14,15 @@ public class RootToken : TokenImpl {
         base.Validate();
 
         // When we are validated, we must have a single child
-        if (Children.Count > 0) {
+        if (Children.Count > 1) {
             throw new ParserException(this, "Invalid expression (too many children)");
         } else if (Children.Count == 0) {
             throw new ParserException(this, "Invalid expression (no children)");
         }
+    }
+
+    public override object Evaluate(UnityELEvaluator context) {
+        TokenImpl child = Children[0];
+        return child.Evaluate(context);
     }
 }

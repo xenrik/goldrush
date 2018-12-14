@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\BaseCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AdditionTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\PropertyAccessCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BaseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BinaryParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AdditionParserTest.cs" />

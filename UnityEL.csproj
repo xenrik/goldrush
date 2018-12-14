@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\TokenImpl.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ValueToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\TypeCoercer.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELEvaluator.cs" />
     <Compile Include="Assets\Scripts\UnityEL\UnityELExpression.cs" />
     <Reference Include="UnityEngine.AIModule">

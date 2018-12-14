@@ -20,4 +20,8 @@ public class ParserException : Exception {
     public ParserException(string contextName, int position, string message, Exception cause) :
         base($"<{contextName}@{position}>{message}", cause) {
     }
+
+    public ParserException(string message) :
+        base(message) {
+    }
 }
