@@ -5,7 +5,7 @@ public class PropertyAccessTokenTest {
     [Test]
     public void TestTokenProperties() {
         IntegerToken lhs = new IntegerToken(1);
-        IntegerToken rhs = new IntegerToken(2);
+        IdentifierToken rhs = new IdentifierToken("blah");
         PropertyAccessToken result = new PropertyAccessToken(0, lhs, rhs);
 
         Assert.AreEqual(lhs, result.Host);

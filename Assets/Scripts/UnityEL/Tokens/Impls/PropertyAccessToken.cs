@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Reflection;
 
 public class PropertyAccessToken : TokenImpl {
     public override string Name { get { return "propertyAccess"; } }
@@ -8,12 +9,12 @@ public class PropertyAccessToken : TokenImpl {
     public TokenImpl Host { get; private set; }
 
     // The property to return
-    public TokenImpl Property { get; private set; }
+    public IdentifierToken Property { get; private set; }
 
     public PropertyAccessToken() {
     }
 
-    public PropertyAccessToken(int position, TokenImpl host, TokenImpl property) : base(position) {
+    public PropertyAccessToken(int position, TokenImpl host, IdentifierToken property) : base(position) {
         this.Host = host;
         this.Property = property;
     }
@@ -56,5 +57,22 @@ public class PropertyAccessToken : TokenImpl {
     protected override string GetTokenDataString() {
         return $"Host={(Host != null ? Host.ToString() : "null")}," +
             $"Property={(Property != null ? Property.ToString() : "null")}";
+    }
+
+    public override object Evaluate(UnityELEvaluator context) {
+        object host = Host.Evaluate(context);
+        if (host == null) {
+            return null;
+        }
+
+        string name = Property.Value;
+        System.Type hostType = host.GetType();
+
+        PropertyInfo info = hostType.GetProperty(name);
+        if (info == null) {
+            throw new NoSuchPropertyException(this, $"Property: {name} not found on type: {hostType}");
+        }
+
+        return info.GetValue(host);
     }
 }

@@ -12,7 +12,7 @@ public class CloseParser : SingleCharacterParser {
             if (!(compiler.Parent is CloseableToken)) {
                 // Reset the position
                 compiler.Pos = symbolPos;
-                throw new ParserException(symbolPos, $"Unexpected '{symbol}'");
+                throw new ParserException(symbolPos, $"Unexpected '{symbol}' as ${compiler.Parent} cannot be closed");
             }
 
             // Close the token and pop the parent

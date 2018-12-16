@@ -5,4 +5,12 @@
     }
     public IdentifierToken(string value, int position) : base(value, position) {
     }
+
+    public override object Evaluate(UnityELEvaluator context) {
+        if (context.Properties.ContainsKey(Value)) {
+            return context.Properties[Value];
+        } else {
+            throw new NoSuchPropertyException(this, $"No property named: {Value} was known");
+        }
+    }
 }

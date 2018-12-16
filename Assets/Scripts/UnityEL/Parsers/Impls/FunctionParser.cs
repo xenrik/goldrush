@@ -7,7 +7,10 @@ public class FunctionParser : SingleCharacterParser {
 
     public override bool Parse(ExpressionCompiler compiler) {
         // The current child on the current parent must be an identifier
-        if (!(compiler.Parent.PeekChild() is IdentifierToken)) {
+        bool acceptCurrentChild = false;
+        acceptCurrentChild |= compiler.Parent.PeekChild() is IdentifierToken;
+        acceptCurrentChild |= compiler.Parent.PeekChild() is PropertyAccessToken;
+        if (!acceptCurrentChild) {
             return false;
         }
 
@@ -17,8 +20,7 @@ public class FunctionParser : SingleCharacterParser {
         }
 
         // The function becomes the new parent token
-        IdentifierToken identifier = (IdentifierToken)compiler.Parent.PopChild();
-        FunctionToken function = new FunctionToken(symbolPos, identifier);
+        FunctionToken function = new FunctionToken(symbolPos, compiler.Parent.PopChild());
         compiler.Parent.AddChild(function);
         compiler.ParentTokens.Push(function);
 

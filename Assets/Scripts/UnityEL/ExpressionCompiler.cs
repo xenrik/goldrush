@@ -29,14 +29,14 @@ public class ExpressionCompiler {
         parsers.Add(new CloseParser(']')); //                                       -- Done
 
         // Function and Group
-        parsers.Add(new FunctionParser()); // <identifier>(                             
+        parsers.Add(new FunctionParser()); // <identifier>(                         -- Done (excluding arguments)                  
         parsers.Add(new GroupParser()); // (                             
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
         // Function, Property and Identifiers 
-        parsers.Add(new PropertyAccessParser()); // .                            
+        parsers.Add(new PropertyAccessParser()); // .                               -- Done
         // parsers.Add(new KeyedAccessorParser()); // [                               
-        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                     
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
 
         // Primitives
         parsers.Add(new StringParser()); // " or '                                  -- Done                 
@@ -78,6 +78,11 @@ public class ExpressionCompiler {
 
         // Assignment
         // parsers.Add(new AssignParser()); // =
+
+        // Other
+        // empty
+        // notEmpty
+        // exists
     }
 
     public UnityELExpression<T> Compile<T>() {
