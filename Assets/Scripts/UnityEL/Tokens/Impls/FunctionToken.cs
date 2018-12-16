@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 using System.Reflection;
+using System;
 
 public class FunctionToken : TokenImpl, CloseableToken {
     public override string Name { get { return "function"; } }
@@ -119,6 +120,33 @@ public class FunctionToken : TokenImpl, CloseableToken {
 
         if (function == null) {
             throw new ParserException(this, $"Unable to resolve function: {functionName} (host={host}, namespace={functionNamespace})");
+        }
+
+        // Map parameters...
+        ParameterInfo[] parameterInfos = function.GetParameters();
+        if (parameterInfos.Length > 0) {
+            // If there is a different number of arguments, see if the last argument is a params
+            // and then wrap up the required number of arguments in an array (coercing as needed)
+            ParameterInfo lastParam = parameterInfos[parameterInfos.Length - 1];
+            if (lastParam.IsDefined(typeof(ParamArrayAttribute), false)) {
+                int varargCount = parameters.Count - parameterInfos.Length + 1;
+                Type elementType = lastParam.ParameterType.GetElementType();
+                Array varargs = Array.CreateInstance(elementType, varargCount);
+                for (int i = 0; i < varargCount; ++i) {
+                    varargs.SetValue(TypeCoercer.CoerceToType(elementType, this,
+                        parameters[parameters.Count - varargCount + i]), i);
+                }
+
+                parameters[parameterInfos.Length - 1] = varargs;
+                parameters.RemoveRange(parameterInfos.Length,
+                    parameters.Count - parameterInfos.Length);
+            }
+
+            // Coerce the parameters if needed
+            for (int i = 0; i < parameters.Count; ++i) {
+                parameters[i] = TypeCoercer.CoerceToType(parameterInfos[i].ParameterType,
+                    this, parameters[i]);
+            }
         }
 
         return function.Invoke(host, parameters.ToArray());
