@@ -87,4 +87,28 @@ public class PropertyAccessParserTest : BaseParserTest {
         Assert.AreEqual(1, root.Children.Count);
         Assert.AreEqual(new IdentifierToken("host", 0), root.Children[0]);
     }
+
+    [Test]
+    public void TestThreeLevelExpression() {
+        string expression = $"host.property.decendent";
+        InitCompiler(expression, 13);
+        compiler.Parent.AddChild(new PropertyAccessToken(4,
+            new IdentifierToken("host", 0),
+            new IdentifierToken("property", 5)));
+
+        Assert.IsTrue(parser.Parse(compiler));
+
+        Assert.AreEqual(expression.Length, compiler.Pos);
+        Assert.AreSame(root, compiler.Parent);
+        Assert.AreEqual(1, root.Children.Count);
+        Assert.AreEqual(new PropertyAccessToken(13,
+            // LHS
+            new PropertyAccessToken(4,
+                new IdentifierToken("host", 0),
+                new IdentifierToken("property", 5)),
+            // RHS
+            new IdentifierToken("decendent", 14)
+            ),
+            root.Children[0]);
+    }
 }

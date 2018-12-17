@@ -11,7 +11,9 @@ public class CombinedCompilerTest : BaseCompilerTest {
     [SetUp]
     public void Init() {
         evaluator = new UnityELEvaluator();
+
         functionResolver = new TestFunctionResolver();
+        evaluator.DefaultFunctionResolver = functionResolver;
     }
 
     [Test]

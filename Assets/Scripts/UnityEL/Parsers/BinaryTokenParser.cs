@@ -37,7 +37,9 @@ public abstract class BinaryTokenParser : TokenParser {
         TokenImpl rhs = compiler.Parent.PopChild();
 
         TokenImpl token = CreateToken(symbolPos, lhs, rhs);
-        compiler.Parent.AddChild(token);
+        if (token != null) {
+            compiler.Parent.AddChild(token);
+        }
 
         return true;
     }

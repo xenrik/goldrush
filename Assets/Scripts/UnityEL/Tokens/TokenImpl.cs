@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -80,6 +81,7 @@ public abstract class TokenImpl : Token {
         buffer.Append($"{indent}{DebugName}");
         string data = GetTokenDataString();
         if (data != null) {
+            data = data.Replace(Environment.NewLine, Environment.NewLine + indent + "   ");
             buffer.Append("[" + data + "]");
         }
         if (Children.Count > 0) {

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System;
+using System.Text;
 
 public abstract class BinaryToken : TokenImpl {
-    public TokenImpl Lhs { get; private set; }
-    public TokenImpl Rhs { get; private set; }
+    public TokenImpl Lhs { get; set; }
+    public TokenImpl Rhs { get; set; }
 
     public BinaryToken() {
     }
@@ -49,7 +51,11 @@ public abstract class BinaryToken : TokenImpl {
     }
 
     protected override string GetTokenDataString() {
-        return $"Lhs={(Lhs != null ? Lhs.ToString() : "null")}," +
-            $"Rhs={(Rhs != null ? Rhs.ToString() : "null")}";
+        StringBuilder buffer = new StringBuilder();
+        buffer.AppendLine();
+        buffer.AppendLine($"Lhs={(Lhs != null ? Lhs.ToString() : "null")},");
+        buffer.AppendLine($"Rhs={(Rhs != null ? Rhs.ToString() : "null")}");
+
+        return buffer.ToString();
     }
 }
