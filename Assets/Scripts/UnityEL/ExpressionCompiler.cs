@@ -29,8 +29,8 @@ public class ExpressionCompiler {
         parsers.Add(new CloseParser(']')); //                                       -- Done
 
         // Function and Group
-        parsers.Add(new FunctionParser()); // <identifier>(                         -- Done (excluding arguments)                  
-        parsers.Add(new GroupParser()); // (                             
+        parsers.Add(new FunctionParser()); // <identifier>(                         -- Done
+        parsers.Add(new GroupParser()); // (                                        -- Done                     
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
         // Function, Property and Identifiers 
@@ -48,11 +48,12 @@ public class ExpressionCompiler {
 
         // Maths
         parsers.Add(new AdditionParser()); // +                                     -- Done
-        parsers.Add(new SubtractionParser()); // -                                 
-        parsers.Add(new DivisionParser()); // /                                    
-        parsers.Add(new MultiplicationParser()); // *                              
+        parsers.Add(new SubtractionParser()); // -                                  -- Done                             
+        parsers.Add(new DivisionParser()); // /                                     -- Done
+        parsers.Add(new MultiplicationParser()); // *                               -- Done
         // parsers.Add(new ModulusParser()); // %                                     
-        // parsers.Add(new ExponentParser()); // **                                   
+        // parsers.Add(new ExponentParser()); // **     
+        // parsers.Add(new UnaryMinusParser()); // -    
 
         // Logical
         // parsers.Add(new NotParser()); // !                                         
@@ -64,25 +65,41 @@ public class ExpressionCompiler {
         // parsers.Add(new ConditionalOperatorParser()); // ?                         
         // parsers.Add(new ConditionalElseParser()); // : (conditional else)          
         // parsers.Add(new IsParser()); // is (instance of)
+        // parsers.Add(new IsEmptyParser()); // empty
+        // parsers.Add(new NotEmptyParser()); // notEmpty
+        // parsers.Add(new ExistsParser()); // exists
         // parsers.Add(new LessThanOrEqualToParser()); // <=
         // parsers.Add(new GreterThanOrEqualToParser()); // >=
         // parsers.Add(new LessThanParser()); // <
         // parsers.Add(new GreaterThanParser()); // >
         // parsers.Add(new EqualsParser()); // ==
+        // parsers.Add(new NotEqualsParser()); // !=
 
         // Bitwise
         // parsers.Add(new ComplementParser()); // ~                                  
         // parsers.Add(new BitwiseAndParser()); // &                                  
         // parsers.Add(new BitwiseOrParser()); // |                                   
-        // parsers.Add(new XorParser()); // ^                                         
+        // parsers.Add(new XorParser()); // ^                                  
+        // parsers.Add(new ShiftLeftParser()); // <<
+        // parsers.Add(new ShiftRightParser()); // >>                                               
 
         // Assignment
         // parsers.Add(new AssignParser()); // =
+        // parsers.Add(new IncrementAndAssignParser()); // +=
+        // parsers.Add(new DecrementAndAssignParser()); // -=
+        // parsers.Add(new MultiplyAndAssignParser()); // *=
+        // parsers.Add(new DivideAndAssignParser()); // /=
+        // parsers.Add(new ModulusAndAssignParser()); // %=
+        // parsers.Add(new IncrementAndAssignParser()); // += 
+        // parsers.Add(new IncrementParser()); // ++
+        // parsers.Add(new DecrementParser()); // --
 
         // Other
-        // empty
-        // notEmpty
-        // exists
+        // parsers.Add(new AsParser()); // as (cast)
+
+
+        // Tests needed
+        // Precendence
     }
 
     public UnityELExpression<T> Compile<T>() {
