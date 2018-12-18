@@ -24,6 +24,8 @@ public class ExpressionCompiler {
     }
 
     private void initParsers() {
+        // These must be added in the order that parsers are to be selected. 
+
         // Special parser to close groups, functions, or keyed access
         parsers.Add(new CloseParser(')')); //                                       -- Done
         parsers.Add(new CloseParser(']')); //                                       -- Done
@@ -96,10 +98,26 @@ public class ExpressionCompiler {
 
         // Other
         // parsers.Add(new AsParser()); // as (cast)
+    }
 
-
-        // Tests needed
-        // Precendence
+    /**
+     * Given a Token type, return its precedence. Returns int.MaxValue if the precedence is
+     * undefined. Numbers are shameless stolen from https://en.wikipedia.org/wiki/Order_of_operations
+     */
+    public int GetPrecedence(Type type) {
+        if (type == typeof(FunctionToken) ||
+            type == typeof(PropertyAccessParser) ||
+            type == typeof(GroupToken)) {
+            return 1;
+        } else if (type == typeof(MultiplicationToken) ||
+            type == typeof(DivisionToken)) {
+            return 3;
+        } else if (type == typeof(AdditionToken) ||
+            type == typeof(SubtractionToken)) {
+            return 4;
+        } else {
+            return int.MaxValue;
+        }
     }
 
     public UnityELExpression<T> Compile<T>() {

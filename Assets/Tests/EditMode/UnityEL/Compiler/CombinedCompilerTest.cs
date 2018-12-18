@@ -33,6 +33,15 @@ public class CombinedCompilerTest : BaseCompilerTest {
         Assert.AreEqual(3, result);
     }
 
+    [Test]
+    public void testPrecedence() {
+        UnityELExpression<int> expression =
+            evaluator.Compile<int>("1 + 2 * 3");
+        int result = expression.Evaluate(evaluator);
+
+        Assert.AreEqual(7, result);
+    }
+
     private class TestFunctionResolver : FunctionResolver {
         public MethodInfo ResolveFunction(string name, Type[] argumentTypes) {
             if (name.Equals("GetValue")) {

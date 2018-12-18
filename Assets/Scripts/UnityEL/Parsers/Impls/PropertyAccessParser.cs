@@ -8,7 +8,7 @@ public class PropertyAccessParser : BinaryTokenParser {
         base(new SingleCharacterParser('.')) {
     }
 
-    protected override TokenImpl CreateToken(int symbolPos, TokenImpl lhs, TokenImpl rhs) {
+    protected override TokenImpl CreateToken(ExpressionCompiler compiler, int symbolPos, TokenImpl lhs, TokenImpl rhs) {
         if (!(rhs is IdentifierToken)) {
             throw new ParserException(Name, symbolPos, "Right-hand side of a property access token must be an identifier");
         }

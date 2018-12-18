@@ -36,7 +36,7 @@ public abstract class BinaryTokenParser : TokenParser {
         }
         TokenImpl rhs = compiler.Parent.PopChild();
 
-        TokenImpl token = CreateToken(symbolPos, lhs, rhs);
+        TokenImpl token = CreateToken(compiler, symbolPos, lhs, rhs);
         if (token != null) {
             compiler.Parent.AddChild(token);
         }
@@ -44,5 +44,23 @@ public abstract class BinaryTokenParser : TokenParser {
         return true;
     }
 
-    protected abstract TokenImpl CreateToken(int symbolPos, TokenImpl lhs, TokenImpl rhs);
+    protected TokenImpl ApplyPrecedence(ExpressionCompiler compiler, BinaryToken lhs, BinaryToken newToken) {
+        // If the left-hand side is a binary token, and the new token has a higher precedence, 
+        // then take the right-hand side from the old left-hand side and use that as the left
+        // hand side on the new token. The new token then becomes the right-hand side of the left
+        // hand side.
+        int lhsPrecedence = compiler.GetPrecedence(lhs.GetType());
+        int newPrecedence = compiler.GetPrecedence(newToken.GetType());
+
+        if (newPrecedence < lhsPrecedence) {
+            newToken.Lhs = lhs.Rhs;
+            lhs.Rhs = newToken;
+
+            return lhs;
+        } else {
+            return newToken;
+        }
+    }
+
+    protected abstract TokenImpl CreateToken(ExpressionCompiler compiler, int symbolPos, TokenImpl lhs, TokenImpl rhs);
 }

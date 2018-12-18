@@ -8,7 +8,11 @@ public class AdditionParser : BinaryTokenParser {
         base(new SingleCharacterParser('+')) {
     }
 
-    protected override TokenImpl CreateToken(int symbolPos, TokenImpl lhs, TokenImpl rhs) {
-        return new AdditionToken(symbolPos, lhs, rhs);
+    protected override TokenImpl CreateToken(ExpressionCompiler compiler, int symbolPos, TokenImpl lhs, TokenImpl rhs) {
+        if (lhs is BinaryToken) {
+            return ApplyPrecedence(compiler, (BinaryToken)lhs, new AdditionToken(symbolPos, lhs, rhs));
+        } else {
+            return new AdditionToken(symbolPos, lhs, rhs);
+        }
     }
 }
