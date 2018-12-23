@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{506FE83D-94A2-5D4B-400B-C5CDEA80322A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -67,20 +68,24 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\FunctionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\GroupTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IdentifierTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\KeyedAccessTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\MultiplicationTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\PropertyAccessTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\SubtractionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BaseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\BinaryParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AdditionParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BinaryIntegerParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BooleanParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\CloseParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecimalParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DivisionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\FunctionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\GroupParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\HexIntegerParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IdentifierParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IntegerParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\KeyedAccessParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\MultiplicationParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\PropertyAccessParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\StringParserTest.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\GroupTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IdentifierTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IntegerTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\KeyedAccessTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\MultiplicationTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\PropertyAccessTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\StringTokenTest.cs" />

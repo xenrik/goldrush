@@ -70,14 +70,17 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\BinaryTokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\DoubleCharacterParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AdditionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BinaryIntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BooleanParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\CloseParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DecimalParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DivisionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\FunctionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\GroupParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\HexIntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IdentifierParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IntegerParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\KeyedAccessParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\MultiplicationParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\PropertyAccessParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\StringParser.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\GroupToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IdentifierToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IntegerToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\KeyedAccessToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\MultiplicationToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\PropertyAccessToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\StringToken.cs" />

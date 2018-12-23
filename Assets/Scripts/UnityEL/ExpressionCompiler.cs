@@ -37,7 +37,7 @@ public class ExpressionCompiler {
 
         // Function, Property and Identifiers 
         parsers.Add(new PropertyAccessParser()); // .                               -- Done
-        // parsers.Add(new KeyedAccessorParser()); // [                               
+        parsers.Add(new KeyedAccessParser()); // [                                  -- Done                     
         parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
 
         // Primitives
@@ -45,8 +45,8 @@ public class ExpressionCompiler {
         parsers.Add(new BooleanParser()); // true or false                          -- Done            
         parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
-        // parsers.Add(new BinaryIntegerParser()); // 0b0101010
-        // parsers.Add(new HexIntegerParser()); // 0x0123ABC
+        parsers.Add(new BinaryIntegerParser()); // 0b0101010                        -- Done
+        parsers.Add(new HexIntegerParser()); // 0x0123ABC                           -- Done
 
         // Maths
         parsers.Add(new AdditionParser()); // +                                     -- Done
