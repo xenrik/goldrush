@@ -5,7 +5,7 @@ public class SubtractionParser : BinaryTokenParser {
     public override string Name { get { return "subtraction"; } }
 
     public SubtractionParser() : 
-        base(new SingleCharacterParser('-')) {
+        base(new SingleCharacterParser('-'), true) {
     }
 
     protected override TokenImpl CreateToken(ExpressionCompiler compiler, int symbolPos, TokenImpl lhs, TokenImpl rhs) {

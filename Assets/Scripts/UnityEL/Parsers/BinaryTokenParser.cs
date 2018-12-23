@@ -6,9 +6,11 @@ public abstract class BinaryTokenParser : TokenParser {
     public abstract string Name { get; }
 
     private TokenParser symbolParser;
+    private bool lhsLenient;
 
-    public BinaryTokenParser(TokenParser symbolParser) {
+    public BinaryTokenParser(TokenParser symbolParser, bool lhsLenient = false) {
         this.symbolParser = symbolParser;
+        this.lhsLenient = lhsLenient;
     }
 
     public bool Parse(ExpressionCompiler compiler) {
@@ -22,7 +24,12 @@ public abstract class BinaryTokenParser : TokenParser {
             // Reset the compiler position
             compiler.Pos = symbolPos;
 
-            throw new ParserException(Name, symbolPos, "Missing left-hand operand");
+            // If we are lenient to the left-hand side missing, just return false
+            if (lhsLenient) {
+                return false;
+            } else {
+                throw new ParserException(Name, symbolPos, "Missing left-hand operand");
+            }
         }
         TokenImpl lhs = compiler.Parent.PopChild();
 

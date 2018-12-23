@@ -6,6 +6,7 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
         where P : TokenParser, new()
         where T : TokenImpl {
     public abstract string ParserSymbol { get; }
+    public virtual bool IsLenient { get { return false; } }
 
     private TokenParser parser;
 
@@ -91,9 +92,13 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
         string expression = $"{ParserSymbol}2";
         InitCompiler(expression, 0);
 
-        Assert.Throws<ParserException>(delegate {
-            parser.Parse(compiler);
-        });
+        if (IsLenient) {
+            Assert.IsFalse(parser.Parse(compiler));
+        } else { 
+            Assert.Throws<ParserException>(delegate {
+                parser.Parse(compiler);
+            });
+        }
 
         Assert.AreEqual(0, compiler.Pos);
         Assert.AreSame(root, compiler.Parent);

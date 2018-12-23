@@ -49,13 +49,13 @@ public class ExpressionCompiler {
         parsers.Add(new HexIntegerParser()); // 0x0123ABC                           -- Done
 
         // Maths
+        parsers.Add(new ExponentParser()); // **                                    -- Done
+        parsers.Add(new MultiplicationParser()); // *                               -- Done
         parsers.Add(new AdditionParser()); // +                                     -- Done
         parsers.Add(new SubtractionParser()); // -                                  -- Done                             
+        parsers.Add(new UnaryMinusParser()); // -                                   -- Done
         parsers.Add(new DivisionParser()); // /                                     -- Done
-        parsers.Add(new MultiplicationParser()); // *                               -- Done
-        // parsers.Add(new ModulusParser()); // %                                     
-        // parsers.Add(new ExponentParser()); // **     
-        // parsers.Add(new UnaryMinusParser()); // -    
+        parsers.Add(new ModulusParser()); // %                                      -- Done
 
         // Logical
         // parsers.Add(new NotParser()); // !                                         
