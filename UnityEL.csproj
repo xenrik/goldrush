@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\BinaryTokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\DoubleCharacterParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AdditionParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AndParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BinaryIntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BooleanParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\CloseParser.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\KeyedAccessParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ModulusParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\MultiplicationParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\NotParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\NullCoalesceParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\OrParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\PropertyAccessParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\StringParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\SubtractionParser.cs" />
@@ -95,6 +99,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BinaryToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\CloseableToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AdditionToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AndToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BooleanToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DecimalToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DivisionToken.cs" />
@@ -106,6 +111,9 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\KeyedAccessToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ModulusToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\MultiplicationToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\NotToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\NullCoalesceToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\OrToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\PropertyAccessToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\StringToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\SubtractionToken.cs" />

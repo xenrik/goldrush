@@ -35,14 +35,17 @@ public class ExpressionCompiler {
         parsers.Add(new GroupParser()); // (                                        -- Done                     
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
+        // Boolean and Null (has to be before identifier)
+        parsers.Add(new BooleanParser()); // true or false                          -- Done   
+        //parsers.Add(new NullToken()); // null
+
         // Function, Property and Identifiers 
         parsers.Add(new PropertyAccessParser()); // .                               -- Done
         parsers.Add(new KeyedAccessParser()); // [                                  -- Done                     
         parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
 
-        // Primitives
-        parsers.Add(new StringParser()); // " or '                                  -- Done                 
-        parsers.Add(new BooleanParser()); // true or false                          -- Done            
+        // Primitives (excluding boolean)
+        parsers.Add(new StringParser()); // " or '                                  -- Done             
         parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
         parsers.Add(new BinaryIntegerParser()); // 0b0101010                        -- Done
@@ -58,12 +61,12 @@ public class ExpressionCompiler {
         parsers.Add(new ModulusParser()); // %                                      -- Done
 
         // Logical
-        // parsers.Add(new NotParser()); // !                                         
-        // parsers.Add(new OrParser()); // ||                                         
-        // parsers.Add(new AndParser()); // &&                                        
+        parsers.Add(new NotParser()); // !                                          -- Done
+        parsers.Add(new OrParser()); // ||                                          -- Done
+        parsers.Add(new AndParser()); // &&                                         -- Done
 
         // Coalesce and Tests
-        // parsers.Add(new NullCoalesceParser()); // ??                               
+        parsers.Add(new NullCoalesceParser()); // ??                               
         // parsers.Add(new ConditionalOperatorParser()); // ?                         
         // parsers.Add(new ConditionalElseParser()); // : (conditional else)          
         // parsers.Add(new IsParser()); // is (instance of)
