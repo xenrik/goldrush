@@ -16,6 +16,13 @@ public class GroupParser : SingleCharacterParser {
         compiler.Parent.AddChild(group);
         compiler.ParentTokens.Push(group);
 
+        // Keep parsing until we are closed
+        while (!group.IsClosed) {
+            if (!compiler.ParseNextToken()) {
+                throw new ParserException(group, "Unclosed group");
+            }
+        }
+
         return true;
     }
 }

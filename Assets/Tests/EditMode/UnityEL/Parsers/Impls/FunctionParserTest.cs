@@ -18,12 +18,15 @@ public class FunctionParserTest : BaseParserTest {
 
         Assert.IsTrue(parser.Parse(compiler));
 
-        Assert.AreEqual(9, compiler.Pos);
+        Assert.AreEqual(13, compiler.Pos);
         Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new FunctionToken(8, functionName), root.Children[0]);
 
-        FunctionToken FunctionToken = (FunctionToken)root.Children[0];
-        Assert.AreSame(FunctionToken, compiler.Parent);
+        FunctionToken expected = new FunctionToken(8, functionName);
+        expected.Children.Add(new AdditionToken(10,
+            new IdentifierToken("a", 9), new IdentifierToken("b", 11)));
+        Assert.AreEqual(expected, root.Children[0]);
+
+        Assert.AreSame(root, compiler.Parent);
     }
 
     [Test]
@@ -50,12 +53,15 @@ public class FunctionParserTest : BaseParserTest {
 
         Assert.IsTrue(parser.Parse(compiler));
 
-        Assert.AreEqual(14, compiler.Pos);
+        Assert.AreEqual(18, compiler.Pos);
         Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new FunctionToken(13, propertyAccess), root.Children[0]);
 
-        FunctionToken FunctionToken = (FunctionToken)root.Children[0];
-        Assert.AreSame(FunctionToken, compiler.Parent);
+        FunctionToken expected = new FunctionToken(13, propertyAccess);
+        expected.Children.Add(new AdditionToken(15,
+            new IdentifierToken("a", 14), new IdentifierToken("b", 16)));
+        Assert.AreEqual(expected, root.Children[0]);
+
+        Assert.AreSame(root, compiler.Parent);
     }
 
     [Test]

@@ -17,11 +17,14 @@ public class GroupParserTest : BaseParserTest {
         Assert.IsTrue(parser.Parse(compiler));
 
         Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new GroupToken(0), root.Children[0]);
+        Assert.AreEqual(5, compiler.Pos);
 
-        GroupToken groupToken = (GroupToken)root.Children[0];
-        Assert.AreSame(groupToken, compiler.Parent);
-        Assert.AreEqual(1, compiler.Pos);
+        GroupToken expected = new GroupToken(0);
+        expected.Children.Add(new AdditionToken(2,
+            new IdentifierToken("a", 1), new IdentifierToken("b", 3)));
+        Assert.AreEqual(expected, root.Children[0]);
+
+        Assert.AreSame(root, compiler.Parent);
     }
 
     [Test]

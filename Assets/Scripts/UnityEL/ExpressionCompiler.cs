@@ -26,30 +26,32 @@ public class ExpressionCompiler {
     private void initParsers() {
         // These must be added in the order that parsers are to be selected. 
 
-        // Special parser to close groups, functions, or keyed access
+        // Special parser to close groups, functions, or keyed access (these should probably move
+        // into the relevant parser now)
         parsers.Add(new CloseParser(')')); //                                       -- Done
         parsers.Add(new CloseParser(']')); //                                       -- Done
 
         // Function and Group
         parsers.Add(new FunctionParser()); // <identifier>(                         -- Done
         parsers.Add(new GroupParser()); // (                                        -- Done                     
+
+        // Should probably move into the function parser
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
-        // Boolean and Null (has to be before identifier)
+        // Boolean and Null
         parsers.Add(new BooleanParser()); // true or false                          -- Done   
-        //parsers.Add(new NullToken()); // null
+        parsers.Add(new NullParser()); // null                                      -- Done
 
-        // Function, Property and Identifiers 
+        // Property Access
         parsers.Add(new PropertyAccessParser()); // .                               -- Done
         parsers.Add(new KeyedAccessParser()); // [                                  -- Done                     
-        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
 
         // Primitives (excluding boolean)
         parsers.Add(new StringParser()); // " or '                                  -- Done             
-        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
-        parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
         parsers.Add(new BinaryIntegerParser()); // 0b0101010                        -- Done
         parsers.Add(new HexIntegerParser()); // 0x0123ABC                           -- Done
+        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
+        parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
 
         // Maths
         parsers.Add(new ExponentParser()); // **                                    -- Done
@@ -66,12 +68,13 @@ public class ExpressionCompiler {
         parsers.Add(new AndParser()); // &&                                         -- Done
 
         // Coalesce and Tests
-        parsers.Add(new NullCoalesceParser()); // ??                               
-        // parsers.Add(new ConditionalOperatorParser()); // ?                         
-        // parsers.Add(new ConditionalElseParser()); // : (conditional else)          
-        // parsers.Add(new IsParser()); // is (instance of)
+        parsers.Add(new NullCoalesceParser()); // ??                                -- Done
+        parsers.Add(new ConditionalOperatorParser()); // ?:                         -- Done                       
+        parsers.Add(new IsNotParser()); // is not (not instance of)                 -- Done 
+        parsers.Add(new IsParser()); // is (instance of)                            -- Done                    
+        // parsers.Add(new NotEmptyParser()); // not empty
         // parsers.Add(new IsEmptyParser()); // empty
-        // parsers.Add(new NotEmptyParser()); // notEmpty
+        // parsers.Add(new NotExistsParser()); // not exists
         // parsers.Add(new ExistsParser()); // exists
         // parsers.Add(new LessThanOrEqualToParser()); // <=
         // parsers.Add(new GreterThanOrEqualToParser()); // >=
@@ -101,6 +104,9 @@ public class ExpressionCompiler {
 
         // Other
         // parsers.Add(new AsParser()); // as (cast)
+
+        // Identifier (should be last to avoid collision with other parsers)
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
     }
 
     /**

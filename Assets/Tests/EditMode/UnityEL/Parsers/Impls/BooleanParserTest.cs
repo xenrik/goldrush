@@ -37,12 +37,11 @@ public class BooleanParserTest : BaseParserTest {
     public void TrueStringWithTrailingChars() {
         InitCompiler("truestuff", 0);
 
-        Assert.IsTrue(parser.Parse(compiler));
+        Assert.IsFalse(parser.Parse(compiler));
 
         Assert.AreSame(root, compiler.Parent);
-        Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new BooleanToken(true, 0), root.Children[0]);
-        Assert.AreEqual(4, compiler.Pos);
+        Assert.AreEqual(0, root.Children.Count);
+        Assert.AreEqual(0, compiler.Pos);
     }
 
     [Test]
@@ -73,12 +72,11 @@ public class BooleanParserTest : BaseParserTest {
     public void FalseStringWithTrailingChars() {
         InitCompiler("falsestuff", 0);
 
-        Assert.IsTrue(parser.Parse(compiler));
+        Assert.IsFalse(parser.Parse(compiler));
 
         Assert.AreSame(root, compiler.Parent);
-        Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new BooleanToken(false, 0), root.Children[0]);
-        Assert.AreEqual(5, compiler.Pos);
+        Assert.AreEqual(0, root.Children.Count);
+        Assert.AreEqual(0, compiler.Pos);
     }
 
     [Test]

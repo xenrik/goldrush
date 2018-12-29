@@ -6,9 +6,21 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
         where P : TokenParser, new()
         where T : TokenImpl {
     public abstract string ParserSymbol { get; }
+
     public virtual bool IsLenient { get { return false; } }
+    public virtual bool SymbolRequiresTrailingSpace { get { return false; } }
 
     private TokenParser parser;
+
+    private string FullParserSymbol {
+        get {
+            if (SymbolRequiresTrailingSpace) {
+                return ParserSymbol + " ";
+            } else {
+                return ParserSymbol;
+            }
+        }
+    }
 
     [SetUp]
     public void Init() {
@@ -35,7 +47,7 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
 
     [Test]
     public void TestValidExpression() {
-        string expression = $"1{ParserSymbol}2";
+        string expression = $"1{FullParserSymbol}2";
         InitCompiler(expression, 1);
         compiler.Parent.AddChild(new IntegerToken(1, 0));
 
@@ -50,12 +62,13 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
         T token = (T)root.Children[0];
         Assert.AreEqual(1, token.Position);
         Assert.AreEqual(new IntegerToken(1, 0), GetLhs(token));
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 1), GetRhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 1 -
+            (SymbolRequiresTrailingSpace ? 1 : 0)), GetRhs(token));
     }
 
     [Test]
     public void TestExpressionWithSpaces() {
-        string expression = $"1 {ParserSymbol} 2";
+        string expression = $"1 {FullParserSymbol} 2";
         InitCompiler(expression, 1);
         compiler.Parent.AddChild(new IntegerToken(1, 0));
 
@@ -70,7 +83,8 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
         T token = (T)root.Children[0];
         Assert.AreEqual(1, token.Position);
         Assert.AreEqual(new IntegerToken(1, 0), GetLhs(token));
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 2), GetRhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 2 -
+            (SymbolRequiresTrailingSpace ? 1 : 0)), GetRhs(token));
     }
 
     [Test]
@@ -89,7 +103,7 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
 
     [Test]
     public void TestMissingLhs() {
-        string expression = $"{ParserSymbol}2";
+        string expression = $"{FullParserSymbol}2";
         InitCompiler(expression, 0);
 
         if (IsLenient) {
@@ -107,7 +121,7 @@ public abstract class BinaryParserTest<P, T> : BaseParserTest
 
     [Test]
     public void TestMissingRhs() {
-        string expression = $"1{ParserSymbol}";
+        string expression = $"1{FullParserSymbol}";
         InitCompiler(expression, 1);
         compiler.Parent.AddChild(new IntegerToken(1, 0));
 

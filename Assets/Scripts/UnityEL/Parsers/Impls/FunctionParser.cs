@@ -23,10 +23,11 @@ public class FunctionParser : SingleCharacterParser {
             return false;
         }
 
+        FunctionToken function;
         if (currentChild is IdentifierToken ||
             currentChild is PropertyAccessToken) {
             // Pop the current child and it becomes our function name
-            FunctionToken function = new FunctionToken(symbolPos, compiler.Parent.PopChild());
+            function = new FunctionToken(symbolPos, compiler.Parent.PopChild());
             compiler.Parent.AddChild(function);
 
             // The function becomes the new parent token
@@ -35,11 +36,18 @@ public class FunctionParser : SingleCharacterParser {
             // Must be binary to get here, the RHS of the binary token becomes
             // our function name and we become the RHS of the binary token.
             BinaryToken binaryToken = (BinaryToken)currentChild;
-            FunctionToken function = new FunctionToken(symbolPos, binaryToken.Rhs);
+            function = new FunctionToken(symbolPos, binaryToken.Rhs);
             binaryToken.Rhs = function;
 
             // We don't add the function, but it still becomes the new parent
             compiler.ParentTokens.Push(function);
+        }
+
+        // Keep parsing until we are closed
+        while (!function.IsClosed) {
+            if (!compiler.ParseNextToken()) {
+                throw new ParserException(function, "Unclosed function");
+            }
         }
 
         return true;

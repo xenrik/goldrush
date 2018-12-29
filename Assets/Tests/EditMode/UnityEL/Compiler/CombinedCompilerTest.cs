@@ -21,7 +21,7 @@ public class CombinedCompilerTest : BaseCompilerTest {
     }
 
     [Test]
-    public void testMultipartExpression() {
+    public void TestMultipartExpression() {
         evaluator.Properties["a"] = 4;
         evaluator.Properties["b"] = new TestObject();
 
@@ -38,12 +38,21 @@ public class CombinedCompilerTest : BaseCompilerTest {
     }
 
     [Test]
-    public void testPrecedence() {
+    public void TestPrecedence() {
         UnityELExpression<int> expression =
             evaluator.Compile<int>("1 + 2 * 3");
         int result = expression.Evaluate(evaluator);
 
         Assert.AreEqual(7, result);
+    }
+
+    [Test]
+    public void TestMixedIntegers() {
+        UnityELExpression<float> expression =
+            evaluator.Compile<float>("0.5 * 3 + 0xA + 0b11");
+        float result = expression.Evaluate(evaluator);
+
+        Assert.AreEqual(14.5, result);
     }
 
     private class TestFunctionResolver : FunctionResolver {
