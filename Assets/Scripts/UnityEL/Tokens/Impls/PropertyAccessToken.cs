@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Reflection;
 
-public class PropertyAccessToken : TokenImpl {
+public class PropertyAccessToken : TokenImpl, ExistsSupport {
     public override string Name { get { return "propertyAccess"; } }
 
     // The host of the property we are returning
@@ -60,19 +60,39 @@ public class PropertyAccessToken : TokenImpl {
     }
 
     public override object Evaluate(UnityELEvaluator context) {
-        object host = Host.Evaluate(context);
-        if (host == null) {
+        PropertyDetails details = ResolveProperty(context);
+        if (details.Property == null) {
+            throw new NoSuchPropertyException(this, $"Property: {details.Name} not found on type: {details.HostType}");
+        }
+
+        return details.Property.GetValue(details.Host);
+    }
+
+    public bool Exists(UnityELEvaluator context) {
+        PropertyDetails details = ResolveProperty(context);
+        return details.Property != null;
+    }
+
+    private PropertyDetails ResolveProperty(UnityELEvaluator context) {
+        PropertyDetails details = new PropertyDetails();
+        details.Host = Host.Evaluate(context);
+        if (details.Host == null) {
             return null;
         }
 
-        string name = Property.Value;
-        System.Type hostType = host.GetType();
+        details.Name = Property.Value;
+        details.HostType = details.Host.GetType();
+        details.Property = details.HostType.GetProperty(details.Name);
+        
+        return details;
+    }
 
-        PropertyInfo info = hostType.GetProperty(name);
-        if (info == null) {
-            throw new NoSuchPropertyException(this, $"Property: {name} not found on type: {hostType}");
-        }
+    private class PropertyDetails {
+        public string Name;
 
-        return info.GetValue(host);
+        public object Host;
+        public System.Type HostType;
+
+        public PropertyInfo Property;
     }
 }

@@ -1,12 +1,12 @@
-﻿public class IntegerToken : ValueTokenImpl<float> {
+﻿public class IntegerToken : ValueTokenImpl<int> {
     public override string Name { get { return "integer"; } }
 
     // The radix used when the token was created. Only kept for information
     public int Radix { get; private set; }
 
-    public IntegerToken(float value) : base(value) {
+    public IntegerToken(int value) : base(value) {
     }
-    public IntegerToken(float value, int position, int radix = 10) : base(value, position) {
+    public IntegerToken(int value, int position, int radix = 10) : base(value, position) {
         this.Radix = radix;
     }
 

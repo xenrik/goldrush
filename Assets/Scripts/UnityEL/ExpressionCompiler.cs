@@ -72,10 +72,10 @@ public class ExpressionCompiler {
         parsers.Add(new ConditionalOperatorParser()); // ?:                         -- Done                       
         parsers.Add(new IsNotParser()); // is not (not instance of)                 -- Done 
         parsers.Add(new IsParser()); // is (instance of)                            -- Done                    
-        // parsers.Add(new NotEmptyParser()); // not empty
-        // parsers.Add(new IsEmptyParser()); // empty
-        // parsers.Add(new NotExistsParser()); // not exists
-        // parsers.Add(new ExistsParser()); // exists
+        parsers.Add(new IsNotEmptyParser()); // not empty                           -- Done
+        parsers.Add(new IsEmptyParser()); // empty                                  -- Done
+        parsers.Add(new NotExistsParser()); // not exists                           -- Done
+        parsers.Add(new ExistsParser()); // exists                                  -- Done
         // parsers.Add(new LessThanOrEqualToParser()); // <=
         // parsers.Add(new GreterThanOrEqualToParser()); // >=
         // parsers.Add(new LessThanParser()); // <
@@ -98,7 +98,7 @@ public class ExpressionCompiler {
         // parsers.Add(new MultiplyAndAssignParser()); // *=
         // parsers.Add(new DivideAndAssignParser()); // /=
         // parsers.Add(new ModulusAndAssignParser()); // %=
-        // parsers.Add(new IncrementAndAssignParser()); // += 
+        // parsers.Add(new ExponentAndAssignParser()); // **=
         // parsers.Add(new IncrementParser()); // ++
         // parsers.Add(new DecrementParser()); // --
 

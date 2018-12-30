@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public interface ValueToken : Token {
+public interface ValueToken : Token, ExistsSupport {
     object Value { get; }
 }
 
@@ -44,5 +44,9 @@ public abstract class ValueTokenImpl<T> : TokenImpl, ValueToken {
 
     protected override string GetTokenDataString() {
         return Value == null ? "null" : Value.ToString();
+    }
+
+    public virtual bool Exists(UnityELEvaluator context) {
+        return true;
     }
 }

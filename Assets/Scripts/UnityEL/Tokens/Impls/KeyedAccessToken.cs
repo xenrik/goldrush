@@ -5,7 +5,7 @@ using System.Reflection;
 using System;
 using System.Collections;
 
-public class KeyedAccessToken : TokenImpl, CloseableToken {
+public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport {
     public override string Name { get { return "keyedAccess"; } }
     public TokenImpl Host { get; private set; }
     public bool IsClosed { get; private set; }
@@ -109,5 +109,44 @@ public class KeyedAccessToken : TokenImpl, CloseableToken {
         }
 
         throw new ParserException(this, $"Unsupported host value type: {hostType}, or unknown property: {key}");
+    }
+
+    /**
+     * Although this shares a fair bit of code with Evaluate, it is easier to read
+     * as a separate method
+     */
+    public bool Exists(UnityELEvaluator context) {
+        object host = Host.Evaluate(context);
+        if (host == null) {
+            return false;
+        }
+        System.Type hostType = host.GetType();
+
+        object key = Children[0].Evaluate(context);
+        System.Type keyType = key?.GetType();
+
+        // If the key is a string, we need to see if there is a property on the host that matches
+        if (key is string) {
+            PropertyInfo info = hostType.GetProperty((string)key);
+            if (info != null) {
+                return true;
+            }
+        }
+
+        // Otherwise inspect the host to determine what to do
+        if (host is IDictionary) {
+            IDictionary dictionary = (IDictionary)host;
+            return dictionary.Contains(key);
+        } else if (host is IList) {
+            IList list = (IList)host;
+            int i = TypeCoercer.CoerceToType<int>(this, key);
+            return i < list.Count;
+        } else if (host is Array) {
+            Array array = (Array)host;
+            int i = TypeCoercer.CoerceToType<int>(this, key);
+            return i < array.Length;
+        } else {
+            return false;
+        }
     }
 }

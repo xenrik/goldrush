@@ -7,7 +7,19 @@ public abstract class UnaryParserTest<P, T> : BaseParserTest
         where T : TokenImpl {
     public abstract string ParserSymbol { get; }
 
+    public virtual bool SymbolRequiresTrailingSpace { get { return false; } }
+
     private TokenParser parser;
+
+    private string FullParserSymbol {
+        get {
+            if (SymbolRequiresTrailingSpace) {
+                return ParserSymbol + " ";
+            } else {
+                return ParserSymbol;
+            }
+        }
+    }
 
     [SetUp]
     public void Init() {
@@ -25,7 +37,7 @@ public abstract class UnaryParserTest<P, T> : BaseParserTest
 
     [Test]
     public void TestValidExpression() {
-        string expression = $"{ParserSymbol}2";
+        string expression = $"{FullParserSymbol}2";
         InitCompiler(expression, 0);
 
         Assert.IsTrue(parser.Parse(compiler));
@@ -38,12 +50,13 @@ public abstract class UnaryParserTest<P, T> : BaseParserTest
 
         T token = (T)root.Children[0];
         Assert.AreEqual(0, token.Position);
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 1), GetRhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 1 -
+            (SymbolRequiresTrailingSpace ? 1 : 0)), GetRhs(token));
     }
 
     [Test]
     public void TestExpressionWithSpaces() {
-        string expression = $" {ParserSymbol} 2";
+        string expression = $" {FullParserSymbol} 2";
         InitCompiler(expression, 0);
 
         Assert.IsTrue(parser.Parse(compiler));
@@ -56,7 +69,8 @@ public abstract class UnaryParserTest<P, T> : BaseParserTest
 
         T token = (T)root.Children[0];
         Assert.AreEqual(0, token.Position);
-        Assert.AreEqual(new IntegerToken(2, expression.Length - 2), GetRhs(token));
+        Assert.AreEqual(new IntegerToken(2, expression.Length - 2 -
+            (SymbolRequiresTrailingSpace ? 1 : 0)), GetRhs(token));
     }
 
     [Test]
@@ -73,7 +87,7 @@ public abstract class UnaryParserTest<P, T> : BaseParserTest
 
     [Test]
     public void TestMissingRhs() {
-        string expression = $"{ParserSymbol}";
+        string expression = $"{FullParserSymbol}";
         InitCompiler(expression, 0);
 
         Assert.Throws<ParserException>(delegate {

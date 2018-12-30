@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System;
 
-public class FunctionToken : TokenImpl, CloseableToken {
+public class FunctionToken : TokenImpl, CloseableToken, ExistsSupport {
     public override string Name { get { return "function"; } }
     public TokenImpl FunctionName { get; private set; }
     public bool IsClosed { get; private set; }
@@ -64,65 +64,25 @@ public class FunctionToken : TokenImpl, CloseableToken {
         }
     }
 
+    public bool Exists(UnityELEvaluator context) {
+        FunctionDetails functionDetails = ResolveFunction(context);
+        return functionDetails.Function != null;
+    }
+
+
     public override object Evaluate(UnityELEvaluator context) {
-        // See if there is a host object, otherwise we're looking for a static function on the evaluator
-        object host = null;
-        string functionName = null;
-        string functionNamespace = null;
-        if (FunctionName is PropertyAccessToken) {
-            PropertyAccessToken propertyAccess = (PropertyAccessToken)FunctionName;
-            host = propertyAccess.Host.Evaluate(context);
-            if (host == null) {
-                return null;
+        FunctionDetails functionDetails = ResolveFunction(context);
+        if (functionDetails.Function == null) {
+            if (functionDetails.ResolutionFailedReason == null) {
+                functionDetails.ResolutionFailedReason = $"Unable to resolve function: {functionDetails.Name} " +
+                    $"(host={functionDetails.Host})"; //, namespace={functionDetails.Namespace})";
             }
-
-            functionName = propertyAccess.Property.Value;
-        } else if (FunctionName is IdentifierToken) {
-            IdentifierToken identifier = (IdentifierToken)FunctionName;
-            host = null;
-            functionName = identifier.Value;
-        }
-
-        // Resolve arguments (if any)
-        List<object> parameters = new List<object>();
-        List<System.Type> types = new List<System.Type>();
-        foreach (TokenImpl childToken in Children) {
-            object value = childToken.Evaluate(context);
-            parameters.Add(value);
-
-            if (value != null) {
-                types.Add(value.GetType());
-            } else {
-                types.Add(null);
-            }
-        }
-
-        MethodInfo function;
-        if (host != null) {
-            if (context.MemberFunctionResolver == null) {
-                throw new ParserException($"Cannot resolve a member function as no MemberFunctionResolver has been configured on the context");
-            }
-
-            function = context.MemberFunctionResolver.ResolveFunction(host.GetType(), functionName, types.ToArray());
-        } else if (functionNamespace != null) { 
-            if (!context.FunctionResolvers.ContainsKey(functionNamespace)) {
-                throw new ParserException($"Unknown function namespace: {functionNamespace}");
-            }
-
-            function = context.FunctionResolvers[functionNamespace].ResolveFunction(functionName, types.ToArray());
-        } else {
-            if (context.DefaultFunctionResolver == null) {
-                throw new ParserException($"No function namespace was supplied and no default function resolver was setup");
-            }
-
-            function = context.DefaultFunctionResolver.ResolveFunction(functionName, types.ToArray());
-        }
-
-        if (function == null) {
-            throw new ParserException(this, $"Unable to resolve function: {functionName} (host={host}, namespace={functionNamespace})");
+            throw new NoSuchFunctionException(this, functionDetails.ResolutionFailedReason);
         }
 
         // Map parameters...
+        MethodInfo function = functionDetails.Function;
+        List<object> parameters = functionDetails.Parameters;
         ParameterInfo[] parameterInfos = function.GetParameters();
         if (parameterInfos.Length > 0) {
             // If there is a different number of arguments, see if the last argument is a params
@@ -149,6 +109,72 @@ public class FunctionToken : TokenImpl, CloseableToken {
             }
         }
 
-        return function.Invoke(host, parameters.ToArray());
+        return function.Invoke(functionDetails.Host, parameters.ToArray());
+    }
+
+    private FunctionDetails ResolveFunction(UnityELEvaluator context) {
+        FunctionDetails functionDetails = new FunctionDetails();
+
+        // See if there is a host object, otherwise we're looking for a static function on the evaluator
+        if (FunctionName is PropertyAccessToken) {
+            PropertyAccessToken propertyAccess = (PropertyAccessToken)FunctionName;
+            functionDetails.Host = propertyAccess.Host.Evaluate(context);
+            if (functionDetails.Host == null) {
+                return null;
+            }
+
+            functionDetails.Name = propertyAccess.Property.Value;
+        } else if (FunctionName is IdentifierToken) {
+            IdentifierToken identifier = (IdentifierToken)FunctionName;
+            functionDetails.Host = null;
+            functionDetails.Name = identifier.Value;
+        }
+
+        // Resolve arguments (if any)
+        functionDetails.Parameters = new List<object>();
+        List<System.Type> types = new List<System.Type>();
+        foreach (TokenImpl childToken in Children) {
+            object value = childToken.Evaluate(context);
+            functionDetails.Parameters.Add(value);
+
+            if (value != null) {
+                types.Add(value.GetType());
+            } else {
+                types.Add(null);
+            }
+        }
+
+        if (functionDetails.Host != null) {
+            if (context.MemberFunctionResolver == null) {
+                functionDetails.ResolutionFailedReason = $"Cannot resolve a member function as no MemberFunctionResolver has been configured on the context";
+            } else {
+                functionDetails.Function = context.MemberFunctionResolver.ResolveFunction(functionDetails.Host.GetType(), functionDetails.Name, types.ToArray());
+            }
+        /*} else if (functionDetails.Namespace != null) {
+            if (!context.FunctionResolvers.ContainsKey(functionDetails.Namespace)) {
+                functionDetails.ResolutionFailedReason = $"Unknown function namespace: {functionDetails.Namespace}";
+            } else {
+                functionDetails.Function = context.FunctionResolvers[functionDetails.Namespace].ResolveFunction(functionDetails.Name, types.ToArray());
+            }*/
+        } else {
+            if (context.DefaultFunctionResolver == null) {
+                functionDetails.ResolutionFailedReason = $"No function namespace was supplied and no default function resolver was setup";
+            } else {
+                functionDetails.Function = context.DefaultFunctionResolver.ResolveFunction(functionDetails.Name, types.ToArray());
+            }
+        }
+
+        return functionDetails;
+    }
+
+    private class FunctionDetails {
+        public string Name;
+        //public string Namespace;
+        public object Host;
+
+        public string ResolutionFailedReason;
+
+        public MethodInfo Function;
+        public List<object> Parameters;
     }
 }

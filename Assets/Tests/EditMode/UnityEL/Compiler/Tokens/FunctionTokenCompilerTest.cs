@@ -56,7 +56,7 @@ public class FunctionTokenCompilerTest : BaseCompilerTest {
         UnityELExpression<string> expression = evaluator.Compile<string>("host.GetValue()");
         string result = expression.Evaluate(evaluator);
 
-        Assert.AreEqual("Value", result);
+        Assert.AreEqual("InstanceValue", result);
     }
 
     private class TestFunctionResolver : FunctionResolver {
@@ -97,7 +97,7 @@ public class FunctionTokenCompilerTest : BaseCompilerTest {
 
     private class TestObject {
         public string GetValue() {
-            return "Value";
+            return "InstanceValue";
         }
     }
 }

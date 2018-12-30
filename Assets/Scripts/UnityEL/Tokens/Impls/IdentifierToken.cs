@@ -1,4 +1,4 @@
-﻿public class IdentifierToken : ValueTokenImpl<string> {
+﻿public class IdentifierToken : ValueTokenImpl<string>, ExistsSupport {
     public override string Name { get { return "identifier"; } }
 
     public IdentifierToken(string value) : base(value) {
@@ -12,5 +12,9 @@
         } else {
             throw new NoSuchPropertyException(this, $"No property named: {Value} was known");
         }
+    }
+
+    public override bool Exists(UnityELEvaluator context) {
+        return context.Properties.ContainsKey(Value);
     }
 }

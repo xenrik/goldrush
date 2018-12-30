@@ -18,12 +18,14 @@ public class KeyedAccessParserTest : BaseParserTest {
 
         Assert.IsTrue(parser.Parse(compiler));
 
-        Assert.AreEqual(5, compiler.Pos);
+        Assert.AreEqual(12, compiler.Pos);
         Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new KeyedAccessToken(4, host), root.Children[0]);
 
-        KeyedAccessToken keyedAccessToken = (KeyedAccessToken)root.Children[0];
-        Assert.AreSame(keyedAccessToken, compiler.Parent);
+        KeyedAccessToken expected = new KeyedAccessToken(4, host);
+        expected.AddChild(new StringToken("fred", 5));
+        Assert.AreEqual(expected, root.Children[0]);
+
+        Assert.AreSame(root, compiler.Parent);
     }
 
     [Test]
@@ -50,12 +52,14 @@ public class KeyedAccessParserTest : BaseParserTest {
 
         Assert.IsTrue(parser.Parse(compiler));
 
-        Assert.AreEqual(14, compiler.Pos);
+        Assert.AreEqual(18, compiler.Pos);
         Assert.AreEqual(1, root.Children.Count);
-        Assert.AreEqual(new KeyedAccessToken(13, propertyAccess), root.Children[0]);
 
-        KeyedAccessToken keyedAccessToken = (KeyedAccessToken)root.Children[0];
-        Assert.AreSame(keyedAccessToken, compiler.Parent);
+        KeyedAccessToken expected = new KeyedAccessToken(13, propertyAccess);
+        expected.AddChild(new IntegerToken(123, 14));
+        Assert.AreEqual(expected, root.Children[0]);
+
+        Assert.AreSame(root, compiler.Parent);
     }
 
     [Test]

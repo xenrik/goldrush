@@ -26,6 +26,16 @@ public class PropertyAccessParser : BinaryTokenParser {
                 binaryLhs.Rhs = new PropertyAccessToken(symbolPos, lhsRhs, (IdentifierToken)rhs);
                 return binaryLhs;
             }
+        } else if (lhs is UnaryToken) {
+            // If the RHS of the unary token is an Identifier or Property Access we can join to and replace it
+            UnaryToken unaryLhs = (UnaryToken)lhs;
+            TokenImpl lhsRhs = unaryLhs.Rhs;
+
+            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+                // We can join it
+                unaryLhs.Rhs = new PropertyAccessToken(symbolPos, lhsRhs, (IdentifierToken)rhs);
+                return unaryLhs;
+            }
         }
 
         // Can't work with the lhs

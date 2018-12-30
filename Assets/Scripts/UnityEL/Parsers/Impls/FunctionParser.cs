@@ -6,42 +6,64 @@ public class FunctionParser : SingleCharacterParser {
     }
 
     public override bool Parse(ExpressionCompiler compiler) {
-        // The current child on the current parent must be an identifier
-        bool acceptCurrentChild = false;
-        TokenImpl currentChild = compiler.Parent.PeekChild();
-        acceptCurrentChild |= currentChild is IdentifierToken;
-        acceptCurrentChild |= currentChild is PropertyAccessToken;
-        acceptCurrentChild |= currentChild is BinaryToken &&
-            (((BinaryToken)currentChild).Rhs is IdentifierToken ||
-             ((BinaryToken)currentChild).Rhs is PropertyAccessToken);
-        if (!acceptCurrentChild) {
-            return false;
-        }
-
         int symbolPos = compiler.Pos;
         if (!base.Parse(compiler)) {
             return false;
         }
 
-        FunctionToken function;
-        if (currentChild is IdentifierToken ||
-            currentChild is PropertyAccessToken) {
-            // Pop the current child and it becomes our function name
-            function = new FunctionToken(symbolPos, compiler.Parent.PopChild());
-            compiler.Parent.AddChild(function);
+        // Must have a left-hand side...
+        if (compiler.Parent.Children.Count == 0) {
+            // Reset the compiler position
+            compiler.Pos = symbolPos;
 
-            // The function becomes the new parent token
-            compiler.ParentTokens.Push(function);
-        } else {
-            // Must be binary to get here, the RHS of the binary token becomes
-            // our function name and we become the RHS of the binary token.
-            BinaryToken binaryToken = (BinaryToken)currentChild;
-            function = new FunctionToken(symbolPos, binaryToken.Rhs);
-            binaryToken.Rhs = function;
-
-            // We don't add the function, but it still becomes the new parent
-            compiler.ParentTokens.Push(function);
+            // We don't throw an exception so the compiler will then check to see
+            // if the symbol represents a group instead
+            return false;
         }
+
+        TokenImpl lhs = compiler.Parent.PopChild();
+        FunctionToken function = null;
+
+        if (lhs is IdentifierToken || lhs is PropertyAccessToken) {
+            function = new FunctionToken(symbolPos, lhs);
+            compiler.Parent.AddChild(function);
+        } else if (lhs is BinaryToken) {
+            // If the RHS of the binary token is an Identifier or Property Access we can join to and replace it
+            BinaryToken binaryLhs = (BinaryToken)lhs;
+            TokenImpl lhsRhs = binaryLhs.Rhs;
+
+            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+                // We can join it
+                function = new FunctionToken(symbolPos, lhsRhs);
+                binaryLhs.Rhs = function;
+
+                compiler.Parent.AddChild(binaryLhs);
+            }
+        } else if (lhs is UnaryToken) {
+            // If the RHS of the unary token is an Identifier or Property Access we can join to and replace it
+            UnaryToken unaryLhs = (UnaryToken)lhs;
+            TokenImpl lhsRhs = unaryLhs.Rhs;
+
+            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+                // We can join it
+                function = new FunctionToken(symbolPos, lhsRhs);
+                unaryLhs.Rhs = function;
+
+                compiler.Parent.AddChild(unaryLhs);
+            }
+        }
+        
+        if (function == null) {
+            // Restore the lhs and position
+            compiler.Parent.AddChild(lhs);
+            compiler.Pos = symbolPos;
+
+            // Couldn't handle the lhs, just return false to continue to parse as a group
+            return false;
+        }
+
+        // The function becomes the new parent token
+        compiler.ParentTokens.Push(function);
 
         // Keep parsing until we are closed
         while (!function.IsClosed) {

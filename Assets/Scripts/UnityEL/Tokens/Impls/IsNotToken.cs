@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
-
-public class IsNotToken : IsToken {
+﻿public class IsNotToken : IsToken {
     public override string Name { get { return "isNot"; } }
 
     public IsNotToken() {
