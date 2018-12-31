@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 /**
- * An token parser that matches whole words (i.e. each word
+ * A token parser that matches whole words (i.e. each word
  * must be followed by at least one whitespace character). 
  * 
  * The last word can also be followed by the end of the expression or a non-alphanumeric

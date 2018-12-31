@@ -31,6 +31,45 @@ public class ExpressionCompiler {
         parsers.Add(new CloseParser(')')); //                                       -- Done
         parsers.Add(new CloseParser(']')); //                                       -- Done
 
+        // ********* Tokens which take words
+
+        // Boolean and Null
+        parsers.Add(new BooleanParser()); // true or false                          -- Done   
+        parsers.Add(new NullParser()); // null                                      -- Done
+
+        // Tests
+        parsers.Add(new IsNotParser()); // is not (not instance of)                 -- Done 
+        parsers.Add(new IsParser()); // is (instance of)                            -- Done                    
+        parsers.Add(new IsNotEmptyParser()); // not empty                           -- Done
+        parsers.Add(new IsEmptyParser()); // empty                                  -- Done
+        parsers.Add(new NotExistsParser()); // not exists                           -- Done
+        parsers.Add(new ExistsParser()); // exists                                  -- Done
+
+        // ********* Tokens which take multiple characters
+
+        // Maths
+        parsers.Add(new ExponentParser()); // **                                    -- Done
+
+        // Bitwise 
+        parsers.Add(new ShiftLeftParser()); // <<                                   -- Done
+        parsers.Add(new ShiftRightParser()); // >>                                  -- Done
+
+        // Coalesce
+        parsers.Add(new NullCoalesceParser()); // ??                                -- Done
+
+        // Tests
+        parsers.Add(new ConditionalOperatorParser()); // ?:                         -- Done                       
+        parsers.Add(new LessThanOrEqualsParser()); // <=                            -- Done
+        parsers.Add(new GreaterThanOrEqualsParser()); // >=                         -- Done
+        parsers.Add(new EqualsParser()); // ==                                      -- Done
+        parsers.Add(new NotEqualsParser()); // !=                                   -- Done
+
+        // Logical
+        parsers.Add(new OrParser()); // ||                                          -- Done
+        parsers.Add(new AndParser()); // &&                                         -- Done
+
+        // ********* Tokens which take single characters
+
         // Function and Group
         parsers.Add(new FunctionParser()); // <identifier>(                         -- Done
         parsers.Add(new GroupParser()); // (                                        -- Done                     
@@ -38,15 +77,11 @@ public class ExpressionCompiler {
         // Should probably move into the function parser
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
-        // Boolean and Null
-        parsers.Add(new BooleanParser()); // true or false                          -- Done   
-        parsers.Add(new NullParser()); // null                                      -- Done
-
         // Property Access
         parsers.Add(new PropertyAccessParser()); // .                               -- Done
         parsers.Add(new KeyedAccessParser()); // [                                  -- Done                     
 
-        // Primitives (excluding boolean)
+        // Primitives 
         parsers.Add(new StringParser()); // " or '                                  -- Done             
         parsers.Add(new BinaryIntegerParser()); // 0b0101010                        -- Done
         parsers.Add(new HexIntegerParser()); // 0x0123ABC                           -- Done
@@ -54,7 +89,6 @@ public class ExpressionCompiler {
         parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
 
         // Maths
-        parsers.Add(new ExponentParser()); // **                                    -- Done
         parsers.Add(new MultiplicationParser()); // *                               -- Done
         parsers.Add(new AdditionParser()); // +                                     -- Done
         parsers.Add(new SubtractionParser()); // -                                  -- Done                             
@@ -62,34 +96,18 @@ public class ExpressionCompiler {
         parsers.Add(new DivisionParser()); // /                                     -- Done
         parsers.Add(new ModulusParser()); // %                                      -- Done
 
+        // Tests
+        parsers.Add(new LessThanParser()); // <                                     -- Done
+        parsers.Add(new GreaterThanParser()); // >                                  -- Done
+
         // Logical
         parsers.Add(new NotParser()); // !                                          -- Done
-        parsers.Add(new OrParser()); // ||                                          -- Done
-        parsers.Add(new AndParser()); // &&                                         -- Done
 
-        // Coalesce and Tests
-        parsers.Add(new NullCoalesceParser()); // ??                                -- Done
-        parsers.Add(new ConditionalOperatorParser()); // ?:                         -- Done                       
-        parsers.Add(new IsNotParser()); // is not (not instance of)                 -- Done 
-        parsers.Add(new IsParser()); // is (instance of)                            -- Done                    
-        parsers.Add(new IsNotEmptyParser()); // not empty                           -- Done
-        parsers.Add(new IsEmptyParser()); // empty                                  -- Done
-        parsers.Add(new NotExistsParser()); // not exists                           -- Done
-        parsers.Add(new ExistsParser()); // exists                                  -- Done
-        // parsers.Add(new LessThanOrEqualToParser()); // <=
-        // parsers.Add(new GreterThanOrEqualToParser()); // >=
-        // parsers.Add(new LessThanParser()); // <
-        // parsers.Add(new GreaterThanParser()); // >
-        // parsers.Add(new EqualsParser()); // ==
-        // parsers.Add(new NotEqualsParser()); // !=
-
-        // Bitwise
-        // parsers.Add(new ComplementParser()); // ~                                  
-        // parsers.Add(new BitwiseAndParser()); // &                                  
-        // parsers.Add(new BitwiseOrParser()); // |                                   
-        // parsers.Add(new XorParser()); // ^                                  
-        // parsers.Add(new ShiftLeftParser()); // <<
-        // parsers.Add(new ShiftRightParser()); // >>                                               
+        // Bitwise (single characters)
+        parsers.Add(new ComplementParser()); // ~                                   -- Done                            
+        parsers.Add(new BitwiseAndParser()); // &                                   -- Done
+        parsers.Add(new BitwiseOrParser()); // |                                    -- Done
+        parsers.Add(new XorParser()); // ^                                          -- Done     
 
         // Assignment
         // parsers.Add(new AssignParser()); // =
