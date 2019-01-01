@@ -1,4 +1,4 @@
-﻿public class IdentifierToken : ValueTokenImpl<string>, ExistsSupport {
+﻿public class IdentifierToken : ValueTokenImpl<string>, ExistsSupport, AssignableToken {
     public override string Name { get { return "identifier"; } }
 
     public IdentifierToken(string value) : base(value) {
@@ -16,5 +16,9 @@
 
     public override bool Exists(UnityELEvaluator context) {
         return context.Properties.ContainsKey(Value);
+    }
+
+    public void Assign(UnityELEvaluator context, object value) {
+        context.Properties[Value] = value;
     }
 }

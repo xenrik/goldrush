@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Reflection;
 
-public class PropertyAccessToken : TokenImpl, ExistsSupport {
+public class PropertyAccessToken : TokenImpl, ExistsSupport, AssignableToken {
     public override string Name { get { return "propertyAccess"; } }
 
     // The host of the property we are returning
@@ -61,7 +61,9 @@ public class PropertyAccessToken : TokenImpl, ExistsSupport {
 
     public override object Evaluate(UnityELEvaluator context) {
         PropertyDetails details = ResolveProperty(context);
-        if (details.Property == null) {
+        if (details == null) {
+            return null;
+        } else if (details.Property == null) {
             throw new NoSuchPropertyException(this, $"Property: {details.Name} not found on type: {details.HostType}");
         }
 
@@ -70,7 +72,25 @@ public class PropertyAccessToken : TokenImpl, ExistsSupport {
 
     public bool Exists(UnityELEvaluator context) {
         PropertyDetails details = ResolveProperty(context);
-        return details.Property != null;
+        return details != null && details.Property != null;
+    }
+
+    public void Assign(UnityELEvaluator context, object value) {
+        PropertyDetails details = ResolveProperty(context);
+        if (details == null) {
+            throw new ParserException(this, $"Did not resolve host object: {Host}");
+        } else if (details.Property == null) {
+            throw new NoSuchPropertyException(this, $"Property: {details.Name} not found on type: {details.HostType}");
+        }
+
+        if (!details.Property.CanWrite || details.Property.SetMethod == null ||
+                details.Property.SetMethod.IsPrivate) {
+            throw new ParserException(this, $"Property: {details.Name} on type: {details.HostType} is read only");
+        }
+
+        System.Type propertyType = details.Property.PropertyType;
+        object coercedValue = TypeCoercer.CoerceToType(propertyType, this, value);
+        details.Property.SetValue(details.Host, coercedValue);
     }
 
     private PropertyDetails ResolveProperty(UnityELEvaluator context) {

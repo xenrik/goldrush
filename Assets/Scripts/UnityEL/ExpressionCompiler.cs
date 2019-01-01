@@ -45,7 +45,12 @@ public class ExpressionCompiler {
         parsers.Add(new NotExistsParser()); // not exists                           -- Done
         parsers.Add(new ExistsParser()); // exists                                  -- Done
 
-        // ********* Tokens which take multiple characters
+        // ********* Tokens which take 3 characters
+
+        // Maths
+        parsers.Add(new ExponentAndAssignParser()); // **=                          -- Done
+
+        // ********* Tokens which take 2 characters
 
         // Maths
         parsers.Add(new ExponentParser()); // **                                    -- Done
@@ -67,6 +72,17 @@ public class ExpressionCompiler {
         // Logical
         parsers.Add(new OrParser()); // ||                                          -- Done
         parsers.Add(new AndParser()); // &&                                         -- Done
+
+        // Assignment
+        parsers.Add(new AddAndAssignParser()); // +=                                -- Done
+        parsers.Add(new SubtractAndAssignParser()); // -=                           -- Done
+        parsers.Add(new MultiplyAndAssignParser()); // *=                           -- Done
+        parsers.Add(new DivideAndAssignParser()); // /=                             -- Done
+        parsers.Add(new ModulusAndAssignParser()); // %=                            -- Done
+        // parsers.Add(new IncrementAndEvaluateParser()); // ++<identifier>
+        // parsers.Add(new DecrementAndEvaluateParser()); // --<identifier>
+        // parsers.Add(new EvaluateAndIncrementParser()); // <identifier>++
+        // parsers.Add(new EvaluateAndDecrementParser()); // <identifier>--
 
         // ********* Tokens which take single characters
 
@@ -110,15 +126,7 @@ public class ExpressionCompiler {
         parsers.Add(new XorParser()); // ^                                          -- Done     
 
         // Assignment
-        // parsers.Add(new AssignParser()); // =
-        // parsers.Add(new IncrementAndAssignParser()); // +=
-        // parsers.Add(new DecrementAndAssignParser()); // -=
-        // parsers.Add(new MultiplyAndAssignParser()); // *=
-        // parsers.Add(new DivideAndAssignParser()); // /=
-        // parsers.Add(new ModulusAndAssignParser()); // %=
-        // parsers.Add(new ExponentAndAssignParser()); // **=
-        // parsers.Add(new IncrementParser()); // ++
-        // parsers.Add(new DecrementParser()); // --
+        parsers.Add(new AssignParser()); // =                                       -- Done
 
         // Other
         // parsers.Add(new AsParser()); // as (cast)

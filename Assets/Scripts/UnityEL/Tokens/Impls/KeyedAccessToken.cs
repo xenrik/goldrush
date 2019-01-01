@@ -5,7 +5,7 @@ using System.Reflection;
 using System;
 using System.Collections;
 
-public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport {
+public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport, AssignableToken {
     public override string Name { get { return "keyedAccess"; } }
     public TokenImpl Host { get; private set; }
     public bool IsClosed { get; private set; }
@@ -148,5 +148,103 @@ public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport {
         } else {
             return false;
         }
+    }
+
+    public void Assign(UnityELEvaluator context, object value) {
+        object host = Host.Evaluate(context);
+        if (host == null) {
+            throw new ParserException(this, $"Did not resolve host object: {Host}");
+        }
+        System.Type hostType = host.GetType();
+
+        object key = Children[0].Evaluate(context);
+        System.Type keyType = key?.GetType();
+
+        // If the key is a string, we need to see if there is a property on the host that matches
+        if (key is string) {
+            PropertyInfo info = hostType.GetProperty((string)key);
+            if (info != null) {
+                if (!info.CanWrite || info.SetMethod == null || info.SetMethod.IsPrivate) {
+                    throw new ParserException(this, $"Property: {key} on type: {hostType} is read only");
+                }
+
+                System.Type propertyType = info.PropertyType;
+                object coercedValue = TypeCoercer.CoerceToType(propertyType, this, value);
+
+                info.SetValue(host, coercedValue);
+                return;
+            }
+        }
+
+        // Otherwise inspect the host to determine what to do
+        if (host is IDictionary) {
+            // See if there is a generic type information
+            Type genericDictionaryType = typeof(IDictionary<,>);
+            MethodInfo assignGenericDictionaryMethod = this.GetType().GetMethod("AssignGenericDictionary",
+                    BindingFlags.Instance | BindingFlags.NonPublic);
+            foreach (Type type in hostType.GetInterfaces()) {
+                if (type.IsGenericType &&
+                        type.GetGenericTypeDefinition() == genericDictionaryType) {
+                    assignGenericDictionaryMethod.MakeGenericMethod(type.GetGenericArguments())
+                        .Invoke(this, new object[] { host, key, value });
+                    return;
+                }
+            }
+
+            // Otheriwse, just use IDictionary
+            IDictionary dictionary = (IDictionary)host;
+            dictionary[key] = value;
+        } else if (host is IList) {
+            int i = TypeCoercer.CoerceToType<int>(this, key);
+
+            // See if there is a generic type information available
+            Type genericListType = typeof(IList<>);
+            MethodInfo assignGenericListMethod = this.GetType().GetMethod("AssignGenericList",
+                    BindingFlags.Instance | BindingFlags.NonPublic);
+            foreach (Type type in hostType.GetInterfaces()) {
+                if (type.IsGenericType &&
+                        type.GetGenericTypeDefinition() == genericListType) {
+                    assignGenericListMethod.MakeGenericMethod(type.GetGenericArguments())
+                        .Invoke(this, new object[] { host, i, value });
+                    return;
+                }
+            }
+
+            // Otherwise just use IList
+
+            // Expand the list if needed
+            IList list = (IList)host;
+            while (i >= list.Count) {
+                list.Add(null);
+            }
+
+            list[i] = value;
+        } else if (host is Array) {
+            Array array = (Array)host;
+            int i = TypeCoercer.CoerceToType<int>(this, key);
+            if (i >= array.Length) {
+                throw new ParserException(this, $"Array index out of bounds: {i}, length: {array.Length}");
+            }
+            array.SetValue(value, i);
+        } else {
+            throw new ParserException(this, $"Unsupported host value type: {hostType}, or unknown property: {key}");
+        }
+    }
+
+    private void AssignGenericDictionary<TKey,TValue>(IDictionary<TKey,TValue> dictionary, object key, object value) {
+        TKey coercedKey = TypeCoercer.CoerceToType<TKey>(this, key);
+        TValue coercedValue = TypeCoercer.CoerceToType<TValue>(this, value);
+
+        dictionary[coercedKey] = coercedValue;
+    }
+
+    private void AssignGenericList<TValue>(IList<TValue> list, int index, object value) {
+        // Expand the list if needed
+        while (index >= list.Count) {
+            list.Add(default(TValue));
+        }
+
+        TValue coercedValue = TypeCoercer.CoerceToType<TValue>(this, value);
+        list[index] = coercedValue;
     }
 }
