@@ -28,128 +28,132 @@ public class ExpressionCompiler {
 
         // Special parser to close groups, functions, or keyed access (these should probably move
         // into the relevant parser now)
-        parsers.Add(new CloseParser(')')); //                                       -- Done
-        parsers.Add(new CloseParser(']')); //                                       -- Done
+        parsers.Add(new CloseParser(')')); //                                       
+        parsers.Add(new CloseParser(']')); //                                       
 
         // ********* Tokens which take words
 
         // Boolean and Null
-        parsers.Add(new BooleanParser()); // true or false                          -- Done   
-        parsers.Add(new NullParser()); // null                                      -- Done
+        parsers.Add(new BooleanParser()); // true or false                             
+        parsers.Add(new NullParser()); // null                                      
 
         // Tests
-        parsers.Add(new IsNotParser()); // is not (not instance of)                 -- Done 
-        parsers.Add(new IsParser()); // is (instance of)                            -- Done                    
-        parsers.Add(new IsNotEmptyParser()); // not empty                           -- Done
-        parsers.Add(new IsEmptyParser()); // empty                                  -- Done
-        parsers.Add(new NotExistsParser()); // not exists                           -- Done
-        parsers.Add(new ExistsParser()); // exists                                  -- Done
+        parsers.Add(new IsNotParser()); // is not (not instance of)                  
+        parsers.Add(new IsParser()); // is (instance of)                                                
+        parsers.Add(new IsNotEmptyParser()); // not empty                           
+        parsers.Add(new IsEmptyParser()); // empty                                  
+        parsers.Add(new NotExistsParser()); // not exists                           
+        parsers.Add(new ExistsParser()); // exists                                  
+
+        // Cast
+        parsers.Add(new AsParser()); // as (cast)
 
         // ********* Tokens which take 3 characters
 
         // Maths
-        parsers.Add(new ExponentAndAssignParser()); // **=                          -- Done
+        parsers.Add(new ExponentAndAssignParser()); // **=                          
 
         // ********* Tokens which take 2 characters
 
         // Maths
-        parsers.Add(new ExponentParser()); // **                                    -- Done
+        parsers.Add(new ExponentParser()); // **                                    
 
         // Bitwise 
-        parsers.Add(new ShiftLeftParser()); // <<                                   -- Done
-        parsers.Add(new ShiftRightParser()); // >>                                  -- Done
+        parsers.Add(new ShiftLeftParser()); // <<                                   
+        parsers.Add(new ShiftRightParser()); // >>                                  
 
         // Coalesce
-        parsers.Add(new NullCoalesceParser()); // ??                                -- Done
+        parsers.Add(new NullCoalesceParser()); // ??                                
 
         // Tests
-        parsers.Add(new ConditionalOperatorParser()); // ?:                         -- Done                       
-        parsers.Add(new LessThanOrEqualsParser()); // <=                            -- Done
-        parsers.Add(new GreaterThanOrEqualsParser()); // >=                         -- Done
-        parsers.Add(new EqualsParser()); // ==                                      -- Done
-        parsers.Add(new NotEqualsParser()); // !=                                   -- Done
+        parsers.Add(new ConditionalOperatorParser()); // ?:                                                
+        parsers.Add(new LessThanOrEqualsParser()); // <=                            
+        parsers.Add(new GreaterThanOrEqualsParser()); // >=                         
+        parsers.Add(new EqualsParser()); // ==                                      
+        parsers.Add(new NotEqualsParser()); // !=                                   
 
         // Logical
-        parsers.Add(new OrParser()); // ||                                          -- Done
-        parsers.Add(new AndParser()); // &&                                         -- Done
+        parsers.Add(new OrParser()); // ||                                          
+        parsers.Add(new AndParser()); // &&                                         
 
         // Assignment
-        parsers.Add(new AddAndAssignParser()); // +=                                -- Done
-        parsers.Add(new SubtractAndAssignParser()); // -=                           -- Done
-        parsers.Add(new MultiplyAndAssignParser()); // *=                           -- Done
-        parsers.Add(new DivideAndAssignParser()); // /=                             -- Done
-        parsers.Add(new ModulusAndAssignParser()); // %=                            -- Done
-        // parsers.Add(new IncrementAndEvaluateParser()); // ++<identifier>
-        // parsers.Add(new DecrementAndEvaluateParser()); // --<identifier>
-        // parsers.Add(new EvaluateAndIncrementParser()); // <identifier>++
-        // parsers.Add(new EvaluateAndDecrementParser()); // <identifier>--
+        parsers.Add(new AddAndAssignParser()); // +=                                
+        parsers.Add(new SubtractAndAssignParser()); // -=                           
+        parsers.Add(new MultiplyAndAssignParser()); // *=                           
+        parsers.Add(new DivideAndAssignParser()); // /=                             
+        parsers.Add(new ModulusAndAssignParser()); // %=                            
+        parsers.Add(new ReturnAndIncrementParser()); // <identifier>++              
+        parsers.Add(new ReturnAndDecrementParser()); // <identifier>--              
+        parsers.Add(new IncrementAndReturnParser()); // ++<identifier>              
+        parsers.Add(new DecrementAndReturnParser()); // --<identifier>              
 
         // ********* Tokens which take single characters
 
         // Function and Group
-        parsers.Add(new FunctionParser()); // <identifier>(                         -- Done
-        parsers.Add(new GroupParser()); // (                                        -- Done                     
+        parsers.Add(new FunctionParser()); // <identifier>(                         
+        parsers.Add(new GroupParser()); // (                                                             
 
         // Should probably move into the function parser
         parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
         // Property Access
-        parsers.Add(new PropertyAccessParser()); // .                               -- Done
-        parsers.Add(new KeyedAccessParser()); // [                                  -- Done                     
+        parsers.Add(new PropertyAccessParser()); // .                               
+        parsers.Add(new KeyedAccessParser()); // [                                                       
 
         // Primitives 
-        parsers.Add(new StringParser()); // " or '                                  -- Done             
-        parsers.Add(new BinaryIntegerParser()); // 0b0101010                        -- Done
-        parsers.Add(new HexIntegerParser()); // 0x0123ABC                           -- Done
-        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          -- Done
-        parsers.Add(new IntegerParser()); // [0-9]+                                 -- Done
+        parsers.Add(new StringParser()); // " or '                                               
+        parsers.Add(new BinaryIntegerParser()); // 0b0101010                        
+        parsers.Add(new HexIntegerParser()); // 0x0123ABC                           
+        parsers.Add(new DecimalParser()); // [0-9]+.[0-9]+                          
+        parsers.Add(new IntegerParser()); // [0-9]+                                 
 
         // Maths
-        parsers.Add(new MultiplicationParser()); // *                               -- Done
-        parsers.Add(new AdditionParser()); // +                                     -- Done
-        parsers.Add(new SubtractionParser()); // -                                  -- Done                             
-        parsers.Add(new UnaryMinusParser()); // -                                   -- Done
-        parsers.Add(new DivisionParser()); // /                                     -- Done
-        parsers.Add(new ModulusParser()); // %                                      -- Done
+        parsers.Add(new MultiplicationParser()); // *                               
+        parsers.Add(new AdditionParser()); // +                                     
+        parsers.Add(new SubtractionParser()); // -                                                               
+        parsers.Add(new UnaryMinusParser()); // -                                   
+        parsers.Add(new DivisionParser()); // /                                     
+        parsers.Add(new ModulusParser()); // %                                      
 
         // Tests
-        parsers.Add(new LessThanParser()); // <                                     -- Done
-        parsers.Add(new GreaterThanParser()); // >                                  -- Done
+        parsers.Add(new LessThanParser()); // <                                     
+        parsers.Add(new GreaterThanParser()); // >                                  
 
         // Logical
-        parsers.Add(new NotParser()); // !                                          -- Done
+        parsers.Add(new NotParser()); // !                                          
 
         // Bitwise (single characters)
-        parsers.Add(new ComplementParser()); // ~                                   -- Done                            
-        parsers.Add(new BitwiseAndParser()); // &                                   -- Done
-        parsers.Add(new BitwiseOrParser()); // |                                    -- Done
-        parsers.Add(new XorParser()); // ^                                          -- Done     
+        parsers.Add(new ComplementParser()); // ~                                                               
+        parsers.Add(new BitwiseAndParser()); // &                                   
+        parsers.Add(new BitwiseOrParser()); // |                                    
+        parsers.Add(new XorParser()); // ^                                               
 
         // Assignment
-        parsers.Add(new AssignParser()); // =                                       -- Done
-
-        // Other
-        // parsers.Add(new AsParser()); // as (cast)
+        parsers.Add(new AssignParser()); // =                                       
 
         // Identifier (should be last to avoid collision with other parsers)
-        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      -- Done
+        parsers.Add(new IdentifierParser()); // [a-Z][a-z0-9]+                      
     }
 
     /**
      * Given a Token type, return its precedence. Returns int.MaxValue if the precedence is
-     * undefined. Numbers are shameless stolen from https://en.wikipedia.org/wiki/Order_of_operations
+     * undefined. Numbers are based on https://en.wikipedia.org/wiki/Order_of_operations
      */
     public int GetPrecedence(Type type) {
-        if (type == typeof(FunctionToken) ||
+        // Left Hand Unary Tokens (<identifier>++ and <identifer>--) have the highest
+        // precedence
+        if (type == typeof(LeftHandUnaryToken)) {
+            return 0;
+        } else if (type == typeof(FunctionToken) ||
             type == typeof(PropertyAccessParser) ||
             type == typeof(GroupToken)) {
-            return 1;
+            return 10;
         } else if (type == typeof(MultiplicationToken) ||
             type == typeof(DivisionToken)) {
-            return 3;
+            return 30;
         } else if (type == typeof(AdditionToken) ||
             type == typeof(SubtractionToken)) {
-            return 4;
+            return 40;
         } else {
             return int.MaxValue;
         }

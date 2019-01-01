@@ -66,10 +66,12 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AdditionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AndTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AssignTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AsTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\BitwiseAndTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\BitwiseOrTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ComplementTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ConditionalOperatorCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\DecrementAndReturnTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\DivideAndAssignTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\DivisionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\EqualsTokenCompilerTest.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\GreaterThanTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\GroupTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IdentifierTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IncrementAndReturnTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IsEmptyTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IsNotEmptyTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\IsNotTokenCompilerTest.cs" />
@@ -98,6 +101,8 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\NullCoalesceTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\OrTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\PropertyAccessTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ReturnAndDecrementTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ReturnAndIncrementTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ShiftLeftTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ShiftRightTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\SubtractAndAssignTokenCompilerTest.cs" />
@@ -109,6 +114,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AddAndAssignParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AdditionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AndParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AsParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AssignParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BinaryIntegerParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BitwiseAndParserTest.cs" />
@@ -118,6 +124,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ComplementParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ConditionalOperatorParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecimalParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DecrementAndReturnParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DivideAndAssignParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\DivisionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\EqualsParserTest.cs" />
@@ -130,6 +137,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\GroupParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\HexIntegerParsertest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IdentifierParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IncrementAndReturnParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IntegerParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IsEmptyParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\IsNotEmptyParserTest.cs" />
@@ -149,6 +157,8 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\NullParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\OrParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\PropertyAccessParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ReturnAndDecrementParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ReturnAndIncrementParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ShiftLeftParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ShiftRightParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\StringParserTest.cs" />
@@ -156,17 +166,20 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\SubtractionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\UnaryMinusParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\XorParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\LeftHandUnaryParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\UnaryParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AddAndAssignTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AdditionTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AndTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AssignTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AsTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BitwiseAndTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BitwiseOrTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BooleanTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ComplementTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ConditionalOperatorTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DecimalTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DecrementAndReturnTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DivideAndAssignTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\DivisionTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\EqualsTokenTest.cs" />
@@ -178,6 +191,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\GreaterThanTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\GroupTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IdentifierTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IncrementAndReturnTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IntegerTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IsEmptyTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\IsNotEmptyTokenTest.cs" />
@@ -197,6 +211,8 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\NullTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\OrTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\PropertyAccessTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ReturnAndDecrementTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ReturnAndIncrementTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ShiftLeftTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ShiftRightTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\StringTokenTest.cs" />

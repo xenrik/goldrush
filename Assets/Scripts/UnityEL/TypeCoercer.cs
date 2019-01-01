@@ -18,10 +18,10 @@ public sealed class TypeCoercer {
         return DoCoerce(type, context, value, defaultValue);
     }
 
-    private static object DoCoerce(Type type, TokenImpl context, object value, object defaultValue) { 
+    private static object DoCoerce(Type type, TokenImpl context, object value, object defaultValue) {
         if (value == null) {
             return defaultValue;
-        } else if (value.GetType() == type) {
+        } else if (type == typeof(object) || value.GetType() == type) {
             return value;
         } else if (type == typeof(int)) {
             if (value.GetType() == typeof(float)) {
@@ -33,14 +33,20 @@ public sealed class TypeCoercer {
                 if (int.TryParse(s, out result)) {
                     return result;
                 }
+            } else if (value.GetType() == typeof(bool)) {
+                bool b = (bool)value;
+                return b ? 1 : 0;
             }
         } else if (type == typeof(bool)) {
             if (value.GetType() == typeof(int)) {
                 int i = (int)value;
                 return i != 0;
+            } else if (value.GetType() == typeof(float)) {
+                float f = (float)value;
+                return f != 0;
             } else if (value.GetType() == typeof(string)) {
                 string s = (string)value;
-                return s.ToLower().Equals("true");
+                return s.Equals("true", StringComparison.InvariantCultureIgnoreCase);
             }
         } else if (type == typeof(float)) {
             if (value.GetType() == typeof(int)) {
@@ -52,9 +58,17 @@ public sealed class TypeCoercer {
                 if (float.TryParse(s, out result)) {
                     return result;
                 }
+            } else if (value.GetType() == typeof(bool)) {
+                bool b = (bool)value;
+                return b ? 1.0f : 0.0f;
             }
         } else if (type == typeof(string)) {
-            return value.ToString();
+            if (value.GetType() == typeof(bool)) {
+                // Force to lowercase for consistency
+                return value.ToString().ToLowerInvariant();
+            } else {
+                return value.ToString();
+            }
         } else if (type.IsAssignableFrom(value.GetType())) {
             return value;
         }

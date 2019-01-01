@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AddAndAssignParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AdditionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AsParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AssignParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BinaryIntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BitwiseAndParser.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ComplementParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ConditionalOperatorParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DecimalParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DecrementAndReturnParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DivideAndAssignParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\DivisionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\EqualsParser.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\GroupParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\HexIntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IdentifierParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IncrementAndReturnParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IntegerParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IsEmptyParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\IsNotEmptyParser.cs" />
@@ -113,6 +116,8 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\NullParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\OrParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\PropertyAccessParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ReturnAndDecrementParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ReturnAndIncrementParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ShiftLeftParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ShiftRightParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\StringParser.cs" />
@@ -120,6 +125,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\SubtractionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\UnaryMinusParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\XorParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\LeftHandUnaryTokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\SingleCharacterParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\StringTokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\TokenParser.cs" />
@@ -133,12 +139,14 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AdditionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AndToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AssignToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AsToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BitwiseAndToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BitwiseOrToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BooleanToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ComplementToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ConditionalOperatorToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DecimalToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DecrementAndReturnToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DivideAndAssignToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\DivisionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\EqualsToken.cs" />
@@ -150,6 +158,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\GreaterThanToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\GroupToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IdentifierToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IncrementAndReturnToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IntegerToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IsEmptyToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\IsNotEmptyToken.cs" />
@@ -169,6 +178,8 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\NullToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\OrToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\PropertyAccessToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ReturnAndDecrementToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ReturnAndIncrementToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ShiftLeftToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ShiftRightToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\StringToken.cs" />
@@ -176,6 +187,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\SubtractionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\UnaryMinusToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\XorToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\LeftHandUnaryToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\RootToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Token.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\TokenImpl.cs" />
