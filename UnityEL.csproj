@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\UnityEL\ArgumentGroupEvaluator.cs" />
     <Compile Include="Assets\Scripts\UnityEL\DefaultMemberFunctionResolver.cs" />
     <Compile Include="Assets\Scripts\UnityEL\ExpressionCompiler.cs" />
     <Compile Include="Assets\Scripts\UnityEL\ExpressionImpl.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AddAndAssignParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AdditionParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AndParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\ArgumentGroupParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AsParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\AssignParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\Impls\BinaryIntegerParser.cs" />
@@ -131,13 +133,16 @@
     <Compile Include="Assets\Scripts\UnityEL\Parsers\TokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\UnaryTokenParser.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Parsers\WordTokenParser.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\StaticMethodsFunctionResolver.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\AssignableToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\BinaryToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\CloseableToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\ExistsSupport.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\HostSupport.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AddAndAssignToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AdditionToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AndToken.cs" />
+    <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\ArgumentGroupToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AssignToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\AsToken.cs" />
     <Compile Include="Assets\Scripts\UnityEL\Tokens\Impls\BitwiseAndToken.cs" />
@@ -429,15 +434,6 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Jurassic">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/Jurassic/Jurassic.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetZip">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/DotNetZip.dll</HintPath>
-    </Reference>
-    <Reference Include="NugetForUnity">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

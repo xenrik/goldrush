@@ -1,4 +1,4 @@
-﻿public class IdentifierToken : ValueTokenImpl<string>, ExistsSupport, AssignableToken {
+﻿public class IdentifierToken : ValueTokenImpl<string>, ExistsSupport, AssignableToken, HostSupport {
     public override string Name { get { return "identifier"; } }
 
     public IdentifierToken(string value) : base(value) {

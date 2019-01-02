@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Reflection;
 
-public class PropertyAccessToken : TokenImpl, ExistsSupport, AssignableToken {
+public class PropertyAccessToken : TokenImpl, ExistsSupport, AssignableToken, HostSupport {
     public override string Name { get { return "propertyAccess"; } }
 
     // The host of the property we are returning

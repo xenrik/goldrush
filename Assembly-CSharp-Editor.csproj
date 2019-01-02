@@ -319,15 +319,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Jurassic">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/Jurassic/Jurassic.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetZip">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/DotNetZip.dll</HintPath>
-    </Reference>
-    <Reference Include="NugetForUnity">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>

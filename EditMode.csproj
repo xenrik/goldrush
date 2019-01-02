@@ -65,6 +65,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AddAndAssignTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AdditionTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AndTokenCompilerTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\ArgumentGroupTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AssignTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\AsTokenCompilerTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Compiler\Tokens\BitwiseAndTokenCompilerTest.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AddAndAssignParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AdditionParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AndParserTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\ArgumentGroupParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AsParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\AssignParserTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Parsers\Impls\BinaryIntegerParserTest.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AddAndAssignTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AdditionTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AndTokenTest.cs" />
+    <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\ArgumentGroupTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AssignTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\AsTokenTest.cs" />
     <Compile Include="Assets\Tests\EditMode\UnityEL\Tokens\Impls\BitwiseAndTokenTest.cs" />
@@ -465,15 +468,6 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Jurassic">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/Jurassic/Jurassic.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetZip">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/DotNetZip.dll</HintPath>
-    </Reference>
-    <Reference Include="NugetForUnity">
-      <HintPath>E:/Programming/Unity/GoldRush/Assets/ThirdParty/NuGet/Editor/NugetForUnity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/lee/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

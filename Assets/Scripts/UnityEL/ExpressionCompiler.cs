@@ -26,10 +26,12 @@ public class ExpressionCompiler {
     private void initParsers() {
         // These must be added in the order that parsers are to be selected. 
 
-        // Special parser to close groups, functions, or keyed access (these should probably move
-        // into the relevant parser now)
-        parsers.Add(new CloseParser(')')); //                                       
-        parsers.Add(new CloseParser(']')); //                                       
+        // Special parsers to close groups, functions, or keyed access (these should probably move
+        // into the relevant parser now), and for argument separation (should probably be in function and argument group)
+        parsers.Add(new CloseParser(')')); // close group/function                                      
+        parsers.Add(new CloseParser(']')); // close keyed access                    
+        parsers.Add(new CloseParser('}')); // close argument group                  
+        parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
 
         // ********* Tokens which take words
 
@@ -89,12 +91,10 @@ public class ExpressionCompiler {
 
         // ********* Tokens which take single characters
 
-        // Function and Group
+        // Function, Group and ArgumentGroup
         parsers.Add(new FunctionParser()); // <identifier>(                         
-        parsers.Add(new GroupParser()); // (                                                             
-
-        // Should probably move into the function parser
-        parsers.Add(new SingleCharacterParser(',')); // argument separator -- we don't need a token for this
+        parsers.Add(new GroupParser()); // (
+        parsers.Add(new ArgumentGroupParser()); // {
 
         // Property Access
         parsers.Add(new PropertyAccessParser()); // .                               

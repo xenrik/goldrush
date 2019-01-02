@@ -8,6 +8,7 @@ public class UnityELEvaluator {
     public Dictionary<string, FunctionResolver> FunctionResolvers { get; private set; }
     public FunctionResolver DefaultFunctionResolver { get; set; }
     public MemberFunctionResolver MemberFunctionResolver { get; set; }
+    public ArgumentGroupEvaluator ArgumentGroupEvaluator { get; set; }
 
     public UnityELEvaluator() {
         Properties = new Dictionary<string, object>();

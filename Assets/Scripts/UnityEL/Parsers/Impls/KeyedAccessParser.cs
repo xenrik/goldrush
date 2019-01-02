@@ -21,15 +21,15 @@ public class KeyedAccessParser : SingleCharacterParser {
 
         // See if we can handle the lhs
         KeyedAccessToken keyedAccess = null;
-        if (lhs is IdentifierToken || lhs is PropertyAccessToken) {
+        if (lhs is HostSupport) {
             keyedAccess = new KeyedAccessToken(symbolPos, lhs);
             compiler.Parent.AddChild(keyedAccess);
         } else if (lhs is BinaryToken) {
-            // If the RHS of the binary token is an Identifier or Property Access we can join to and replace it
+            // If the RHS of the binary token is token which allows Hosting we can join to and replace it
             BinaryToken binaryLhs = (BinaryToken)lhs;
             TokenImpl lhsRhs = binaryLhs.Rhs;
 
-            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+            if (lhsRhs is HostSupport) {
                 // We can join it
                 keyedAccess = new KeyedAccessToken(symbolPos, lhsRhs);
                 binaryLhs.Rhs = keyedAccess;
@@ -37,11 +37,11 @@ public class KeyedAccessParser : SingleCharacterParser {
                 compiler.Parent.AddChild(binaryLhs);
             }
         } else if (lhs is UnaryToken) {
-            // If the RHS of the unary token is an Identifier or Property Access we can join to and replace it
+            // If the RHS of the unary token is which which allows Hosting we can join to and replace it
             UnaryToken unaryLhs = (UnaryToken)lhs;
             TokenImpl lhsRhs = unaryLhs.Rhs;
 
-            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+            if (lhsRhs is HostSupport) {
                 // We can join it
                 keyedAccess = new KeyedAccessToken(symbolPos, lhsRhs);
                 unaryLhs.Rhs = keyedAccess;

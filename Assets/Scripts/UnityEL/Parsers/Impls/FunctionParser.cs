@@ -24,15 +24,15 @@ public class FunctionParser : SingleCharacterParser {
         TokenImpl lhs = compiler.Parent.PopChild();
         FunctionToken function = null;
 
-        if (lhs is IdentifierToken || lhs is PropertyAccessToken) {
+        if (lhs is HostSupport) {
             function = new FunctionToken(symbolPos, lhs);
             compiler.Parent.AddChild(function);
         } else if (lhs is BinaryToken) {
-            // If the RHS of the binary token is an Identifier or Property Access we can join to and replace it
+            // If the RHS of the binary token is token which supports hosting we can join to and replace it
             BinaryToken binaryLhs = (BinaryToken)lhs;
             TokenImpl lhsRhs = binaryLhs.Rhs;
 
-            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+            if (lhsRhs is HostSupport) {
                 // We can join it
                 function = new FunctionToken(symbolPos, lhsRhs);
                 binaryLhs.Rhs = function;
@@ -40,11 +40,11 @@ public class FunctionParser : SingleCharacterParser {
                 compiler.Parent.AddChild(binaryLhs);
             }
         } else if (lhs is UnaryToken) {
-            // If the RHS of the unary token is an Identifier or Property Access we can join to and replace it
+            // If the RHS of the unary token is token which supports hosting we can join to and replace it
             UnaryToken unaryLhs = (UnaryToken)lhs;
             TokenImpl lhsRhs = unaryLhs.Rhs;
 
-            if (lhsRhs is IdentifierToken || lhsRhs is PropertyAccessToken) {
+            if (lhsRhs is HostSupport) {
                 // We can join it
                 function = new FunctionToken(symbolPos, lhsRhs);
                 unaryLhs.Rhs = function;

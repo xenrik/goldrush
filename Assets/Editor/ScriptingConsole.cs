@@ -4,8 +4,10 @@ using System.Threading;
 using System.Text;
 using UnityEngine;
 using UnityEditor;
-using Jurassic;
-using Jurassic.Library;
+using System;
+using System.Reflection;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class DynamicConsole : EditorWindow {
     [MenuItem("Window/Dynamic Console")]
@@ -23,7 +25,7 @@ public class DynamicConsole : EditorWindow {
     private Texture2D consoleBackground;
 
     private string command;
-    private ScriptEngine engine;
+    private UnityELEvaluator evaluator;
 
     private void OnEnable() {
         InitialiseTextures();
@@ -31,8 +33,9 @@ public class DynamicConsole : EditorWindow {
         Application.logMessageReceivedThreaded += HandleLog;
         Clear();
 
-        engine = new ScriptEngine();
-        engine.SetGlobalFunction("FindByName", new System.Func<string, GameObject>(FindByName));
+        evaluator = new UnityELEvaluator();
+        evaluator.DefaultFunctionResolver = new UnityFunctionResolver();
+        evaluator.ArgumentGroupEvaluator = new UnityArgumentGroupEvaluator();
     }
 
     private GameObject FindByName(string name) {
@@ -191,7 +194,8 @@ public class DynamicConsole : EditorWindow {
         command = GUI.TextField(rect, command, style);
         if (Event.current.isKey && Event.current.keyCode == KeyCode.Return) {
             try {
-                engine.Execute(command);
+                object result = evaluator.Evaluate<object>(command);
+                Debug.Log(command + " => " + result);
             } catch (System.Exception ex) {
                 Debug.Log(ex);
             }
@@ -208,6 +212,55 @@ public class DynamicConsole : EditorWindow {
             this.message = message;
             this.stackTrace = stackTrace;
             this.type = type;
+        }
+    }
+
+    private class UnityFunctionResolver : StaticMethodsFunctionResolver {
+        public static GameObject FindByName(string name) {
+            // Quick Search
+            GameObject result = GameObject.Find(name);
+            if (result != null) {
+                return result;
+            }
+
+            // Try all objects including inactive ones
+            Stack<GameObject> objectsToCheck = new Stack<GameObject>();
+            Scene scene = SceneManager.GetActiveScene();
+            foreach (GameObject go in scene.GetRootGameObjects()) {
+                objectsToCheck.Push(go);
+            }
+            while (objectsToCheck.Count > 0) {
+                GameObject go = objectsToCheck.Pop();
+                if (go.name.Equals(name)) {
+                    return go;
+                }
+
+                for (int i = 0; i < go.transform.childCount; ++i) {
+                    objectsToCheck.Push(go.transform.GetChild(i).gameObject);
+                }
+            }
+
+            return null;
+        }
+    }
+
+    private class UnityArgumentGroupEvaluator: ArgumentGroupEvaluator {
+        public object Evaluate(UnityELEvaluator context, ArgumentGroupToken group) {
+            // Assume its a vector if there are three arguments
+            if (group.Children.Count == 3) {
+                float x = TypeCoercer.CoerceToType<float>(group, group.Children[0].Evaluate(context));
+                float y = TypeCoercer.CoerceToType<float>(group, group.Children[1].Evaluate(context));
+                float z = TypeCoercer.CoerceToType<float>(group, group.Children[2].Evaluate(context));
+
+                return new Vector3(x, y, z);
+            } else {
+                return null;
+            }
+        }
+
+        public object EvaluateForArgument(UnityELEvaluator context, string functionname, int argumentIndex, ArgumentGroupToken group) {
+            // Just delegate to the normal Evaluate method for now
+            return Evaluate(context, group);
         }
     }
 }

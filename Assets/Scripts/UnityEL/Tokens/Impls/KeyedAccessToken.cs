@@ -5,7 +5,7 @@ using System.Reflection;
 using System;
 using System.Collections;
 
-public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport, AssignableToken {
+public class KeyedAccessToken : TokenImpl, CloseableToken, ExistsSupport, AssignableToken, HostSupport {
     public override string Name { get { return "keyedAccess"; } }
     public TokenImpl Host { get; private set; }
     public bool IsClosed { get; private set; }

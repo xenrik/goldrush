@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System;
 
-public class FunctionToken : TokenImpl, CloseableToken, ExistsSupport {
+public class FunctionToken : TokenImpl, CloseableToken, ExistsSupport, HostSupport {
     public override string Name { get { return "function"; } }
     public TokenImpl FunctionName { get; private set; }
     public bool IsClosed { get; private set; }
@@ -133,8 +133,15 @@ public class FunctionToken : TokenImpl, CloseableToken, ExistsSupport {
         // Resolve arguments (if any)
         functionDetails.Parameters = new List<object>();
         List<System.Type> types = new List<System.Type>();
+        int argIndex = 0;
         foreach (TokenImpl childToken in Children) {
-            object value = childToken.Evaluate(context);
+            object value = null;
+            if (childToken is ArgumentGroupToken) {
+                value = ((ArgumentGroupToken)childToken).EvaluateForArgument(context, functionDetails.Name, argIndex);
+            } else {
+                value = childToken.Evaluate(context);
+            }
+
             functionDetails.Parameters.Add(value);
 
             if (value != null) {
@@ -142,6 +149,8 @@ public class FunctionToken : TokenImpl, CloseableToken, ExistsSupport {
             } else {
                 types.Add(null);
             }
+
+            ++argIndex;
         }
 
         if (functionDetails.Host != null) {
