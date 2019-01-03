@@ -34,7 +34,7 @@ public class DynamicConsole : EditorWindow {
         Clear();
 
         evaluator = new UnityELEvaluator();
-        evaluator.DefaultFunctionResolver = new UnityFunctionResolver();
+        evaluator.DefaultFunctionResolver = new UnityFunctionResolver(this);
         evaluator.ArgumentGroupEvaluator = new UnityArgumentGroupEvaluator();
     }
 
@@ -128,7 +128,10 @@ public class DynamicConsole : EditorWindow {
  
         GUILayout.BeginHorizontal(EditorStyles.toolbar);
 
-        GUILayout.Button("Clear", EditorStyles.toolbarButton);
+        if (GUILayout.Button("Clear", EditorStyles.toolbarButton)) {
+            Clear();
+        }
+
         GUILayout.Space(6);
         GUILayout.Button("Collapse", EditorStyles.toolbarButton);
         GUILayout.Button("Clear on Play", EditorStyles.toolbarButton);
@@ -194,11 +197,28 @@ public class DynamicConsole : EditorWindow {
         command = GUI.TextField(rect, command, style);
         if (Event.current.isKey && Event.current.keyCode == KeyCode.Return) {
             try {
-                object result = evaluator.Evaluate<object>(command);
-                Debug.Log(command + " => " + result);
+                if (command.Equals("cls")) {
+                    Clear();
+                } else {
+                    object result = evaluator.Evaluate<object>(command);
+                    if (result != null) {
+                        result = ConvertToString(result);
+                        Debug.Log(command + " => " + result);
+                    } else {
+                        Debug.Log(command);
+                    }
+                }
             } catch (System.Exception ex) {
                 Debug.Log(ex);
             }
+        }
+    }
+
+    private string ConvertToString(object o) {
+        if (o is Quaternion) {
+            return ((Quaternion)o).eulerAngles.ToString();
+        } else {
+            return o.ToString();
         }
     }
 
@@ -216,6 +236,12 @@ public class DynamicConsole : EditorWindow {
     }
 
     private class UnityFunctionResolver : StaticMethodsFunctionResolver {
+        private static DynamicConsole console;
+
+        public UnityFunctionResolver(DynamicConsole dynamicConsole) {
+            UnityFunctionResolver.console = dynamicConsole;
+        }
+
         public static GameObject FindByName(string name) {
             // Quick Search
             GameObject result = GameObject.Find(name);
@@ -241,6 +267,10 @@ public class DynamicConsole : EditorWindow {
             }
 
             return null;
+        }
+
+        public static Quaternion QuaternionFromEuler(float x, float y, float z) {
+            return Quaternion.Euler(x, y, z);
         }
     }
 

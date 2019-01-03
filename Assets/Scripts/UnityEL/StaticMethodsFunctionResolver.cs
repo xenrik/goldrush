@@ -28,6 +28,8 @@ public class StaticMethodsFunctionResolver : FunctionResolver {
     }
 
     public MethodInfo ResolveFunction(string name, Type[] parameterTypes) {
+        MethodInfo bestMethod = null;
+        int bestSimilarity = int.MaxValue;
         foreach (MethodInfo methodInfo in type.GetMethods()) {
             if (!methodInfo.IsStatic) {
                 continue;
@@ -39,6 +41,7 @@ public class StaticMethodsFunctionResolver : FunctionResolver {
                     continue;
                 }
 
+                int similarity = 0;
                 bool matched = true;
                 for (int i = 0; i < parameterTypes.Length; ++i) {
                     if (parameterTypes[i] == null) {
@@ -48,16 +51,18 @@ public class StaticMethodsFunctionResolver : FunctionResolver {
                     Type methodParameterType = methodParameters[i].ParameterType;
                     if (!parameterTypes[i].Equals(methodParameterType)) {
                         matched = false;
-                        break;
                     }
+                    similarity += TypeCoercer.GetTypeSimilarity(methodParameterType, parameterTypes[i]);
                 }
 
                 if (matched) {
                     return methodInfo;
+                } else if (similarity < bestSimilarity) {
+                    bestMethod = methodInfo;
                 }
             }
         }
 
-        return null;
+        return bestMethod;
     }
 }

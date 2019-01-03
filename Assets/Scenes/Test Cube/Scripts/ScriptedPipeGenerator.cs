@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ScriptedPipeGenerator : MonoBehaviour {
 
-    public List<GameObject> Points;
     public float Size;
     public float Speed;
 
@@ -26,8 +25,13 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     }
 
     private IEnumerator AnimatePipe() {
-        foreach (GameObject node in Points) {
+        for (int i = 0; i < transform.childCount; ++i) {
+            GameObject node = transform.GetChild(i).gameObject;
             PipeNode nodeType = node.GetComponent<PipeNode>();
+            if (nodeType == null) {
+                continue;
+            }
+
             switch (nodeType.Type) {
             case PipeNode.NodeType.START:
                 yield return StartCoroutine(AnimateStart(node));
@@ -56,7 +60,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
     private IEnumerator AnimateCorner(GameObject node) {
         Quaternion rotation = node.transform.rotation;
-        rotation = rotation * Quaternion.Euler(0, 0, 180);
+        rotation = rotation * Quaternion.Euler(0, -90, 0);
 
         Vector3 origin = node.transform.position;
         origin -= rotation * (Vector3.forward * 0.5f);
@@ -151,19 +155,18 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         GameObject torus = MakeTorus.GenerateTube(Size, 1, true, 0, 0.1f);
 
-        Vector3 origin = position;
-        origin.x -= Size;
+        Vector3 origin = position - (rotation * (Vector3.left * Size));
+
         torus.transform.position = origin;
-        torus.transform.rotation = Quaternion.Euler(90, 90, 0) * rotation;
+        torus.transform.rotation = rotation * Quaternion.Euler(0, 0, 90) * Quaternion.Euler(-90, 0, 0);
 
         MeshFilter filter = torus.GetComponent<MeshFilter>();
 
         float angle = 0;
         float t = 0;
-        Vector3 pivot = origin;
-        pivot.y += Size;
+        Vector3 pivot = origin + (rotation * (Vector3.forward * Size));
+        Vector3 pivotOffset = rotation * (Vector3.left * Size);
 
-        Vector3 rotationOffset = new Vector3(0, -Size, 0);
         float cornerSpeed = Speed * Mathf.PI * Size * 0.5f;
 
         while (t < cornerSpeed) {
@@ -171,7 +174,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
             MakeTorus.GenerateMesh(filter, Size, 1, true, 0, angle);
 
             endCap.transform.rotation = torus.transform.rotation * Quaternion.Euler(angle, 0, 0);
-            endCap.transform.position = pivot + (Quaternion.Euler(0, 0, angle) * rotationOffset);
+            endCap.transform.position = pivot + (endCap.transform.up * Size);
 
             yield return null;
             t += Time.deltaTime;

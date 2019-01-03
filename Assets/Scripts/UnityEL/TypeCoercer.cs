@@ -2,7 +2,56 @@
 using UnityEditor;
 using System;
 
+/**
+ * The TypeCoercer is used to adapt between different representations of a given value. For example it can convert a string
+ * to an int, or vice-versa.
+ * 
+ * It can also report on the 'similarity' between two types, where a higher number indicates they are less similar (int.MaxValue
+ * is returned if the types cannot be coerced). Similarity is based wether two types are fundamentally the same kind of data,
+ * for example two types of number (int and float) are more similar than an int and a string. Note that an int -> float conversion
+ * is more similar than a float->int conversion (as no information can be lost). Zero is returned if the source and target type
+ * are the same. 
+ */
 public sealed class TypeCoercer {
+    public static int GetTypeSimilarity(Type sourceType, Type targetType) {
+        if (sourceType == targetType) {
+            return 0;
+        } else if (sourceType == typeof(int)) {
+            if (targetType == typeof(float)) {
+                return 10;
+            } else if (targetType == typeof(string)) {
+                return 20;
+            } else if (targetType == typeof(bool)) {
+                return 30;
+            }
+        } else if (sourceType == typeof(float)) {
+            if (targetType == typeof(int)) {
+                return 15;
+            } else if (targetType == typeof(string)) {
+                return 20;
+            } else if (targetType == typeof(bool)) {
+                return 30;
+            }
+        } else if (sourceType == typeof(bool)) {
+            if (targetType == typeof(int) ||
+                    targetType == typeof(float) ||
+                    targetType == typeof(string)) {
+                return 20;
+            }
+        } else if (sourceType == typeof(string)) {
+            if (targetType == typeof(int) ||
+                    targetType == typeof(float) ||
+                    targetType == typeof(bool)) {
+                return 30;
+            }
+        } else if (targetType.IsAssignableFrom(sourceType)) {
+            return 30;
+        }
+
+        // Return maxValue if we get here
+        return int.MaxValue;
+    }
+
     public static T CoerceToType<T>(TokenImpl context, object value) {
         return (T)DoCoerce(typeof(T), context, value, default(T));
     }
