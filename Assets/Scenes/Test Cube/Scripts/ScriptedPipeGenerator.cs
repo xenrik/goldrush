@@ -7,6 +7,8 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     public float Size;
     public float Speed;
 
+    public Material material;
+
     private GameObject startCap;
     private GameObject tube;
     private GameObject endCap;
@@ -17,8 +19,13 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         Debug.LogWarning("Warning!");
 
         startCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(-90, 0, 0));
+        startCap.GetComponent<MeshRenderer>().material = material;
+
         tube = MakeTube.GenerateTube(1, 1, 1, true);
+        tube.GetComponent<MeshRenderer>().material = material;
+
         endCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(90, 0, 0));
+        endCap.GetComponent<MeshRenderer>().material = material;
 
         ResetParts(Vector3.zero, Quaternion.identity, false, false, false);
         StartCoroutine(AnimatePipe());
@@ -63,9 +70,9 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         rotation = rotation * Quaternion.Euler(0, -90, 0);
 
         Vector3 origin = node.transform.position;
-        origin -= rotation * (Vector3.forward * 0.5f);
+        origin -= rotation * Vector3.forward;
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, 0.5f - Size));
+        yield return StartCoroutine(AnimateStraight(origin, rotation, 1 - Size));
 
         yield return StartCoroutine(AnimateCorner(node.transform.position, node.transform.rotation));
 
@@ -73,7 +80,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         origin = node.transform.position +
             (rotation * (Vector3.forward * Size));
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, 0.5f - Size));
+        yield return StartCoroutine(AnimateStraight(origin, rotation, 1 - Size));
     }
 
     private IEnumerator AnimateEnd(GameObject node) {
@@ -154,6 +161,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         ResetParts(position, rotation, false, false, true);
 
         GameObject torus = MakeTorus.GenerateTube(Size, 1, true, 0, 0.1f);
+        torus.GetComponent<MeshRenderer>().material = material;
 
         Vector3 origin = position - (rotation * (Vector3.left * Size));
 
