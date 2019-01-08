@@ -649,7 +649,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 1a04b99a-8f74-4fee-9abe-d671b4b1d59a
   projectName: GoldRush
   organizationId: xenrik

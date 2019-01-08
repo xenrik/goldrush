@@ -41,16 +41,16 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
             switch (nodeType.Type) {
             case PipeNode.NodeType.START:
-                yield return StartCoroutine(AnimateStart(node));
+                yield return StartCoroutine(AnimateStart(i));
                 break;
 
             case PipeNode.NodeType.CORNER:
-                yield return StartCoroutine(AnimateCorner(node));
+                yield return StartCoroutine(AnimateCorner(i));
                 break;
 
             case PipeNode.NodeType.END:
             default:
-                yield return StartCoroutine(AnimateEnd(node));
+                yield return StartCoroutine(AnimateEnd(i));
                 break;
             }
         }
@@ -60,35 +60,52 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         Destroy(endCap);
     }
 
-    private IEnumerator AnimateStart(GameObject node) {
-        yield return StartCoroutine(AnimateSpawn(node.transform.position, node.transform.rotation));
-        yield return StartCoroutine(AnimateStraight(node.transform.position, node.transform.rotation, 0.5f));
+    private IEnumerator AnimateStart(int nodeIndex) {
+        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
+        GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
+        float distanceToNext = (nextNode.transform.position - currentNode.transform.position).magnitude;
+
+        yield return StartCoroutine(AnimateSpawn(currentNode.transform.position, currentNode.transform.rotation));
+        yield return StartCoroutine(AnimateStraight(currentNode.transform.position, currentNode.transform.rotation, distanceToNext / 2.0f));
     }
 
-    private IEnumerator AnimateCorner(GameObject node) {
-        Quaternion rotation = node.transform.rotation;
+    private IEnumerator AnimateCorner(int nodeIndex) {
+        GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
+        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
+        GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
+        float distanceToLast = (currentNode.transform.position - lastNode.transform.position).magnitude;
+        float distanceToNext = (nextNode.transform.position - currentNode.transform.position).magnitude;
+
+        float firstLegLength = distanceToLast / 2.0f;
+        float secondLegLength = ((distanceToNext / 2.0f) - Size);
+
+        Quaternion rotation = currentNode.transform.rotation;
         rotation = rotation * Quaternion.Euler(0, -90, 0);
 
-        Vector3 origin = node.transform.position;
-        origin -= rotation * Vector3.forward;
+        Vector3 origin = currentNode.transform.position;
+        origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, 1 - Size));
+        yield return StartCoroutine(AnimateStraight(origin, rotation, (distanceToLast / 2.0f) - Size));
 
-        yield return StartCoroutine(AnimateCorner(node.transform.position, node.transform.rotation));
+        yield return StartCoroutine(AnimateCorner(currentNode.transform.position, currentNode.transform.rotation));
 
-        rotation = node.transform.rotation;
-        origin = node.transform.position +
+        rotation = currentNode.transform.rotation;
+        origin = currentNode.transform.position +
             (rotation * (Vector3.forward * Size));
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, 1 - Size));
+        yield return StartCoroutine(AnimateStraight(origin, rotation, secondLegLength));
     }
 
-    private IEnumerator AnimateEnd(GameObject node) {
-        Quaternion rotation = node.transform.rotation;
-        Vector3 origin = node.transform.position;
-        origin -= rotation * (Vector3.forward * 0.5f);
+    private IEnumerator AnimateEnd(int nodeIndex) {
+        GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
+        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
+        float distanceToLast = (currentNode.transform.position - lastNode.transform.position).magnitude;
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, 0.5f));
+        Quaternion rotation = currentNode.transform.rotation;
+        Vector3 origin = currentNode.transform.position;
+        origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
+
+        yield return StartCoroutine(AnimateStraight(origin, rotation, distanceToLast / 2.0f));
 
         Instantiate(endCap);
     }
