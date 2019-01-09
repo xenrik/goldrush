@@ -14,18 +14,17 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     private GameObject endCap;
 
     private void Start() {
-        Debug.Log("Hello");
-        Debug.LogError("Error!");
-        Debug.LogWarning("Warning!");
-
         startCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(-90, 0, 0));
         startCap.GetComponent<MeshRenderer>().material = material;
+        startCap.transform.parent = gameObject.transform;
 
         tube = MakeTube.GenerateTube(1, 1, 1, true);
         tube.GetComponent<MeshRenderer>().material = material;
+        tube.transform.parent = gameObject.transform;
 
         endCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(90, 0, 0));
         endCap.GetComponent<MeshRenderer>().material = material;
+        endCap.transform.parent = gameObject.transform;
 
         ResetParts(Vector3.zero, Quaternion.identity, false, false, false);
         StartCoroutine(AnimatePipe());
@@ -107,7 +106,8 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         yield return StartCoroutine(AnimateStraight(origin, rotation, distanceToLast / 2.0f));
 
-        Instantiate(endCap);
+        GameObject copy = Instantiate(endCap);
+        copy.transform.parent = gameObject.transform;
     }
 
     private void ResetParts(Vector3 position, Quaternion rotation, bool useStart, bool useTube, bool useEnd) {
@@ -142,7 +142,9 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         }
 
         startCap.transform.localScale = Vector3.one * Size;
-        Instantiate(startCap);
+
+        GameObject copy = Instantiate(startCap);
+        copy.transform.parent = gameObject.transform;
     }
 
     private IEnumerator AnimateStraight(Vector3 position, Quaternion rotation, float length) {
@@ -168,7 +170,9 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         scale.z = length;
         tube.transform.localScale = scale;
-        Instantiate(tube);
+
+        GameObject copy = Instantiate(tube);
+        copy.transform.parent = gameObject.transform;
 
         pos = start + (rotation * (Vector3.forward * scale.z));
         endCap.transform.position = pos;
@@ -179,6 +183,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         GameObject torus = MakeTorus.GenerateTube(Size, 1, true, 0, 0.1f);
         torus.GetComponent<MeshRenderer>().material = material;
+        torus.transform.parent = gameObject.transform.parent;
 
         Vector3 origin = position - (rotation * (Vector3.left * Size));
 
