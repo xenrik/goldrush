@@ -62,34 +62,34 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     private IEnumerator AnimateStart(int nodeIndex) {
         GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
         GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
-        float distanceToNext = (nextNode.transform.position - currentNode.transform.position).magnitude;
+        float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
 
-        yield return StartCoroutine(AnimateSpawn(currentNode.transform.position, currentNode.transform.rotation));
-        yield return StartCoroutine(AnimateStraight(currentNode.transform.position, currentNode.transform.rotation, distanceToNext / 2.0f));
+        yield return StartCoroutine(AnimateSpawn(currentNode.transform.localPosition, currentNode.transform.localRotation));
+        yield return StartCoroutine(AnimateStraight(currentNode.transform.localPosition, currentNode.transform.localRotation, distanceToNext / 2.0f));
     }
 
     private IEnumerator AnimateCorner(int nodeIndex) {
         GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
         GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
         GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
-        float distanceToLast = (currentNode.transform.position - lastNode.transform.position).magnitude;
-        float distanceToNext = (nextNode.transform.position - currentNode.transform.position).magnitude;
+        float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
+        float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
 
         float firstLegLength = distanceToLast / 2.0f;
         float secondLegLength = ((distanceToNext / 2.0f) - Size);
 
-        Quaternion rotation = currentNode.transform.rotation;
+        Quaternion rotation = currentNode.transform.localRotation;
         rotation = rotation * Quaternion.Euler(0, -90, 0);
 
-        Vector3 origin = currentNode.transform.position;
+        Vector3 origin = currentNode.transform.localPosition;
         origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
 
         yield return StartCoroutine(AnimateStraight(origin, rotation, (distanceToLast / 2.0f) - Size));
 
-        yield return StartCoroutine(AnimateCorner(currentNode.transform.position, currentNode.transform.rotation));
+        yield return StartCoroutine(AnimateCorner(currentNode.transform.localPosition, currentNode.transform.localRotation));
 
-        rotation = currentNode.transform.rotation;
-        origin = currentNode.transform.position +
+        rotation = currentNode.transform.localRotation;
+        origin = currentNode.transform.localPosition +
             (rotation * (Vector3.forward * Size));
 
         yield return StartCoroutine(AnimateStraight(origin, rotation, secondLegLength));
@@ -98,32 +98,31 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     private IEnumerator AnimateEnd(int nodeIndex) {
         GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
         GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
-        float distanceToLast = (currentNode.transform.position - lastNode.transform.position).magnitude;
+        float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
 
-        Quaternion rotation = currentNode.transform.rotation;
-        Vector3 origin = currentNode.transform.position;
+        Quaternion rotation = currentNode.transform.localRotation;
+        Vector3 origin = currentNode.transform.localPosition;
         origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
 
         yield return StartCoroutine(AnimateStraight(origin, rotation, distanceToLast / 2.0f));
 
-        GameObject copy = Instantiate(endCap);
-        copy.transform.parent = gameObject.transform;
+        Instantiate(endCap, gameObject.transform);
     }
 
     private void ResetParts(Vector3 position, Quaternion rotation, bool useStart, bool useTube, bool useEnd) {
         startCap.SetActive(useStart);
-        startCap.transform.position = position;
-        startCap.transform.rotation = rotation;
+        startCap.transform.localPosition = position;
+        startCap.transform.localRotation = rotation;
         startCap.transform.localScale = Vector3.one * Size;
 
         tube.SetActive(useTube);
-        tube.transform.position = position;
-        tube.transform.rotation = rotation;
+        tube.transform.localPosition = position;
+        tube.transform.localRotation = rotation;
         tube.transform.localScale = Vector3.one * Size;
 
         endCap.SetActive(useEnd);
-        endCap.transform.position = position;
-        endCap.transform.rotation = rotation;
+        endCap.transform.localPosition = position;
+        endCap.transform.localRotation = rotation;
         endCap.transform.localScale = Vector3.one * Size;
     }
 
@@ -143,8 +142,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         startCap.transform.localScale = Vector3.one * Size;
 
-        GameObject copy = Instantiate(startCap);
-        copy.transform.parent = gameObject.transform;
+        Instantiate(startCap, gameObject.transform);
     }
 
     private IEnumerator AnimateStraight(Vector3 position, Quaternion rotation, float length) {
@@ -162,7 +160,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
             tube.transform.localScale = scale;
 
             pos = start + (rotation * (Vector3.forward * scale.z));
-            endCap.transform.position = pos;
+            endCap.transform.localPosition = pos;
 
             yield return null;
             t += Time.deltaTime;
@@ -171,11 +169,10 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         scale.z = length;
         tube.transform.localScale = scale;
 
-        GameObject copy = Instantiate(tube);
-        copy.transform.parent = gameObject.transform;
+        Instantiate(tube, gameObject.transform);
 
         pos = start + (rotation * (Vector3.forward * scale.z));
-        endCap.transform.position = pos;
+        endCap.transform.localPosition = pos;
     }
 
     private IEnumerator AnimateCorner(Vector3 position, Quaternion rotation) {
@@ -183,19 +180,18 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         GameObject torus = MakeTorus.GenerateTube(Size, 1, true, 0, 0.1f);
         torus.GetComponent<MeshRenderer>().material = material;
-        torus.transform.parent = gameObject.transform.parent;
+        torus.transform.parent = gameObject.transform;
 
         Vector3 origin = position - (rotation * (Vector3.left * Size));
 
-        torus.transform.position = origin;
-        torus.transform.rotation = rotation * Quaternion.Euler(0, 0, 90) * Quaternion.Euler(-90, 0, 0);
+        torus.transform.localPosition = origin;
+        torus.transform.localRotation = rotation * Quaternion.Euler(0, 0, 90) * Quaternion.Euler(-90, 0, 0);
 
         MeshFilter filter = torus.GetComponent<MeshFilter>();
 
         float angle = 0;
         float t = 0;
         Vector3 pivot = origin + (rotation * (Vector3.forward * Size));
-        Vector3 pivotOffset = rotation * (Vector3.left * Size);
 
         float cornerSpeed = Speed * Mathf.PI * Size * 0.5f;
 
@@ -203,8 +199,8 @@ public class ScriptedPipeGenerator : MonoBehaviour {
             angle = 90 * (t / cornerSpeed);
             MakeTorus.GenerateMesh(filter, Size, 1, true, 0, angle);
 
-            endCap.transform.rotation = torus.transform.rotation * Quaternion.Euler(angle, 0, 0);
-            endCap.transform.position = pivot + (endCap.transform.up * Size);
+            endCap.transform.localRotation = torus.transform.localRotation * Quaternion.Euler(angle, 0, 0);
+            endCap.transform.localPosition = pivot + (endCap.transform.localRotation * Vector3.up * Size);
 
             yield return null;
             t += Time.deltaTime;
