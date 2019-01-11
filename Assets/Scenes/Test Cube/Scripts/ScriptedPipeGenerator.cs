@@ -7,7 +7,12 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     public float Size;
     public float Speed;
 
-    public Material material;
+    public Material Material;
+
+    public GameObject PipeParent;
+
+    public PipeNode StartingNode;
+    public PipeNode FinalNode;
 
     private GameObject startCap;
     private GameObject tube;
@@ -15,43 +20,40 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
     private void Start() {
         startCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(-90, 0, 0));
-        startCap.GetComponent<MeshRenderer>().material = material;
-        startCap.transform.parent = gameObject.transform;
+        startCap.GetComponent<MeshRenderer>().material = Material;
+        startCap.transform.parent = PipeParent.transform;
 
         tube = MakeTube.GenerateTube(1, 1, 1, true);
-        tube.GetComponent<MeshRenderer>().material = material;
-        tube.transform.parent = gameObject.transform;
+        tube.GetComponent<MeshRenderer>().material = Material;
+        tube.transform.parent = PipeParent.transform;
 
         endCap = MakeSphereHemisphere.GenerateHemisphere(1, 1, true, Quaternion.Euler(90, 0, 0));
-        endCap.GetComponent<MeshRenderer>().material = material;
-        endCap.transform.parent = gameObject.transform;
+        endCap.GetComponent<MeshRenderer>().material = Material;
+        endCap.transform.parent = PipeParent.transform;
 
         ResetParts(Vector3.zero, Quaternion.identity, false, false, false);
         StartCoroutine(AnimatePipe());
     }
 
     private IEnumerator AnimatePipe() {
-        for (int i = 0; i < transform.childCount; ++i) {
-            GameObject node = transform.GetChild(i).gameObject;
-            PipeNode nodeType = node.GetComponent<PipeNode>();
-            if (nodeType == null) {
-                continue;
-            }
-
-            switch (nodeType.Type) {
+        PipeNode currentNode = StartingNode;
+        while (currentNode != null) { 
+            switch (currentNode.Type) {
             case PipeNode.NodeType.START:
-                yield return StartCoroutine(AnimateStart(i));
+                yield return StartCoroutine(AnimateStart(currentNode.gameObject, currentNode.NextNode.gameObject));
                 break;
 
             case PipeNode.NodeType.CORNER:
-                yield return StartCoroutine(AnimateCorner(i));
+                yield return StartCoroutine(AnimateCorner(currentNode.PreviousNode.gameObject, currentNode.gameObject, currentNode.NextNode.gameObject));
                 break;
 
             case PipeNode.NodeType.END:
             default:
-                yield return StartCoroutine(AnimateEnd(i));
+                yield return StartCoroutine(AnimateEnd(currentNode.PreviousNode.gameObject, currentNode.gameObject));
                 break;
             }
+
+            currentNode = currentNode.NextNode;
         }
 
         Destroy(startCap);
@@ -59,19 +61,14 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         Destroy(endCap);
     }
 
-    private IEnumerator AnimateStart(int nodeIndex) {
-        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
-        GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
+    private IEnumerator AnimateStart(GameObject currentNode, GameObject nextNode) {
         float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
 
         yield return StartCoroutine(AnimateSpawn(currentNode.transform.localPosition, currentNode.transform.localRotation));
         yield return StartCoroutine(AnimateStraight(currentNode.transform.localPosition, currentNode.transform.localRotation, distanceToNext / 2.0f));
     }
 
-    private IEnumerator AnimateCorner(int nodeIndex) {
-        GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
-        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
-        GameObject nextNode = transform.GetChild(nodeIndex + 1).gameObject;
+    private IEnumerator AnimateCorner(GameObject lastNode, GameObject currentNode, GameObject nextNode) {
         float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
         float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
 
@@ -95,9 +92,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         yield return StartCoroutine(AnimateStraight(origin, rotation, secondLegLength));
     }
 
-    private IEnumerator AnimateEnd(int nodeIndex) {
-        GameObject lastNode = transform.GetChild(nodeIndex - 1).gameObject;
-        GameObject currentNode = transform.GetChild(nodeIndex).gameObject;
+    private IEnumerator AnimateEnd(GameObject lastNode, GameObject currentNode) {
         float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
 
         Quaternion rotation = currentNode.transform.localRotation;
@@ -106,7 +101,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         yield return StartCoroutine(AnimateStraight(origin, rotation, distanceToLast / 2.0f));
 
-        Instantiate(endCap, gameObject.transform);
+        Instantiate(endCap, PipeParent.transform);
     }
 
     private void ResetParts(Vector3 position, Quaternion rotation, bool useStart, bool useTube, bool useEnd) {
@@ -142,7 +137,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
 
         startCap.transform.localScale = Vector3.one * Size;
 
-        Instantiate(startCap, gameObject.transform);
+        Instantiate(startCap, PipeParent.transform);
     }
 
     private IEnumerator AnimateStraight(Vector3 position, Quaternion rotation, float length) {
@@ -169,7 +164,7 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         scale.z = length;
         tube.transform.localScale = scale;
 
-        Instantiate(tube, gameObject.transform);
+        Instantiate(tube, PipeParent.transform);
 
         pos = start + (rotation * (Vector3.forward * scale.z));
         endCap.transform.localPosition = pos;
@@ -179,8 +174,8 @@ public class ScriptedPipeGenerator : MonoBehaviour {
         ResetParts(position, rotation, false, false, true);
 
         GameObject torus = MakeTorus.GenerateTube(Size, 1, true, 0, 0.1f);
-        torus.GetComponent<MeshRenderer>().material = material;
-        torus.transform.parent = gameObject.transform;
+        torus.GetComponent<MeshRenderer>().material = Material;
+        torus.transform.parent = PipeParent.transform;
 
         Vector3 origin = position - (rotation * (Vector3.left * Size));
 

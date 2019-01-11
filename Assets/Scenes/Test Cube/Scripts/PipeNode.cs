@@ -10,4 +10,7 @@ public class PipeNode : MonoBehaviour {
     }
 
     public NodeType Type;
+
+    public PipeNode PreviousNode;
+    public PipeNode NextNode;
 }
