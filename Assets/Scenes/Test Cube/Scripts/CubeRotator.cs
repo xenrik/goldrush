@@ -8,14 +8,19 @@ public class CubeRotator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetMouseButton(1)) {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+
             float dx = Input.GetAxis("MouseX");
             float dy = Input.GetAxis("MouseY");
 
-            Quaternion cameraRot = mainCamera.transform.rotation;
             gameObject.transform.RotateAround(gameObject.transform.position,
                 mainCamera.transform.up, -dx);
             gameObject.transform.RotateAround(gameObject.transform.position,
                 mainCamera.transform.right, dy);
+        } else {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 	}
 }

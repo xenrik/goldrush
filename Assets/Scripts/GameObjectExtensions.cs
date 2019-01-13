@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameObjectExtensions {
-    public static Vector3 RelativePosition(this GameObject gameObject, GameObject other) {
-        return gameObject.transform.position - other.transform.position;
+public static class TransformExtensions {
+    public static Vector3 WorldToLocal(this Transform transform, Vector3 worldPosition) {
+        return transform.worldToLocalMatrix.MultiplyVector(worldPosition);
     }
 
-    public static Vector3 RelativeRotation(this GameObject gameObject, )
+    public static Quaternion WorldToLocal(this Transform transform, Quaternion worldRotation) {
+        return Quaternion.Inverse(transform.rotation) * worldRotation;
+    }
 }

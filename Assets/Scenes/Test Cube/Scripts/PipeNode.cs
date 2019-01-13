@@ -6,10 +6,13 @@ public class PipeNode : MonoBehaviour {
     public enum NodeType {
         START,
         CORNER,
-        END
+        END,
+
+        EMPTY
     }
 
     public NodeType Type;
+    public Vector3Int Position;
 
     public PipeNode PreviousNode;
     public PipeNode NextNode;

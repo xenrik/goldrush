@@ -62,44 +62,60 @@ public class ScriptedPipeGenerator : MonoBehaviour {
     }
 
     private IEnumerator AnimateStart(GameObject currentNode, GameObject nextNode) {
-        float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
+        Vector3 position = PipeParent.transform.WorldToLocal(currentNode.transform.position);
+        Quaternion rotation = PipeParent.transform.WorldToLocal(currentNode.transform.rotation);
 
-        yield return StartCoroutine(AnimateSpawn(currentNode.transform.localPosition, currentNode.transform.localRotation));
-        yield return StartCoroutine(AnimateStraight(currentNode.transform.localPosition, currentNode.transform.localRotation, distanceToNext / 2.0f));
+        Vector3 nextRelativePosition = PipeParent.transform.WorldToLocal(nextNode.transform.position);
+
+        float distanceToNext = (nextRelativePosition - position).magnitude;
+
+        yield return StartCoroutine(AnimateSpawn(position, rotation));
+        yield return StartCoroutine(AnimateStraight(position, rotation, distanceToNext / 2.0f));
     }
 
     private IEnumerator AnimateCorner(GameObject lastNode, GameObject currentNode, GameObject nextNode) {
-        float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
-        float distanceToNext = (nextNode.transform.localPosition - currentNode.transform.localPosition).magnitude;
+        Vector3 position = PipeParent.transform.WorldToLocal(currentNode.transform.position);
+        Quaternion rotation = PipeParent.transform.WorldToLocal(currentNode.transform.rotation);
+
+        Vector3 nextRelativePosition = PipeParent.transform.WorldToLocal(nextNode.transform.position);
+        Vector3 lastRelativePosition = PipeParent.transform.WorldToLocal(lastNode.transform.position);
+
+        float distanceToLast = (position - lastRelativePosition).magnitude;
+        float distanceToNext = (nextRelativePosition - position).magnitude;
 
         float firstLegLength = distanceToLast / 2.0f;
         float secondLegLength = ((distanceToNext / 2.0f) - Size);
 
-        Quaternion rotation = currentNode.transform.localRotation;
-        rotation = rotation * Quaternion.Euler(0, -90, 0);
+        Quaternion tempRotation = rotation;
+        tempRotation = tempRotation * Quaternion.Euler(0, -90, 0);
 
-        Vector3 origin = currentNode.transform.localPosition;
-        origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
+        Vector3 origin = position;
+        origin -= tempRotation * (Vector3.forward * (distanceToLast / 2.0f));
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, (distanceToLast / 2.0f) - Size));
+        yield return StartCoroutine(AnimateStraight(origin, tempRotation, (distanceToLast / 2.0f) - Size));
 
-        yield return StartCoroutine(AnimateCorner(currentNode.transform.localPosition, currentNode.transform.localRotation));
+        yield return StartCoroutine(AnimateCorner(position, rotation));
 
-        rotation = currentNode.transform.localRotation;
-        origin = currentNode.transform.localPosition +
-            (rotation * (Vector3.forward * Size));
+        tempRotation = rotation;
+        origin = position +
+            (tempRotation * (Vector3.forward * Size));
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, secondLegLength));
+        yield return StartCoroutine(AnimateStraight(origin, tempRotation, secondLegLength));
     }
 
     private IEnumerator AnimateEnd(GameObject lastNode, GameObject currentNode) {
-        float distanceToLast = (currentNode.transform.localPosition - lastNode.transform.localPosition).magnitude;
+        Vector3 position = PipeParent.transform.WorldToLocal(currentNode.transform.position);
+        Quaternion rotation = PipeParent.transform.WorldToLocal(currentNode.transform.rotation);
 
-        Quaternion rotation = currentNode.transform.localRotation;
-        Vector3 origin = currentNode.transform.localPosition;
-        origin -= rotation * (Vector3.forward * (distanceToLast / 2.0f));
+        Vector3 lastRelativePosition = PipeParent.transform.WorldToLocal(lastNode.transform.position);
 
-        yield return StartCoroutine(AnimateStraight(origin, rotation, distanceToLast / 2.0f));
+        float distanceToLast = (position - lastRelativePosition).magnitude;
+
+        Quaternion tempRotation = rotation;
+        Vector3 origin = position;
+        origin -= tempRotation * (Vector3.forward * (distanceToLast / 2.0f));
+
+        yield return StartCoroutine(AnimateStraight(origin, tempRotation, distanceToLast / 2.0f));
 
         Instantiate(endCap, PipeParent.transform);
     }
