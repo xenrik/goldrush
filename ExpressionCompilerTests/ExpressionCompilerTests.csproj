@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
+  <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F785B52-5045-4955-894D-3AF0FE4E7EE3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExpressionCompilerTests</RootNamespace>
+    <AssemblyName>ExpressionCompilerTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiler\BaseCompilerTest.cs" />
+    <Compile Include="Compiler\CombinedCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\AddAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\AdditionTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\AndTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ArgumentGroupTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\AssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\AsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\BitwiseAndTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\BitwiseOrTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ComplementTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ConditionalOperatorCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\DecrementAndReturnTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\DivideAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\DivisionTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\EqualsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ExistsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ExponentAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ExponentTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\FunctionTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\GreaterThanOrEqualsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\GreaterThanTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\GroupTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IdentifierTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IncrementAndReturnTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IsEmptyTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IsNotEmptyTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IsNotTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\IsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\KeyedAccessTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\LessThanOrEqualsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\LessThanTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ModulusAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ModulusTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\MultiplicationTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\MultiplyAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\NotEqualsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\NotExistsTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\NotTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\NullCoalesceTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\OrTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\PropertyAccessTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ReturnAndDecrementTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ReturnAndIncrementTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ShiftLeftTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\ShiftRightTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\SubtractAndAssignTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\SubtractionTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\UnaryMinusTokenCompilerTest.cs" />
+    <Compile Include="Compiler\Tokens\XorTokenCompilerTest.cs" />
+    <Compile Include="Parsers\BaseParserTest.cs" />
+    <Compile Include="Parsers\BinaryParserTest.cs" />
+    <Compile Include="Parsers\Impls\AddAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\AdditionParserTest.cs" />
+    <Compile Include="Parsers\Impls\AndParserTest.cs" />
+    <Compile Include="Parsers\Impls\ArgumentGroupParserTest.cs" />
+    <Compile Include="Parsers\Impls\AsParserTest.cs" />
+    <Compile Include="Parsers\Impls\AssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\BinaryIntegerParserTest.cs" />
+    <Compile Include="Parsers\Impls\BitwiseAndParserTest.cs" />
+    <Compile Include="Parsers\Impls\BitwiseOrParserTest.cs" />
+    <Compile Include="Parsers\Impls\BooleanParserTest.cs" />
+    <Compile Include="Parsers\Impls\CloseParserTest.cs" />
+    <Compile Include="Parsers\Impls\ComplementParserTest.cs" />
+    <Compile Include="Parsers\Impls\ConditionalOperatorParserTest.cs" />
+    <Compile Include="Parsers\Impls\DecimalParserTest.cs" />
+    <Compile Include="Parsers\Impls\DecrementAndReturnParserTest.cs" />
+    <Compile Include="Parsers\Impls\DivideAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\DivisionParserTest.cs" />
+    <Compile Include="Parsers\Impls\EqualsParserTest.cs" />
+    <Compile Include="Parsers\Impls\ExistsParserTest.cs" />
+    <Compile Include="Parsers\Impls\ExponentAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\ExponentParserTest.cs" />
+    <Compile Include="Parsers\Impls\FunctionParserTest.cs" />
+    <Compile Include="Parsers\Impls\GreaterThanOrEqualsParserTest.cs" />
+    <Compile Include="Parsers\Impls\GreaterThanParserTest.cs" />
+    <Compile Include="Parsers\Impls\GroupParserTest.cs" />
+    <Compile Include="Parsers\Impls\HexIntegerParsertest.cs" />
+    <Compile Include="Parsers\Impls\IdentifierParserTest.cs" />
+    <Compile Include="Parsers\Impls\IncrementAndReturnParserTest.cs" />
+    <Compile Include="Parsers\Impls\IntegerParserTest.cs" />
+    <Compile Include="Parsers\Impls\IsEmptyParserTest.cs" />
+    <Compile Include="Parsers\Impls\IsNotEmptyParserTest.cs" />
+    <Compile Include="Parsers\Impls\IsNotParserTest.cs" />
+    <Compile Include="Parsers\Impls\IsParserTest.cs" />
+    <Compile Include="Parsers\Impls\KeyedAccessParserTest.cs" />
+    <Compile Include="Parsers\Impls\LessThanOrEqualsParserTest.cs" />
+    <Compile Include="Parsers\Impls\LessThanParserTest.cs" />
+    <Compile Include="Parsers\Impls\ModulusAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\ModulusParserTest.cs" />
+    <Compile Include="Parsers\Impls\MultiplicationParserTest.cs" />
+    <Compile Include="Parsers\Impls\MultiplyAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\NotEqualsParserTest.cs" />
+    <Compile Include="Parsers\Impls\NotExistsParserTest.cs" />
+    <Compile Include="Parsers\Impls\NotParserTest.cs" />
+    <Compile Include="Parsers\Impls\NullCoalesceParserTest.cs" />
+    <Compile Include="Parsers\Impls\NullParserTest.cs" />
+    <Compile Include="Parsers\Impls\OrParserTest.cs" />
+    <Compile Include="Parsers\Impls\PropertyAccessParserTest.cs" />
+    <Compile Include="Parsers\Impls\ReturnAndDecrementParserTest.cs" />
+    <Compile Include="Parsers\Impls\ReturnAndIncrementParserTest.cs" />
+    <Compile Include="Parsers\Impls\ShiftLeftParserTest.cs" />
+    <Compile Include="Parsers\Impls\ShiftRightParserTest.cs" />
+    <Compile Include="Parsers\Impls\StringParserTest.cs" />
+    <Compile Include="Parsers\Impls\SubtractAndAssignParserTest.cs" />
+    <Compile Include="Parsers\Impls\SubtractionParserTest.cs" />
+    <Compile Include="Parsers\Impls\UnaryMinusParserTest.cs" />
+    <Compile Include="Parsers\Impls\XorParserTest.cs" />
+    <Compile Include="Parsers\LeftHandUnaryParserTest.cs" />
+    <Compile Include="Parsers\UnaryParserTest.cs" />
+    <Compile Include="Tokens\Impls\AddAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\AdditionTokenTest.cs" />
+    <Compile Include="Tokens\Impls\AndTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ArgumentGroupTokenTest.cs" />
+    <Compile Include="Tokens\Impls\AssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\AsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\BitwiseAndTokenTest.cs" />
+    <Compile Include="Tokens\Impls\BitwiseOrTokenTest.cs" />
+    <Compile Include="Tokens\Impls\BooleanTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ComplementTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ConditionalOperatorTokenTest.cs" />
+    <Compile Include="Tokens\Impls\DecimalTokenTest.cs" />
+    <Compile Include="Tokens\Impls\DecrementAndReturnTokenTest.cs" />
+    <Compile Include="Tokens\Impls\DivideAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\DivisionTokenTest.cs" />
+    <Compile Include="Tokens\Impls\EqualsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ExistsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ExponentAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ExponentTokenTest.cs" />
+    <Compile Include="Tokens\Impls\FunctionTokenTest.cs" />
+    <Compile Include="Tokens\Impls\GreaterThanOrEqualsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\GreaterThanTokenTest.cs" />
+    <Compile Include="Tokens\Impls\GroupTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IdentifierTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IncrementAndReturnTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IntegerTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IsEmptyTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IsNotEmptyTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IsNotTokenTest.cs" />
+    <Compile Include="Tokens\Impls\IsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\KeyedAccessTokenTest.cs" />
+    <Compile Include="Tokens\Impls\LessThanOrEqualsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\LessThanTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ModulusAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ModulusTokenTest.cs" />
+    <Compile Include="Tokens\Impls\MultiplicationTokenTest.cs" />
+    <Compile Include="Tokens\Impls\MultiplyAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\NotEqualsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\NotExistsTokenTest.cs" />
+    <Compile Include="Tokens\Impls\NotTokenTest.cs" />
+    <Compile Include="Tokens\Impls\NullCoalesceTokenTest.cs" />
+    <Compile Include="Tokens\Impls\NullTokenTest.cs" />
+    <Compile Include="Tokens\Impls\OrTokenTest.cs" />
+    <Compile Include="Tokens\Impls\PropertyAccessTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ReturnAndDecrementTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ReturnAndIncrementTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ShiftLeftTokenTest.cs" />
+    <Compile Include="Tokens\Impls\ShiftRightTokenTest.cs" />
+    <Compile Include="Tokens\Impls\StringTokenTest.cs" />
+    <Compile Include="Tokens\Impls\SubtractAndAssignTokenTest.cs" />
+    <Compile Include="Tokens\Impls\SubtractionTokenTest.cs" />
+    <Compile Include="Tokens\Impls\UnaryMinusTokenTest.cs" />
+    <Compile Include="Tokens\Impls\XorTokenTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressionCompiler\ExpressionCompiler.csproj">
+      <Project>{0164a22a-1ff3-4ae0-9de2-f073c1aa0d1e}</Project>
+      <Name>ExpressionCompiler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" />
+</Project>

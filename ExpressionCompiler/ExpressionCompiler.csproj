@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0164A22A-1FF3-4AE0-9DE2-F073C1AA0D1E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExpressionCompiler</RootNamespace>
+    <AssemblyName>ExpressionCompiler</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArgumentGroupEvaluator.cs" />
+    <Compile Include="DefaultMemberFunctionResolver.cs" />
+    <Compile Include="ExpressionCompiler.cs" />
+    <Compile Include="ExpressionImpl.cs" />
+    <Compile Include="FunctionResolver.cs" />
+    <Compile Include="MemberFunctionResolver.cs" />
+    <Compile Include="NoSuchFunctionException.cs" />
+    <Compile Include="NoSuchPropertyException.cs" />
+    <Compile Include="ParserException.cs" />
+    <Compile Include="Parsers\BinaryTokenParser.cs" />
+    <Compile Include="Parsers\DoubleCharacterParser.cs" />
+    <Compile Include="Parsers\Impls\AddAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\AdditionParser.cs" />
+    <Compile Include="Parsers\Impls\AndParser.cs" />
+    <Compile Include="Parsers\Impls\ArgumentGroupParser.cs" />
+    <Compile Include="Parsers\Impls\AsParser.cs" />
+    <Compile Include="Parsers\Impls\AssignParser.cs" />
+    <Compile Include="Parsers\Impls\BinaryIntegerParser.cs" />
+    <Compile Include="Parsers\Impls\BitwiseAndParser.cs" />
+    <Compile Include="Parsers\Impls\BitwiseOrParser.cs" />
+    <Compile Include="Parsers\Impls\BooleanParser.cs" />
+    <Compile Include="Parsers\Impls\CloseParser.cs" />
+    <Compile Include="Parsers\Impls\ComplementParser.cs" />
+    <Compile Include="Parsers\Impls\ConditionalOperatorParser.cs" />
+    <Compile Include="Parsers\Impls\DecimalParser.cs" />
+    <Compile Include="Parsers\Impls\DecrementAndReturnParser.cs" />
+    <Compile Include="Parsers\Impls\DivideAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\DivisionParser.cs" />
+    <Compile Include="Parsers\Impls\EqualsParser.cs" />
+    <Compile Include="Parsers\Impls\ExistsParser.cs" />
+    <Compile Include="Parsers\Impls\ExponentAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\ExponentParser.cs" />
+    <Compile Include="Parsers\Impls\FunctionParser.cs" />
+    <Compile Include="Parsers\Impls\GreaterThanOrEqualsParser.cs" />
+    <Compile Include="Parsers\Impls\GreaterThanParser.cs" />
+    <Compile Include="Parsers\Impls\GroupParser.cs" />
+    <Compile Include="Parsers\Impls\HexIntegerParser.cs" />
+    <Compile Include="Parsers\Impls\IdentifierParser.cs" />
+    <Compile Include="Parsers\Impls\IncrementAndReturnParser.cs" />
+    <Compile Include="Parsers\Impls\IntegerParser.cs" />
+    <Compile Include="Parsers\Impls\IsEmptyParser.cs" />
+    <Compile Include="Parsers\Impls\IsNotEmptyParser.cs" />
+    <Compile Include="Parsers\Impls\IsNotParser.cs" />
+    <Compile Include="Parsers\Impls\IsParser.cs" />
+    <Compile Include="Parsers\Impls\KeyedAccessParser.cs" />
+    <Compile Include="Parsers\Impls\LessThanOrEqualsParser.cs" />
+    <Compile Include="Parsers\Impls\LessThanParser.cs" />
+    <Compile Include="Parsers\Impls\ModulusAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\ModulusParser.cs" />
+    <Compile Include="Parsers\Impls\MultiplicationParser.cs" />
+    <Compile Include="Parsers\Impls\MultiplyAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\NotEqualsParser.cs" />
+    <Compile Include="Parsers\Impls\NotExistsParser.cs" />
+    <Compile Include="Parsers\Impls\NotParser.cs" />
+    <Compile Include="Parsers\Impls\NullCoalesceParser.cs" />
+    <Compile Include="Parsers\Impls\NullParser.cs" />
+    <Compile Include="Parsers\Impls\OrParser.cs" />
+    <Compile Include="Parsers\Impls\PropertyAccessParser.cs" />
+    <Compile Include="Parsers\Impls\ReturnAndDecrementParser.cs" />
+    <Compile Include="Parsers\Impls\ReturnAndIncrementParser.cs" />
+    <Compile Include="Parsers\Impls\ShiftLeftParser.cs" />
+    <Compile Include="Parsers\Impls\ShiftRightParser.cs" />
+    <Compile Include="Parsers\Impls\StringParser.cs" />
+    <Compile Include="Parsers\Impls\SubtractAndAssignParser.cs" />
+    <Compile Include="Parsers\Impls\SubtractionParser.cs" />
+    <Compile Include="Parsers\Impls\UnaryMinusParser.cs" />
+    <Compile Include="Parsers\Impls\XorParser.cs" />
+    <Compile Include="Parsers\LeftHandUnaryTokenParser.cs" />
+    <Compile Include="Parsers\SingleCharacterParser.cs" />
+    <Compile Include="Parsers\StringTokenParser.cs" />
+    <Compile Include="Parsers\TokenParser.cs" />
+    <Compile Include="Parsers\UnaryTokenParser.cs" />
+    <Compile Include="Parsers\WordTokenParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticMethodsFunctionResolver.cs" />
+    <Compile Include="Tokens\AssignableToken.cs" />
+    <Compile Include="Tokens\BinaryToken.cs" />
+    <Compile Include="Tokens\CloseableToken.cs" />
+    <Compile Include="Tokens\ExistsSupport.cs" />
+    <Compile Include="Tokens\HostSupport.cs" />
+    <Compile Include="Tokens\Impls\AddAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\AdditionToken.cs" />
+    <Compile Include="Tokens\Impls\AndToken.cs" />
+    <Compile Include="Tokens\Impls\ArgumentGroupToken.cs" />
+    <Compile Include="Tokens\Impls\AssignToken.cs" />
+    <Compile Include="Tokens\Impls\AsToken.cs" />
+    <Compile Include="Tokens\Impls\BitwiseAndToken.cs" />
+    <Compile Include="Tokens\Impls\BitwiseOrToken.cs" />
+    <Compile Include="Tokens\Impls\BooleanToken.cs" />
+    <Compile Include="Tokens\Impls\ComplementToken.cs" />
+    <Compile Include="Tokens\Impls\ConditionalOperatorToken.cs" />
+    <Compile Include="Tokens\Impls\DecimalToken.cs" />
+    <Compile Include="Tokens\Impls\DecrementAndReturnToken.cs" />
+    <Compile Include="Tokens\Impls\DivideAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\DivisionToken.cs" />
+    <Compile Include="Tokens\Impls\EqualsToken.cs" />
+    <Compile Include="Tokens\Impls\ExistsToken.cs" />
+    <Compile Include="Tokens\Impls\ExponentAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\ExponentToken.cs" />
+    <Compile Include="Tokens\Impls\FunctionToken.cs" />
+    <Compile Include="Tokens\Impls\GreaterThanOrEqualsToken.cs" />
+    <Compile Include="Tokens\Impls\GreaterThanToken.cs" />
+    <Compile Include="Tokens\Impls\GroupToken.cs" />
+    <Compile Include="Tokens\Impls\IdentifierToken.cs" />
+    <Compile Include="Tokens\Impls\IncrementAndReturnToken.cs" />
+    <Compile Include="Tokens\Impls\IntegerToken.cs" />
+    <Compile Include="Tokens\Impls\IsEmptyToken.cs" />
+    <Compile Include="Tokens\Impls\IsNotEmptyToken.cs" />
+    <Compile Include="Tokens\Impls\IsNotToken.cs" />
+    <Compile Include="Tokens\Impls\IsToken.cs" />
+    <Compile Include="Tokens\Impls\KeyedAccessToken.cs" />
+    <Compile Include="Tokens\Impls\LessThanOrEqualsToken.cs" />
+    <Compile Include="Tokens\Impls\LessThanToken.cs" />
+    <Compile Include="Tokens\Impls\ModulusAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\ModulusToken.cs" />
+    <Compile Include="Tokens\Impls\MultiplicationToken.cs" />
+    <Compile Include="Tokens\Impls\MultiplyAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\NotEqualsToken.cs" />
+    <Compile Include="Tokens\Impls\NotExistsToken.cs" />
+    <Compile Include="Tokens\Impls\NotToken.cs" />
+    <Compile Include="Tokens\Impls\NullCoalesceToken.cs" />
+    <Compile Include="Tokens\Impls\NullToken.cs" />
+    <Compile Include="Tokens\Impls\OrToken.cs" />
+    <Compile Include="Tokens\Impls\PropertyAccessToken.cs" />
+    <Compile Include="Tokens\Impls\ReturnAndDecrementToken.cs" />
+    <Compile Include="Tokens\Impls\ReturnAndIncrementToken.cs" />
+    <Compile Include="Tokens\Impls\ShiftLeftToken.cs" />
+    <Compile Include="Tokens\Impls\ShiftRightToken.cs" />
+    <Compile Include="Tokens\Impls\StringToken.cs" />
+    <Compile Include="Tokens\Impls\SubtractAndAssignToken.cs" />
+    <Compile Include="Tokens\Impls\SubtractionToken.cs" />
+    <Compile Include="Tokens\Impls\UnaryMinusToken.cs" />
+    <Compile Include="Tokens\Impls\XorToken.cs" />
+    <Compile Include="Tokens\LeftHandUnaryToken.cs" />
+    <Compile Include="Tokens\RootToken.cs" />
+    <Compile Include="Tokens\Token.cs" />
+    <Compile Include="Tokens\TokenImpl.cs" />
+    <Compile Include="Tokens\UnaryToken.cs" />
+    <Compile Include="Tokens\ValueToken.cs" />
+    <Compile Include="TypeCoercer.cs" />
+    <Compile Include="UnityELEvaluator.cs" />
+    <Compile Include="UnityELExpression.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostBuild.bat" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call $(ProjectDir)\PostBuild.bat "$(TargetPath)" "$(SolutionDir)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

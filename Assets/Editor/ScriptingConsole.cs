@@ -9,10 +9,10 @@ using System.Reflection;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public class DynamicConsole : EditorWindow {
-    [MenuItem("Window/Dynamic Console")]
+public class ImmediateConsole : EditorWindow {
+    [MenuItem("Window/Immediate Console")]
     public static void Open() {
-        GetWindow(typeof(DynamicConsole), false, "Dynamic Console");
+        GetWindow(typeof(ImmediateConsole), false, "Immediate");
     }
 
     private Queue<LogFrame> logMessages = new Queue<LogFrame>();
@@ -30,7 +30,7 @@ public class DynamicConsole : EditorWindow {
     private void OnEnable() {
         InitialiseTextures();
 
-        Application.logMessageReceivedThreaded += HandleLog;
+        //Application.logMessageReceivedThreaded += HandleLog;
         Clear();
 
         evaluator = new UnityELEvaluator();
@@ -236,9 +236,9 @@ public class DynamicConsole : EditorWindow {
     }
 
     private class UnityFunctionResolver : StaticMethodsFunctionResolver {
-        private static DynamicConsole console;
+        private static ImmediateConsole console;
 
-        public UnityFunctionResolver(DynamicConsole dynamicConsole) {
+        public UnityFunctionResolver(ImmediateConsole dynamicConsole) {
             UnityFunctionResolver.console = dynamicConsole;
         }
 
