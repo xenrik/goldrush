@@ -69,9 +69,11 @@
     <Compile Include="Assets\Scenes\Test Cube\Scripts\ManualPipeGenerator.cs" />
     <Compile Include="Assets\Scenes\Test Cube\Scripts\PipeNode.cs" />
     <Compile Include="Assets\Scenes\Test Cube\Scripts\ScriptedPipeGenerator.cs" />
+    <Compile Include="Assets\Scripts\Cells\Cell.cs" />
+    <Compile Include="Assets\Scripts\Cells\CellMap.cs" />
+    <Compile Include="Assets\Scripts\Cells\CellPipeGenerator.cs" />
     <Compile Include="Assets\Scripts\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\PauseEditor.cs" />
-    <Compile Include="Assets\Scripts\Pipe\Cell.cs" />
     <Compile Include="Assets\Scripts\ShowNormals.cs" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe Functions.cginc" />
     <None Include="Assets\ThirdParty\UCLAGameLab\Wireframe\Shaders\UCLA GameLab Wireframe.shader" />
