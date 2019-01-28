@@ -35,13 +35,13 @@ public class CellMap : MonoBehaviour {
         }
     }
 
-    private void Start() {
+    private void Awake() {
         Cell[] cells = GetComponentsInChildren<Cell>();
         Vector3Int size = Vector3Int.zero;
         foreach (Cell cell in cells) {
-            size.x = Mathf.Max(cell.Position.x, size.x);
-            size.y = Mathf.Max(cell.Position.y, size.y);
-            size.z = Mathf.Max(cell.Position.z, size.z);
+            size.x = Mathf.Max(cell.Position.x + 1, size.x);
+            size.y = Mathf.Max(cell.Position.y + 1, size.y);
+            size.z = Mathf.Max(cell.Position.z + 1, size.z);
         }
 
         this.Size = size;

@@ -17,7 +17,7 @@ public class CubeMap : MonoBehaviour {
         }
     }
 
-    private void Start() {
+    private void Awake() {
         PipeNode[] nodes = GetComponentsInChildren<PipeNode>();
         Vector3Int size = Vector3Int.zero;
         foreach (PipeNode node in nodes) {

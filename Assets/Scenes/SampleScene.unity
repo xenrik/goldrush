@@ -150,7 +150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &34198460
@@ -527,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &102724393
@@ -571,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &110888856
@@ -1052,6 +1055,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1657479842}
+  - {fileID: 589151979}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1067,6 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
+  PipeAnchor: {fileID: 589151978}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: -1, y: 0, z: 0}
 --- !u!1 &274064629
@@ -1096,6 +1101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1433828019}
+  - {fileID: 1425269002}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1111,8 +1117,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  PipeAnchor: {fileID: 1425269001}
   PreviousOffset: {x: 0, y: 1, z: 0}
   NextOffset: {x: 0, y: 0, z: 1}
+--- !u!1 &274536360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274536361}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &274536361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274536360}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 1507713980}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &285090959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &311005517
@@ -1726,6 +1762,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 58adfb0db81f36748962acd5802831a7,
     type: 3}
   m_PrefabInternal: {fileID: 409173408}
+--- !u!1 &416119523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416119524}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416119524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 416119523}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0.5}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 1127249350}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &430886408
 Prefab:
   m_ObjectHideFlags: 0
@@ -1827,6 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &446551272
@@ -1930,6 +1995,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 446551272}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &495289711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 495289712}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495289712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495289711}
+  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.5}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 952942047}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
 --- !u!1 &529736635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,6 +2227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &588810013
@@ -2187,6 +2281,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 58adfb0db81f36748962acd5802831a7,
     type: 3}
   m_PrefabInternal: {fileID: 588810013}
+--- !u!1 &589151978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589151979}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &589151979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 589151978}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 255670350}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &595203668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &688337563
@@ -2762,7 +2885,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9ba5e36ee3fba9498af1908ca4ad47e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9ba5e36ee3fba9498af1908ca4ad47e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2900,7 +3023,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3253,6 +3376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &831632540
@@ -3436,6 +3560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &867466828
@@ -3637,6 +3762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &939004341
@@ -3666,6 +3792,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1407682625}
+  - {fileID: 1363837326}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3681,6 +3808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  PipeAnchor: {fileID: 1363837325}
   PreviousOffset: {x: 1, y: 0, z: 0}
   NextOffset: {x: 0, y: -1, z: 0}
 --- !u!1 &952942046
@@ -3710,6 +3838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 17051714}
+  - {fileID: 495289712}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3725,6 +3854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  PipeAnchor: {fileID: 495289711}
   PreviousOffset: {x: 0, y: 1, z: 0}
   NextOffset: {x: 0, y: 0, z: -1}
 --- !u!1001 &965244736
@@ -4142,6 +4272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1065709186
@@ -4281,6 +4412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1127249349
@@ -4310,6 +4442,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 749169078}
+  - {fileID: 416119524}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4325,6 +4458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  PipeAnchor: {fileID: 416119523}
   PreviousOffset: {x: 0, y: 0, z: -1}
   NextOffset: {x: 1, y: 0, z: 0}
 --- !u!1 &1143646119
@@ -4627,6 +4761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1208710514
@@ -5243,8 +5378,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
+--- !u!1 &1363837325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363837326}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1363837326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1363837325}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 939004342}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1365531822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5287,6 +5451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1402955655
@@ -5370,7 +5535,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5404,6 +5569,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: a7cc4f3c5bf96824582aa20cbc0d18e4,
     type: 3}
   m_PrefabInternal: {fileID: 1407682624}
+--- !u!1 &1425269001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425269002}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1425269002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425269001}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 274064630}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &1433828018
 Prefab:
   m_ObjectHideFlags: 0
@@ -5441,7 +5634,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f2cd59ead2dbfb6489d86f8d85d4fadf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f2cd59ead2dbfb6489d86f8d85d4fadf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5783,6 +5976,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 718877391}
+  - {fileID: 274536361}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5798,6 +5992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
+  PipeAnchor: {fileID: 274536360}
   PreviousOffset: {x: 0, y: 0, z: 1}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1512333704
@@ -5886,6 +6081,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1595616559}
+  - {fileID: 1624628742}
   m_Father: {fileID: 1450246626}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5901,6 +6097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  PipeAnchor: {fileID: 1624628741}
   PreviousOffset: {x: -1, y: 0, z: 0}
   NextOffset: {x: 0, y: -1, z: 0}
 --- !u!1 &1530657857
@@ -6025,7 +6222,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f2cd59ead2dbfb6489d86f8d85d4fadf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: f2cd59ead2dbfb6489d86f8d85d4fadf, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6039,6 +6236,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f2cd59ead2dbfb6489d86f8d85d4fadf,
     type: 3}
   m_PrefabInternal: {fileID: 1595616558}
+--- !u!1 &1624628741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624628742}
+  m_Layer: 0
+  m_Name: PipeAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624628742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1624628741}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_Children: []
+  m_Father: {fileID: 1525392559}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!1 &1628995332
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,7 +6402,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9ba5e36ee3fba9498af1908ca4ad47e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9ba5e36ee3fba9498af1908ca4ad47e, type: 3}
       propertyPath: m_LocalScale.y
@@ -6481,6 +6706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1735277098
@@ -6985,6 +7211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1865002273
@@ -7087,6 +7314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1908103589
@@ -7245,6 +7473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1938318470
@@ -7451,6 +7680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  PipeAnchor: {fileID: 0}
   PreviousOffset: {x: 0, y: 0, z: 0}
   NextOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2036604112

@@ -20,8 +20,6 @@ public class CellPipeGenerator : MonoBehaviour {
     private GameObject tube;
     private GameObject endCap;
 
-    private bool running = false;
-
     private void Start() {
         cellMap = GetComponentInParent<CellMap>();
         if (PipeParent == null) {
@@ -41,35 +39,48 @@ public class CellPipeGenerator : MonoBehaviour {
         endCap.transform.parent = PipeParent.transform;
 
         ResetParts(Vector3.zero, Quaternion.identity, false, false, false);
-    }
-
-    private void Update() {
-        if (!running) {
-            StartCoroutine(AnimatePipe());
-            running = true;
-        }
+        StartCoroutine(AnimatePipe());
     }
 
     private IEnumerator AnimatePipe() {
         Cell currentCell = StartingCell;
         Cell nextCell = null;
         Cell previousCell = null;
+        GameObject currentAnchor, nextAnchor, previousAnchor;
 
         while (currentCell != null) {
-            previousCell = cellMap[currentCell.Position + currentCell.PreviousOffset];
-            nextCell = cellMap[currentCell.Position + currentCell.NextOffset];
+            currentAnchor = currentCell.PipeAnchor != null ? currentCell.PipeAnchor : currentCell.gameObject;
+
+            if (currentCell.PreviousOffset != Vector3Int.zero) {
+                Vector3Int previousPosition = currentCell.Position + currentCell.PreviousOffset;
+                previousCell = cellMap[previousPosition];
+                previousAnchor = previousCell.PipeAnchor != null ? previousCell.PipeAnchor : previousCell.gameObject;
+            } else {
+                previousCell = null;
+                previousAnchor = null;
+            }
+
+            if (currentCell.NextOffset != Vector3Int.zero) {
+                Vector3Int nextPosition = currentCell.Position + currentCell.NextOffset;
+                nextCell = cellMap[nextPosition];
+                nextAnchor = nextCell.PipeAnchor != null ? nextCell.PipeAnchor : nextCell.gameObject;
+            } else {
+                nextCell = null;
+                nextAnchor = null;
+            }
+
             if (nextCell != null) {
                 switch (currentCell.Type) {
                 case Cell.CellType.START:
-                    yield return StartCoroutine(AnimateStart(currentCell.gameObject, nextCell.gameObject));
+                    yield return StartCoroutine(AnimateStart(currentAnchor, nextAnchor));
                     break;
 
                 case Cell.CellType.CORNER:
-                    yield return StartCoroutine(AnimateCorner(previousCell.gameObject, currentCell.gameObject, nextCell.gameObject));
+                    yield return StartCoroutine(AnimateCorner(previousAnchor, currentAnchor, nextAnchor));
                     break;
                 }
             } else if (currentCell.Type == Cell.CellType.END) {
-                yield return StartCoroutine(AnimateEnd(previousCell.gameObject, currentCell.gameObject));
+                yield return StartCoroutine(AnimateEnd(previousAnchor, currentAnchor));
             } else {
                 // TODO Broken Pipe
             }
@@ -80,6 +91,8 @@ public class CellPipeGenerator : MonoBehaviour {
         Destroy(startCap);
         Destroy(tube);
         Destroy(endCap);
+
+        Debug.Log("Finished!");
     }
 
     private IEnumerator AnimateStart(GameObject currentNode, GameObject nextNode) {

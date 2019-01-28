@@ -10,16 +10,17 @@ public class Cell : MonoBehaviour {
     }
 
     public CellType Type;
+    public GameObject PipeAnchor;
 
     public Vector3Int PreviousOffset;
     public Vector3Int NextOffset;
 
     /**
-     * Converts our transform position into a Vector3Int
+     * Converts our transform position into a Cell Position
      */
     public Vector3Int Position {
         get {
-            return new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+            return new Vector3Int((int)transform.localPosition.x, (int)transform.localPosition.y, (int)transform.localPosition.z);
         }
     }
 }
